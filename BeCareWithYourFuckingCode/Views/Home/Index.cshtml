@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form accept-charset="utf-8">
+            <div class="row pt-1" style="background-color: black;">
+                <div class="col-md-3 mb-1">
+                    <select class="form-control text-center">
+                        <option selected>Tìm theo rank</option>
+                        <option value="none">Không rank</option>
+                        <option value="copper">Rank đồng</option>
+                        <option value="silver">Rank bạc</option>
+                        <option value="gold">Rank vàng</option>
+                        <option value="platinum">Rank bạch kim</option>
+                        <option value="diamond">Rank kim cương</option>
+                        <option value="hight-ranking">Rank cao thủ</option>
+
+                    </select>
+                </div>
+                <div class="col-md-3 mb-1">
+                    <select class="form-control text-center">
+                        <option selected>Tìm theo tướng</option>
+                        <option value="hero">Tướng nhiều nhất</option>
+                        <option value="skin">Trang phục nhiều nhất</option>
+
+                    </select>
+                </div>
+                <div class="col-md-3 mb-1">
+                    <select class="form-control text-center">
+                        <option selected>Sắp xếp theo</option>
+                        <option value="0-100">Giá dưới 100k</option>
+                        <option value="100-300">Giá từ 100k - 300k</option>
+                        <option value="300-500">Giá từ 300k - 500k</option>
+                        <option value="500-1000">Giá từ 500k - 1Tr</option>
+                        <option value="1000-max">Lớn hơn 1Tr</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <button type="reset" class="btn btn-outline-warning float-right">Reset</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--Vùng chứa tất cả sản phẩm-->
+    <div class="col-md-12 mt-1">
+        <div class="row my-2 mx-1" id="home-body">
+            
+        </div>
+    </div>
+</div>

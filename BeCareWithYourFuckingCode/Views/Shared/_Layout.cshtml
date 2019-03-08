@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1 " />
+    <title>ACCG.NET | @ViewBag.Title</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        $(function () {
+            _getAll();
+        })
+    </script>
+
+</head>
+<body>
+    <!--header-->
+    <div class="header container-fluid fixed-top">
+        <div class="container">
+            <!-- start row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="navbar navbar-expand-lg navbar-dark nav-header">
+                        <a class="navbar-brand" href="#"><img src="~/Content/Images/logo2.png" alt=""></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item active home">
+                                    <a class="nav-link home" href="#">Trang chủ<span class="sr-only">(current)</span></a>
+                                </li>
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Hướng dẫn
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">Nạp thẻ</a>
+                                        <a class="dropdown-item" href="#">Mua bán</a>
+
+                                    </div>
+                                </li>
+                                <li class="nav-item napthe">
+                                    <a href="#" class="nav-link">Nạp thẻ</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">Liên hệ</a>
+                                </li>
+                                <li class="nav-item">
+                                    <div class="nav-link">
+                                        <a href="#" class="nav-link d-inline">Mua bán</a><img src="https://shopdat09.com/assets/images/hot.gif" alt="" class="d-inline">
+                                    </div>
+                                </li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-warning" id="btn-login" data-toggle="modal" data-target="#exampleModal" onclick="getLogin()">Đăng nhập</a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!--end row -->
+        </div>
+    </div>
+    <!--end header-->
+    <!--Banner-->
+    <div class="banner container" id="">
+        <!--row-->
+        <div class="row bg-dark px-1 py-1 h-100">
+
+            <!--banner-left-->
+            <div class="col-md-4 banner-left">
+                <div class="my-nav" id="myTab" role="tablist" style="margin-left: -15px; margin-right: -15px;">
+                    <ul class="nav bg-dark h-100">
+                        <li class="nav-item w-50">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><p class="text-center text-warning h6">Top nạp thẻ</p></a>
+                        </li>
+                        <li class="nav-item w-50">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><p class="text-center text-warning h6">Lịch sử giao dịch</p></a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tab-content pt-4" id="myTabContent">
+                    <div class="tab-pane container-fluid fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-xs-12 col-7">
+                                <img src="~/Content/Images/one.png" alt="" class="d-inline img-fluid p-2 "><p class="d-inline h6 text-warning">Hiếu nguyễn</p>
+                            </div>
+                            <div class="col-xs-6 col-5">
+                                <label class="bg-warning btn btn-warning w-100 h-75">2.000.000 <sup>đ</sup></label>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col-xs-12 col-7">
+                                <img src="~/Content/Images/two.png" alt="" class="d-inline img-fluid p-2"><p class="d-inline h6 text-warning">Toàn N</p>
+                            </div>
+                            <div class="col-xs-6 col-5">
+                                <label class="btn btn-warning w-100 h-75">950.000 <sup>đ</sup></label>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col-xs-12 col-7">
+                                <img src="~/Content/Images/three.png" alt="" class="d-inline img-fluid p-2"><p class="d-inline h6 text-warning">Văn Lâm</p>
+                            </div>
+                            <div class="col-xs-6 col-5">
+                                <label class="btn btn-warning w-100 h-75">700.000 <sup>đ</sup></label>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col-xs-12 col-7">
+                                <img src="~/Content/Images/four.png" alt="" class="d-inline img-fluid p-2"><p class="d-inline h6 text-warning">Công Phượng</p>
+                            </div>
+                            <div class="col-xs-6 col-5">
+                                <label class="btn btn-warning w-100 h-75">620.000 <sup>đ</sup></label>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col-xs-12 col-7">
+                                <img src="~/Content/Images/five.png" alt="" class="d-inline img-fluid p-2"><p class="d-inline h6 text-warning">Quang Hải</p>
+                            </div>
+                            <div class="col-xs-6 col-5">
+                                <label class="btn btn-warning w-100 h-75">500.000 <sup>đ</sup></label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane fade container-fluid" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <h6 class="text-light"><span class="text-warning">Văn Toàn</span> vừa sở hửa được một acc liên quân cực khủng.</h6><br>
+                        <h6 class="text-light"><span class="text-warning">Anh Đức</span> vừa đăng bán một acc liên quân khá xịn.</h6><br>
+                        <h6 class="text-light"><span class="text-warning">Văn Toàn</span> vừa sở hửa được một acc liên quân cực khủng.</h6><br>
+                        <h6 class="text-light"><span class="text-warning">Anh Đức</span> vừa đăng bán một acc liên quân khá xịn.</h6><br>
+                    </div>
+                </div>
+            </div>
+            <!--end banner-left-->
+            <!--banner-right-->
+            <div class="col-md-8 banner-right">
+                <div class="my-slider carousel slide h-100" id="carouselExampleControls" data-ride="carousel">
+                    <div class="carousel-inner h-100 w-100">
+                        <div class="carousel-item active h-100 w-100">
+                            <img class="d-block h-100 w-100" src="~/Content/Images/banner-3.jpg" alt="First slide">
+                        </div>
+                        <div class="carousel-item w-100 h-100">
+                            <img class="d-block w-100 w-100 h-100" src="~/Content/Images/banner-2.jpg" alt="Second slide">
+                        </div>
+                        <div class="carousel-item w-100 h-100">
+                            <img class="d-block w-100 w-100 h-100" src="~/Content/Images/banner-1.jpg" alt="Third slide">
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+            <!--end banner-right-->
+        </div>
+        <!--end row-->
+    </div>
+    <!--end banner-->
+    <!--Content body-->
+    <div class="main-contain container bg-dark mt-2 p-1">
+        <div class="w-100 h-100 container" style="background-color:#111111; " id="content-body">
+            @RenderBody()
+        </div>
+
+    </div>
+    <!--end content body-->
+    <!--footer-->
+    <div class="container bg-dark mt-2 p-1">
+        <div class="row w-100" style="background-color:#111111;">
+            <div class="col-md-12 text-center">
+                <p class="">this is footer</p>
+            </div>
+        </div>
+    </div>
+
+    <!--end footer-->
+    
+    <script type="text/javascript" src="~/Scripts/umd/popper.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/MyJS/change_background_color_header.js"></script>
+    <script type="text/javascript" src="~/Scripts/MyJS/load_data.js"></script>
+    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+    <script type="text/javascript" src="~/Script/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+</body>
+</html>
+
+
+@Html.Partial("_Login_Page");
+@Html.Partial("_Price_Offer");

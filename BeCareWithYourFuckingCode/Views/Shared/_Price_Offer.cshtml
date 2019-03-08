@@ -1,0 +1,83 @@
+﻿<!--sự kiện chọn giá trong select box-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#select-price').change(function () {
+            var val = $('#select-price').val();
+            $('.my-info').removeClass('d-none');
+            $('.selected-price').text(val);
+            $('.orther-val').val("");
+        });
+    });
+    // sự kiện ấn phím trong textbox
+    $(document).ready(function () {
+        $('.orther-val').keyup(function () {
+            var val = $('.orther-val').val();
+            if (val == "") {
+                $('.my-info').addClass('d-none');
+                return;
+            }
+            $('.my-info').removeClass('d-none');
+            $('.selected-price').text(val);
+        });
+    });
+
+
+</script>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Trả giá</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-inline">
+                    <li class="list-inline-item font-weight-bold">Giá gốc: </li>
+                    <li class="list-inline-item font-weight-bold text-danger"><?php echo number_format(500000)." Đ"; ?></li>
+                </ul>
+                <footer class="blockquote-footer">Hãy chọn giá mà bạn cho rằng hợp lý</footer>
+                <form class="form mt-2">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <select name="" id="select-price" class="form-control">
+                                <?php
+                                $price = 500000;
+                                for($i=95; $i>=5;$i-=5){
+                                $tmp = $price - (($price * $i)/100);
+                                ?>
+                                <option value="<?php echo number_format($tmp).' Đ'; ?>"><?php echo "Giảm ".$i."% - ".  number_format($tmp)." Đ"; ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="" class="h6">Số khác:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control text-center orther-val" placeholder="5% - 95%">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="mt-2 my-info  d-none w-100" style="word-wrap: break-word;">
+                        <p class="d-inline h6 ">Bạn chọn giá: </p><span class="d-inline text-danger font-weight-bold selected-price"></span>
+                    </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <input type="submit" class="btn btn-primary" value="Cập nhật">
+            </div>
+            </form>
+        </div>
+    </div>
+</div>

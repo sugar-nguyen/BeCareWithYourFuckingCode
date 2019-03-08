@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b515ddf2fa914f41ba31e9aaf4cb72c6" Name="Diagram1">
+        <EntityTypeShape EntityType="WEBACCOUNTModel.TB_CARD_DEAL_HISTORY" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="WEBACCOUNTModel.TB_GAME_ACCOUNT" Width="1.5" PointX="3.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="WEBACCOUNTModel.TB_GAME_ACCOUNT_DETAIL" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WEBACCOUNTModel.TB_GAME_PRICE_OFFER" Width="1.5" PointX="6" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WEBACCOUNTModel.TB_RANK_NAME" Width="1.5" PointX="3.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WEBACCOUNTModel.TB_SELL_DEAL_HISTORY" Width="1.5" PointX="6" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WEBACCOUNTModel.TB_USER" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="WEBACCOUNTModel.TB_GAME_IMAGE" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <AssociationConnector Association="WEBACCOUNTModel.FK_TB_CARD_DEAL_HISTORY_TB_USER" ManuallyRouted="false" />
+        <AssociationConnector Association="WEBACCOUNTModel.FK_TB_GAME_ACCOUNT_DETAIL_TB_GAME_ACCOUNT" ManuallyRouted="false" />
+        <AssociationConnector Association="WEBACCOUNTModel.FK_TB_GAME_PRICE_OFFER_TB_GAME_ACCOUNT" ManuallyRouted="false" />
+        <AssociationConnector Association="WEBACCOUNTModel.FK_TB_SELL_DELL_HISTORY_TB_GAME_ACCOUNT" ManuallyRouted="false" />
+        <AssociationConnector Association="WEBACCOUNTModel.FK_TB_GAME_ACCOUNT_DETAIL_TB_RANK_NAME" ManuallyRouted="false" />
+        <AssociationConnector Association="WEBACCOUNTModel.FK_TB_GAME_ACCOUNT_DETAIL_TB_RANK_NAME1" ManuallyRouted="false" />
+        <AssociationConnector Association="WEBACCOUNTModel.FK_TB_GAME_PRICE_OFFER_TB_USER" ManuallyRouted="false" />
+        <AssociationConnector Association="WEBACCOUNTModel.FK_TB_SELL_DELL_HISTORY_TB_USER1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
