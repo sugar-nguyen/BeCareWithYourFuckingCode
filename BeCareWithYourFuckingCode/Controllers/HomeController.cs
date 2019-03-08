@@ -51,10 +51,6 @@ namespace BeCareWithYourFuckingCode.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult getLogin(TB_USER users)
-        {
-            return RedirectToAction("Index");
-        }
         public ActionResult getDetail(string id)
         {
             try

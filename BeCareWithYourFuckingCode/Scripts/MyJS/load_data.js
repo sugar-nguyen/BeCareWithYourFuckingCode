@@ -80,13 +80,6 @@ function getLogin() {
             document.getElementById('modal-body').innerHTML = this.responseText;
         }
     };
-    xhttp.open("GET", "/Home/getLogin", true);
+    xhttp.open("GET", "/User/Index", true);
     xhttp.send();
 }
-
-$(document).ready(function () {
-    $('#btn-login').click(function () {
-        var val = $('.form-control').val();
-        if (val == "") $('.text-danger').html('<p>Chưa nhập tên đăng nhập</p>');
-    });
-})

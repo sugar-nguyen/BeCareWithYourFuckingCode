@@ -11,7 +11,7 @@
         <div class="form-group">
             <label for="exampleInputEmail1">@Html.DisplayNameFor(x => x.USERNAME)</label>
             @*<input type="text" class="form-control" id="" placeholder="abc...">*@
-            @Html.TextBoxFor(x => x.USERNAME, new {@class = "form-control", @placeholder = "...." })
+            @Html.TextBoxFor(x => x.USERNAME, new { @class = "form-control", @placeholder = "...." })
             <label class="text-danger">@Html.ValidationMessageFor(x => x.USERNAME)</label>
         </div>
         <div class="form-group">
@@ -32,3 +32,6 @@
 
     </div>
 </form>
+
+
+
