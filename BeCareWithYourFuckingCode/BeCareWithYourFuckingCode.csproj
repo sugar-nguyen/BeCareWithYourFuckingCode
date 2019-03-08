@@ -252,7 +252,7 @@
     <Content Include="Views\Shared\_Login_Page.cshtml" />
     <Content Include="Views\Shared\_Price_Offer.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\User\getSingUp.cshtml" />
+    <Content Include="Views\User\getSignUp.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
