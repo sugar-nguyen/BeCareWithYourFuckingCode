@@ -14,10 +14,15 @@ namespace BeCareWithYourFuckingCode.Controllers
         {
             return View();
         }
-
+        [HttpPost]
         public ActionResult getLogin()
         {
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult getSingUp()
+        {
+            return View();
         }
 	}
 }

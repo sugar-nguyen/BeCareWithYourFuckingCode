@@ -46,10 +46,6 @@ namespace BeCareWithYourFuckingCode.Controllers
             }
         }
 
-        public ActionResult getLogin()
-        {
-            return View();
-        }
         [HttpPost]
         public ActionResult getDetail(string id)
         {
