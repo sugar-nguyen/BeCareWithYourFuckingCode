@@ -6,11 +6,12 @@
 <div class="h-100 bg-light" style="margin-left:-15px; margin-right: -15px;">
     <div class="container p-5 w-75">
         <h2>Đăng ký</h2>
-        <form action="/User/getSignUp" method="post">
+        <small class="text-muted"> Hoàn tất các thông tin để tạo tài khoản !</small>
+        <form action="/User/getSignUp" method="post" class="mt-2">
             @Html.ValidationSummary(true)
             @Html.AntiForgeryToken()
             <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Tên đăng nhập</label>
+                <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(x=>x.USERNAME)</label>
                 <div class="col-sm-8">
                     @Html.TextBoxFor(x => x.USERNAME, new {@class = "form-control", @placeholder = "Tên đăng nhập" })
                     <small class="text-danger">@Html.ValidationMessageFor(x => x.USERNAME)</small>
@@ -18,7 +19,7 @@
                 <div class="col-sm-1">*</div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Mật khẩu</label>
+                <label for="inputPassword3" class="col-sm-3 col-form-label">@Html.DisplayNameFor(x=>x.PASSWORD_KEY)</label>
                 <div class="col-sm-8">
                     @Html.PasswordFor(x => x.PASSWORD_KEY, new { @class = "form-control", @placeholder = "Mật khẩu" })
                     <small class="text-danger">@Html.ValidationMessageFor(x=>x.PASSWORD_KEY)</small>
@@ -33,7 +34,7 @@
                 <div class="col-sm-1">*</div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Họ tên</label>
+                <label for="inputPassword3" class="col-sm-3 col-form-label">@Html.DisplayNameFor(x=>x.NAME)</label>
                 <div class="col-sm-8">
                     @Html.TextBoxFor(x => x.NAME, new {@class = "form-control", @placeholder = "Họ tên" })
                     <small class="text-danger">@Html.ValidationMessageFor(x => x.NAME)</small>
@@ -41,7 +42,15 @@
                 <div class="col-sm-1">*</div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Địa chỉ hiện tại</label>
+                <label for="inputPassword3" class="col-sm-3 col-form-label">@Html.DisplayNameFor(x => x.EMAIL)</label>
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(x => x.EMAIL, new { @class = "form-control", @placeholder = "Email" })
+                    <small class="text-danger">@Html.ValidationMessageFor(x => x.EMAIL)</small>
+                </div>
+                <div class="col-sm-1">*</div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">@Html.DisplayNameFor(x=>x.CURRENT_ADDRESS)</label>
                 <div class="col-sm-8">
                     @Html.TextBoxFor(x => x.CURRENT_ADDRESS, new {@class = "form-control", @placeholder = "Địa chỉ"})
                     <small class="text-danger">@Html.ValidationMessageFor(x => x.CURRENT_ADDRESS)</small>
@@ -49,7 +58,7 @@
                 <div class="col-sm-1">*</div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Số điện thoại</label>
+                <label for="inputPassword3" class="col-sm-3 col-form-label">@Html.DisplayNameFor(x=>x.PHONE)</label>
                 <div class="col-sm-8">
                     @Html.TextBoxFor(x => x.PHONE, new {@class = "form-control", @placeholder = "Số điện thoại"})
                     <small class="text-danger">@Html.ValidationMessageFor(x => x.PHONE)</small>

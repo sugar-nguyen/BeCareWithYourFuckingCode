@@ -19,11 +19,13 @@ namespace BeCareWithYourFuckingCode.Controllers
         [HttpPost]
         public ActionResult getLogin()
         {
+            // write your code hear
             return RedirectToAction("Index", "Home");
         }
 
         public ActionResult getSignUp()
         {
+           
             return View();
         }
         [HttpPost]

@@ -13,6 +13,7 @@ namespace BeCareWithYourFuckingCode.Controllers
         Models.WEBACCOUNTEntities2 Entities = new Models.WEBACCOUNTEntities2();
         public ActionResult Index()
         {
+            Session["user"] = "";
             return View();
         }
 

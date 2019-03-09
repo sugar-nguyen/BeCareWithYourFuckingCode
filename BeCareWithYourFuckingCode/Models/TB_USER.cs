@@ -23,18 +23,31 @@ namespace BeCareWithYourFuckingCode.Models
         }
          
         public string ID { get; set; }
+
         [Display(Name ="Tên đăng nhập")]
         [Required(ErrorMessage = "Chưa nhập tên đăng nhập")]  
+        [StringLength(20,MinimumLength = 8,ErrorMessage = "{0} phải có độ dài từ {2} đến {1} kí tự")]
         public string USERNAME { get; set; }
+
         [Display(Name = "Mật khẩu")]
         [Required(ErrorMessage = "Chưa nhập mật khẩu")]  
         public string PASSWORD_KEY { get; set; }
+
         [Required(ErrorMessage = "Chưa nhập họ tên")]  
+        [Display(Name = "Họ tên")]
         public string NAME { get; set; }
+
+        [Display(Name = "Email")]
+        [EmailAddress(ErrorMessage = "Email không hợp lệ")]
         [Required(ErrorMessage = "Chưa nhập email")]  
         public string EMAIL { get; set; }
+
+        [Display(Name = "Số điện thoại")]
+        [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
         [Required(ErrorMessage = "Chưa nhập số điện thoại")]  
         public string PHONE { get; set; }
+
+        [Display(Name = "Địa chỉ hiện tại")]
         [Required(ErrorMessage = "Chưa nhập địa chỉ")]  
         public string CURRENT_ADDRESS { get; set; }
     

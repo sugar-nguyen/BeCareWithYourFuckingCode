@@ -55,7 +55,17 @@
                                     </div>
                                 </li>
                             </ul>
-                            <a href="#" class="btn btn-outline-warning" id="btn-login" data-toggle="modal" data-target="#exampleModal" onclick="getLogin()">Đăng nhập</a>
+                            @{
+                                if (Session["user"].ToString() != "")
+                                {
+                                    <a href="#" class="text-danger">@Session["user"].ToString()</a>
+                                }
+                                else
+                                {
+                                     <a href="#" class="btn btn-outline-warning" id="btn-login" data-toggle="modal" data-target="#exampleModal" onclick="getLogin()">Đăng nhập</a>
+                                }
+                            }
+                           
 
                         </div>
                     </nav>
