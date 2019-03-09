@@ -28,6 +28,15 @@ namespace BeCareWithYourFuckingCode.Controllers
            
             return View();
         }
+
+        public ActionResult checkMatchPass(string PASSWORD_KEY, string password2)
+        {
+            if (string.Compare(PASSWORD_KEY,password2) == 0)
+            {
+                return Json(1, JsonRequestBehavior.AllowGet);
+            }
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         public ActionResult getSignUp(TB_USER user)
         {

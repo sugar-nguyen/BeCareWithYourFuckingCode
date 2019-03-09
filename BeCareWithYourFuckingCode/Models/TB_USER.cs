@@ -30,9 +30,11 @@ namespace BeCareWithYourFuckingCode.Models
         public string USERNAME { get; set; }
 
         [Display(Name = "Mật khẩu")]
+        [StringLength(40,MinimumLength = 8, ErrorMessage = "{0} phải có độ dài từ {2} đến {1} kí tự")]
+        [Remote("checkMatchPass","User",ErrorMessage = "Mật khẩu không trùng khớp")]
         [Required(ErrorMessage = "Chưa nhập mật khẩu")]  
         public string PASSWORD_KEY { get; set; }
-
+        [StringLength(30, MinimumLength = 2, ErrorMessage = "{0} phải có độ dài từ {2} đến {1} kí tự")]
         [Required(ErrorMessage = "Chưa nhập họ tên")]  
         [Display(Name = "Họ tên")]
         public string NAME { get; set; }
@@ -43,11 +45,13 @@ namespace BeCareWithYourFuckingCode.Models
         public string EMAIL { get; set; }
 
         [Display(Name = "Số điện thoại")]
+        [StringLength(10)]
         [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
         [Required(ErrorMessage = "Chưa nhập số điện thoại")]  
         public string PHONE { get; set; }
 
         [Display(Name = "Địa chỉ hiện tại")]
+        [StringLength(100, MinimumLength = 10, ErrorMessage = "{0} phải có độ dài từ {2} đến {1} kí tự")]
         [Required(ErrorMessage = "Chưa nhập địa chỉ")]  
         public string CURRENT_ADDRESS { get; set; }
     
