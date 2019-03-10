@@ -1,13 +1,18 @@
-﻿function _getAll() {
+﻿function _getAll(num) {
     $.ajax({
-        url: "/Home/GetAll",
+        url: "/Home/GetAll/" + num,
         type: "GET",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
             var html = '';
+            var tmp;
             $.each(result, function (key, item) {
-                html += '<div class="product-box col-md border border-warning rounded mr-2 mb-1">';
+                if (key == 0 || key % 4 == 0) {
+                    html += '<div class = "row mb-2">';
+                    tmp = 1;
+                }
+                html += '<div class="product-box col-md col-lg col-sm border border-warning rounded mr-2 mb-1">';
                 html += '<div class="product-info-down w-100 rounded-top p-4">';
                 html += '<p class="h5 text-light">Tướng:' + item.tuong + '</p>';
                 html += '<p class="h5 text-light">Trang phục:' + item.skin + '</p>';
@@ -19,14 +24,16 @@
                 html += '<p class="h3 mt-4 text-center font-weight-bold text-danger">' + NumberFormat(item.gia) + '<sup>đ</sup></p>';
                 html += '<div class="row my-2">';
                 html += '<div class="col">';
-                html += '<a href="#" class="btn btn-outline-success w-100" onclick="getDetail(\''+ item.id +'\')">Xem</a>';
+                html += '<a href="#" class="btn btn-outline-success w-100" onclick="getDetail(\'' + item.id + '\')">Xem</a>';
                 html += '</div>';
                 html += '<div class="col">';
-                html += '<a href="#" class="btn btn-outline-primary w-100">Mua ngay</a>';
+                html += '<a href="#" class="btn btn-outline-primary w-100">Mua</a>';
                 html += '</div>';
                 html += '</div>';
                 html += '</div>';
                 html += '</div>';
+                tmp++;
+                if (tmp == 5) html += '</div>';
             });
             $('#home-body').html(html);
             $('.product-box').hover(function (e) {

@@ -17,9 +17,10 @@ namespace BeCareWithYourFuckingCode.Controllers
             return View();
         }
 
-        public JsonResult GetAll()
+        public JsonResult GetAll(string num)
         {
-
+            int limit = num == null ? 8 : int.Parse(num);
+            
             bool proxyCreation = Entities.Configuration.ProxyCreationEnabled;
             try
             {
@@ -34,7 +35,7 @@ namespace BeCareWithYourFuckingCode.Controllers
                         img = x.RE_IMAGE,
                         hang = x.TB_GAME_ACCOUNT_DETAIL.TB_RANK_NAME.RANK_NAME,
                         gia = x.ORIGINAL_PRICE
-                    });
+                    }).Take(limit);
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
