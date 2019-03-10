@@ -54,7 +54,7 @@ namespace BeCareWithYourFuckingCode.Controllers
                 user.ID = CreateID();
                 Entities.TB_USER.Add(user);
                 Entities.SaveChanges();
-                return RedirectToAction("Index", "User");
+                return RedirectToAction("Index", "Home");
             }
             return View();
         }
