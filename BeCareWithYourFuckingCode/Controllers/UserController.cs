@@ -31,14 +31,27 @@ namespace BeCareWithYourFuckingCode.Controllers
             return View();
         }
 
-     
+        public string CreateID()
+        {
+            string id = "";
+            Random rand = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                int a = rand.Next() % 10;
+                a = a < 0 ? -1 * a : a;
+                id += a.ToString();
+            }
+            TB_USER user = Entities.TB_USER.Find(id);
+            if (user != null) return CreateID();
+            return id;
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult getSignUp(TB_USER user)
         {
             if (ModelState.IsValid)
             {
-                user.ID = "user" + DateTime.Now.Date;
+                user.ID = CreateID();
                 Entities.TB_USER.Add(user);
                 Entities.SaveChanges();
                 return RedirectToAction("Index", "User");
