@@ -29,8 +29,8 @@
             <div class="form-group row">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Nhắc lại mật khẩu</label>
                 <div class="col-sm-8">
-                    <input type="password" class="form-control" id="password2" name="password2" placeholder="Nhắc lại mật khẩu">
-                    <small class="text-danger">@Html.ValidationMessageFor(x => x.PASSWORD_KEY)</small>
+                    @Html.PasswordFor(x => x.ConfirmPassWord, new {@class = "form-control", @placeholder = "Nhắc lại mật khẩu" })
+                    <small class="text-danger">@Html.ValidationMessageFor(x => x.ConfirmPassWord)</small>
                 </div>
                 <div class="col-sm-1">*</div>
             </div>
@@ -73,6 +73,7 @@
                 <div class="col-sm-8" >
                     <small>* Bắt buộc</small>
                 </div>
+                <div class="col-sm-12 text-center mt-5"><p class="h6 d-inline text-muted">Bằng cách chọn đăng ký, bạn có thể tiến hành mua và bán account ở </p><img class="d-inline" src="/Content/images/logo2.png" alt="ACCG.NET" style="height: 50px; width: 100px;"/></div>
             </div>
         </form>
     </div>

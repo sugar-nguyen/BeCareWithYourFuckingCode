@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BeCareWithYourFuckingCode.Models;
+using System.Security.Cryptography;
+using System.Text;
 namespace BeCareWithYourFuckingCode.Controllers
 {
     public class UserController : Controller
@@ -19,7 +21,7 @@ namespace BeCareWithYourFuckingCode.Controllers
         [HttpPost]
         public ActionResult getLogin()
         {
-            // write your code hear
+            
             return RedirectToAction("Index", "Home");
         }
 
@@ -29,21 +31,17 @@ namespace BeCareWithYourFuckingCode.Controllers
             return View();
         }
 
-        public ActionResult checkMatchPass(string PASSWORD_KEY, string password2)
-        {
-            if (string.Compare(PASSWORD_KEY,password2) == 0)
-            {
-                return Json(1, JsonRequestBehavior.AllowGet);
-            }
-            return Json(null, JsonRequestBehavior.AllowGet);
-        }
+     
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult getSignUp(TB_USER user)
         {
             if (ModelState.IsValid)
             {
+                user.ID = "user" + DateTime.Now.Date;
                 Entities.TB_USER.Add(user);
-                return RedirectToAction("Index", "Home");
+                Entities.SaveChanges();
+                return RedirectToAction("Index", "User");
             }
             return View();
         }
