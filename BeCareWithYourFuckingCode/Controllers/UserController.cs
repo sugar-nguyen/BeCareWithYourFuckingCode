@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using BeCareWithYourFuckingCode.Models;
 using System.Security.Cryptography;
 using System.Text;
+using System.Data.Entity.Validation;
 namespace BeCareWithYourFuckingCode.Controllers
 {
     public class UserController : Controller
@@ -19,9 +20,28 @@ namespace BeCareWithYourFuckingCode.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult getLogin()
+        public ActionResult getLogin(TB_USER user)
         {
-
+            if (ModelState.IsValid)
+            {
+                if (CheckUserName(user.USERNAME) == null)
+                {
+                    ModelState.AddModelError("", "Tên đăng nhập không đúng");
+                }
+                else
+                {
+                    TB_USER Valid_User = Entities.TB_USER.Where(x => x.PASSWORD_KEY == user.PASSWORD_KEY).SingleOrDefault();
+                    if (Valid_User == null)
+                    {
+                        ModelState.AddModelError("", "Mật khẩu không đúng");
+                    }
+                    else
+                    {
+                        Session["user"] = Valid_User.NAME.ToUpper();
+                        return RedirectToAction("Index", Request.Url.AbsoluteUri);
+                    }
+                }
+            }
             return RedirectToAction("Index", "Home");
         }
 
@@ -46,6 +66,17 @@ namespace BeCareWithYourFuckingCode.Controllers
             return id;
         }
 
+        public TB_USER CheckUserName(string username)
+        {
+            TB_USER user = Entities.TB_USER.Where(x => x.USERNAME == username).SingleOrDefault();
+            return user;
+        }
+
+        public TB_USER CheckEmail(string email)
+        {
+            TB_USER user = Entities.TB_USER.Where(x => x.EMAIL == email).SingleOrDefault();
+            return user;
+        }
         public string toMD5(string pass)
         {
             //Tạo MD5 
@@ -70,20 +101,23 @@ namespace BeCareWithYourFuckingCode.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    //TB_USER CurUser = new TB_USER();
-                    //CurUser.ID = CreateID();
-                    //CurUser.USERNAME = user.USERNAME;
-                    //CurUser.PASSWORD_KEY = toMD5(user.PASSWORD_KEY);
-                    //CurUser.NAME = user.NAME;
-                    //CurUser.PHONE = user.PHONE;
-                    //CurUser.CURRENT_ADDRESS = user.CURRENT_ADDRESS;
-                    //CurUser.EMAIL = user.EMAIL;
-                    user.ID = CreateID();
-                    string tmp = user.PASSWORD_KEY;
-                    user.PASSWORD_KEY = toMD5(tmp);
-                    Entities.TB_USER.Add(user);
-                    Entities.SaveChanges();
-                    return RedirectToAction("Index", "Home");
+                    if (CheckUserName(user.USERNAME) != null)
+                    {
+                        ModelState.AddModelError("", "Tên đăng nhập đã được sử dụng");
+                    }
+                    else if (CheckEmail(user.EMAIL) != null)
+                    {
+                        ModelState.AddModelError("", "Email đã được sử dụng");
+                    }
+                    else
+                    {
+                        user.ID = CreateID();
+                        Entities.TB_USER.Add(user);
+                        Entities.SaveChanges();
+                        ViewBag.Success = "Đăng nhập thành công";
+                    }
+
+
                 }
                 return View();
             }

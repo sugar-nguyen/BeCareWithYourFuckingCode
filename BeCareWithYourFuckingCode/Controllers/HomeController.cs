@@ -48,6 +48,7 @@ namespace BeCareWithYourFuckingCode.Controllers
             }
         }
 
+       
         [HttpPost]
         public ActionResult getDetail(string id)
         {

@@ -4,76 +4,75 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="h-100 bg-light" style="margin-left:-15px; margin-right: -15px;">
-    <div class="container p-5 w-75">
+    <div class="container pt-3 w-75">
         <h2>Đăng ký</h2>
         <small class="text-muted"> Hoàn tất các thông tin để tạo tài khoản !</small>
         <form action="/User/getSignUp" method="post" class="mt-2">
-            @Html.ValidationSummary(true)
+           
             @Html.AntiForgeryToken()
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(x=>x.USERNAME)</label>
-                <div class="col-sm-8">
-                    @Html.TextBoxFor(x => x.USERNAME, new {@class = "form-control", @placeholder = "Tên đăng nhập" })
-                    <small class="text-danger">@Html.ValidationMessageFor(x => x.USERNAME)</small>
-                </div>
-                <div class="col-sm-1">*</div>
+            <div class="form-group">
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+                @if(ViewBag.Success !=null){<div class="alert alert-success">@ViewBag.Success</div>}
+                
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">@Html.DisplayNameFor(x=>x.PASSWORD_KEY)</label>
-                <div class="col-sm-8">
+                <label class="col-md-4 col-sm-4 col-lg-4 col-form-label">@Html.DisplayNameFor(x=>x.USERNAME) *</label>
+                <div class="col-md-8 col-lg-8 col-sm-8">
+                    @Html.TextBoxFor(x => x.USERNAME, new {@class = "form-control", @placeholder = "Tên đăng nhập", @autofocus = "" })
+                    <small class="text-danger">@Html.ValidationMessageFor(x => x.USERNAME)</small>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword3" class="col-md-4 col-sm-4 col-lg-4 col-form-label">@Html.DisplayNameFor(x=>x.PASSWORD_KEY) *</label>
+                <div class="col-md-8 col-lg-8 col-sm-8">
                     @Html.PasswordFor(x => x.PASSWORD_KEY, new { @class = "form-control", @placeholder = "Mật khẩu" })
                     <small class="text-danger">@Html.ValidationMessageFor(x=>x.PASSWORD_KEY)</small>
                 </div>
-                <div class="col-sm-1">*</div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Nhắc lại mật khẩu</label>
-                <div class="col-sm-8">
+                <label for="inputPassword3" class="col-md-4 col-sm-4 col-lg-4 col-form-label">Nhắc lại mật khẩu *</label>
+                <div class="col-md-8 col-lg-8 col-sm-8">
                     @Html.PasswordFor(x => x.ConfirmPassWord, new {@class = "form-control", @placeholder = "Nhắc lại mật khẩu" })
                     <small class="text-danger">@Html.ValidationMessageFor(x => x.ConfirmPassWord)</small>
                 </div>
-                <div class="col-sm-1">*</div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">@Html.DisplayNameFor(x=>x.NAME)</label>
-                <div class="col-sm-8">
+                <label for="inputPassword3" class="col-md-4 col-sm-4 col-lg-4 col-form-label">@Html.DisplayNameFor(x=>x.NAME) *</label>
+                <div class="col-md-8 col-lg-8 col-sm-8">
                     @Html.TextBoxFor(x => x.NAME, new {@class = "form-control", @placeholder = "Họ tên" })
                     <small class="text-danger">@Html.ValidationMessageFor(x => x.NAME)</small>
                 </div>
-                <div class="col-sm-1">*</div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">@Html.DisplayNameFor(x => x.EMAIL)</label>
-                <div class="col-sm-8">
+                <label for="inputPassword3" class="col-md-4 col-sm-4 col-lg-4 col-form-label">@Html.DisplayNameFor(x => x.EMAIL) *</label>
+                <div class="col-md-8 col-lg-8 col-sm-8">
                     @Html.TextBoxFor(x => x.EMAIL, new { @class = "form-control", @placeholder = "Email" })
                     <small class="text-danger">@Html.ValidationMessageFor(x => x.EMAIL)</small>
                 </div>
-                <div class="col-sm-1">*</div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">@Html.DisplayNameFor(x=>x.CURRENT_ADDRESS)</label>
-                <div class="col-sm-8">
+                <label for="inputPassword3" class="col-md-4 col-sm-4 col-lg-4 col-form-label">@Html.DisplayNameFor(x=>x.CURRENT_ADDRESS) *</label>
+                <div class="col-md-8 col-lg-8 col-sm-8">
                     @Html.TextBoxFor(x => x.CURRENT_ADDRESS, new {@class = "form-control", @placeholder = "Địa chỉ"})
                     <small class="text-danger">@Html.ValidationMessageFor(x => x.CURRENT_ADDRESS)</small>
                 </div>
-                <div class="col-sm-1">*</div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">@Html.DisplayNameFor(x=>x.PHONE)</label>
-                <div class="col-sm-8">
+                <label for="inputPassword3" class="col-md-4 col-sm-4 col-lg-4 col-form-label">@Html.DisplayNameFor(x=>x.PHONE) *</label>
+                <div class="col-md-8 col-lg-8 col-sm-8">
                     @Html.TextBoxFor(x => x.PHONE, new {@class = "form-control", @placeholder = "Số điện thoại"})
                     <small class="text-danger">@Html.ValidationMessageFor(x => x.PHONE)</small>
                 </div>
-                <div class="col-sm-1">*</div>
             </div>
             <div class="form-group row">
-                <div class="col-sm-3">
+                <div class="col-md-4 col-sm-4 col-lg-4">
                     <button type="submit" class="btn btn-primary">Đăng ký</button>
                 </div>
-                <div class="col-sm-8" >
+                <div class="col-md-8 col-lg-8 col-sm-8" >
                     <small>* Bắt buộc</small>
                 </div>
-                <div class="col-sm-12 text-center mt-5"><p class="h6 d-inline text-muted">Bằng cách chọn đăng ký, bạn có thể tiến hành mua và bán account ở </p><img class="d-inline" src="/Content/images/logo2.png" alt="ACCG.NET" style="height: 50px; width: 100px;"/></div>
+                <div class="col-12 m-3 text-center">Đã có tài khoản <a href="#" data-toggle="modal" data-target="#exampleModal" onclick="getLogin()">Đăng nhập</a></div>
+                <div class="col-sm-12 text-center mt-3"><p class="h6 d-inline text-muted">Bằng cách chọn đăng ký, bạn có thể tiến hành mua và bán account ở </p><img class="d-inline" src="/Content/images/logo2.png" alt="ACCG.NET" style="height: 50px; width: 100px;" /></div>
             </div>
         </form>
     </div>
