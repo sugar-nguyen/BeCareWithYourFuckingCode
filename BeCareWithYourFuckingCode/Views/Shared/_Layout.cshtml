@@ -9,9 +9,19 @@
     <link href="~/Content/Site.css" rel="stylesheet" />
     <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script>
+        var CREATE_NUM = 4;
         $(function () {
-            _getAll(8);
+            _getAll(CREATE_NUM);
         })
+
+
+        $(document).ready(function () {
+            $('#see_more').click(function () {
+                CREATE_NUM += 4;
+                alert(CREATE_NUM);
+                _getAll(CREATE_NUM);
+            });
+        });
     </script>
 
 </head>

@@ -21,13 +21,13 @@ namespace BeCareWithYourFuckingCode.Controllers
         [HttpPost]
         public ActionResult getLogin()
         {
-            
+
             return RedirectToAction("Index", "Home");
         }
 
         public ActionResult getSignUp()
         {
-           
+
             return View();
         }
 
@@ -45,18 +45,54 @@ namespace BeCareWithYourFuckingCode.Controllers
             if (user != null) return CreateID();
             return id;
         }
+
+        public string toMD5(string pass)
+        {
+            //Tạo MD5 
+            MD5 mh = MD5.Create();
+            //Chuyển kiểu chuổi thành kiểu byte
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(pass);
+            //mã hóa chuỗi đã chuyển
+            byte[] hash = mh.ComputeHash(inputBytes);
+            //tạo đối tượng StringBuilder (làm việc với kiểu dữ liệu lớn)
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("X2"));
+            }
+            return sb.ToString();
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult getSignUp(TB_USER user)
         {
-            if (ModelState.IsValid)
+            try
             {
-                user.ID = CreateID();
-                Entities.TB_USER.Add(user);
-                Entities.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                if (ModelState.IsValid)
+                {
+                    //TB_USER CurUser = new TB_USER();
+                    //CurUser.ID = CreateID();
+                    //CurUser.USERNAME = user.USERNAME;
+                    //CurUser.PASSWORD_KEY = toMD5(user.PASSWORD_KEY);
+                    //CurUser.NAME = user.NAME;
+                    //CurUser.PHONE = user.PHONE;
+                    //CurUser.CURRENT_ADDRESS = user.CURRENT_ADDRESS;
+                    //CurUser.EMAIL = user.EMAIL;
+                    user.ID = CreateID();
+                    string tmp = user.PASSWORD_KEY;
+                    user.PASSWORD_KEY = toMD5(tmp);
+                    Entities.TB_USER.Add(user);
+                    Entities.SaveChanges();
+                    return RedirectToAction("Index", "Home");
+                }
+                return View();
             }
-            return View();
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+
+
         }
-	}
+    }
 }

@@ -90,3 +90,4 @@ function getLogin() {
     xhttp.open("GET", "/User/Index", true);
     xhttp.send();
 }
+
