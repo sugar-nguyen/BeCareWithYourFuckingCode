@@ -39,6 +39,7 @@ namespace BeCareWithYourFuckingCode.Controllers
                     {
                         Session["user"] = Valid_User.NAME.ToUpper();
                         return RedirectToAction("Index", Request.Url.AbsoluteUri);
+
                     }
                 }
             }
