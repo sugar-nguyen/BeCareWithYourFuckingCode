@@ -80,7 +80,7 @@ namespace BeCareWithYourFuckingCode.Controllers
         }
         public string toMD5(string pass)
         {
-            //Tạo MD5 
+            //Tạo MD5
             MD5 mh = MD5.Create();
             //Chuyển kiểu chuổi thành kiểu byte
             byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(pass);

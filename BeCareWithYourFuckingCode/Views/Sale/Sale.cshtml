@@ -1,4 +1,4 @@
-﻿@model BeCareWithYourFuckingCode.Models.TB_GAME_ACCOUNT 
+﻿@model BeCareWithYourFuckingCode.Models.TB_GAME_ACCOUNT
 @using BeCareWithYourFuckingCode.Models;
 @{
     ViewBag.Title = "Sale";
@@ -7,83 +7,130 @@
 
 <div class="row bg-white p-5">
     <div class="col-12">
-        <form method="post">
-            <div class="row">
+        <form method="post" enctype="multipart/form-data" action="/">
+            @Html.AntiForgeryToken()
+            <div><img class="d-inline" src="~/Content/Images/finger.png" alt="Alternate Text" style="width:20px; height:20px;" /><p class="h6 d-inline" style="color:#ff006e">  Hãy điền tất cả thông tin nếu bạn muốn bán một account game</p></div>
+            <div class="row mt-4">
                 <div class="col-md-6">
-                    <div class="form-group row">
-                        <label class="col-sm-4">@Html.DisplayNameFor(x=>x.USERNAME)</label>
-                        <div class="col-sm-8">
-                            @Html.TextBoxFor(x => x.USERNAME, new { @class = "form-control form-control-sm", @autofocus = "" })
+                    <fieldset class="p-3 rounded" style="border: 2px solid #0c176f">
+                        <legend class="text-danger mb-4 ml-3">Thông tin chi tiết</legend>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group row">
+                            <label class="col-sm-4">@Html.DisplayNameFor(x => x.USERNAME)</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.USERNAME, new { @class = "form-control form-control-sm", @autofocus = "" })
+                                <small class="text-danger">@Html.ValidationMessageFor(x => x.USERNAME)</small>
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 ">@Html.DisplayNameFor(x => x.PASSWORD_KEY)</label>
+                            <div class="col-sm-8">
+                                @Html.PasswordFor(x => x.PASSWORD_KEY, new { @class = "form-control form-control-sm", @title = "Mật khẩu sẽ được mã hõa và chỉ được giải mã khi bạn nhận được tiền từ người mua nó" })
+                                <small class="text-danger">@Html.ValidationMessageFor(x => x.PASSWORD_KEY)</small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4">@Html.DisplayNameFor(x => x.TB_GAME_ACCOUNT_DETAIL.GENERAL_NUMBER)</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.TB_GAME_ACCOUNT_DETAIL.GENERAL_NUMBER, new { @class = "form-control form-control-sm", @type = "number", @min = 5 })
+                                <small class="text-danger">@Html.ValidationMessageFor(x => x.TB_GAME_ACCOUNT_DETAIL.GENERAL_NUMBER)</small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4">@Html.DisplayNameFor(x => x.TB_GAME_ACCOUNT_DETAIL.SKIN_NUMBER)</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.TB_GAME_ACCOUNT_DETAIL.SKIN_NUMBER, new { @class = "form-control form-control-sm", @type = "number", @min = 0 })
+                                <small class="text-danger">@Html.ValidationMessageFor(x => x.TB_GAME_ACCOUNT_DETAIL.SKIN_NUMBER)</small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4">@Html.DisplayNameFor(x => x.TB_GAME_ACCOUNT_DETAIL.GEM_NUMBER)</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.TB_GAME_ACCOUNT_DETAIL.GEM_NUMBER, new { @class = "form-control form-control-sm", @type = "number", @min = 0 })
+                                <small class="text-danger">@Html.ValidationMessageFor(x => x.TB_GAME_ACCOUNT_DETAIL.GEM_NUMBER)</small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4">@Html.DisplayNameFor(x => x.TB_GAME_ACCOUNT_DETAIL.LEVEL_NUMBER)</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.TB_GAME_ACCOUNT_DETAIL.LEVEL_NUMBER, new { @class = "form-control form-control-sm", @type = "number", @min = 1, @max = 30 })
+                                <small class="text-danger">@Html.ValidationMessageFor(x => x.TB_GAME_ACCOUNT_DETAIL.LEVEL_NUMBER)</small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4">@Html.DisplayNameFor(x => x.TB_GAME_ACCOUNT_DETAIL.CLAN_NAME)</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.TB_GAME_ACCOUNT_DETAIL.CLAN_NAME, new { @class = "form-control form-control-sm" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4">@Html.DisplayNameFor(x => x.TB_GAME_ACCOUNT_DETAIL.BEST_RANK)</label>
+                            <div class="col-sm-8">
+                                @{
+                                    SelectList rank = new SelectList(ViewBag.tbgank, "RANK_ID", "RANK_NAME");
+                                }
+                                @Html.DropDownListFor(x => x.TB_GAME_ACCOUNT_DETAIL.BEST_RANK, rank, new { @class = "form-control form-control-sm" })
+                                <small class="text-danger">@Html.ValidationMessageFor(x => x.TB_GAME_ACCOUNT_DETAIL.BEST_RANK)</small>
+                            </div>
                         </div>
 
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 ">@Html.DisplayNameFor(x=>x.PASSWORD_KEY)</label>
-                        <div class="col-sm-8">@Html.PasswordFor(x => x.PASSWORD_KEY, new {@class = "form-control form-control-sm" })</div>
-                    </div>
-                    <div class="form-group row">
-                         <label class="col-sm-4">@Html.DisplayNameFor(x=>x.TB_GAME_ACCOUNT_DETAIL.GENERAL_NUMBER)</label>
-                        <div class="col-sm-8">@Html.TextBoxFor(x => x.TB_GAME_ACCOUNT_DETAIL.GENERAL_NUMBER, new {@class = "form-control form-control-sm",@type = "number",@min = 5 })</div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4">@Html.DisplayNameFor(x => x.TB_GAME_ACCOUNT_DETAIL.SKIN_NUMBER)</label>
-                        <div class="col-sm-8">@Html.TextBoxFor(x => x.TB_GAME_ACCOUNT_DETAIL.SKIN_NUMBER, new { @class = "form-control form-control-sm", @type = "number", @min = 0})</div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4">@Html.DisplayNameFor(x => x.TB_GAME_ACCOUNT_DETAIL.GEM_NUMBER)</label>
-                        <div class="col-sm-8">@Html.TextBoxFor(x => x.TB_GAME_ACCOUNT_DETAIL.GEM_NUMBER, new { @class = "form-control form-control-sm", @type = "number", @min = 0 })</div>
-                    </div>             
-                    <div class="form-group row">
-                        <label class="col-sm-4">@Html.DisplayNameFor(x => x.TB_GAME_ACCOUNT_DETAIL.LEVEL_NUMBER)</label>
-                        <div class="col-sm-8">@Html.TextBoxFor(x => x.TB_GAME_ACCOUNT_DETAIL.LEVEL_NUMBER, new { @class = "form-control form-control-sm", @type = "number", @min = 1, @max = 30 })</div>
-                    </div> 
-                    <div class="form-group row">
-                        <label class="col-sm-4">@Html.DisplayNameFor(x => x.TB_GAME_ACCOUNT_DETAIL.CLAN_NAME)</label>
-                        <div class="col-sm-8">@Html.TextBoxFor(x => x.TB_GAME_ACCOUNT_DETAIL.CLAN_NAME, new { @class = "form-control form-control-sm"})</div>
-                    </div> 
-                    <div class="form-group row">
-                        <label class="col-sm-4">@Html.DisplayNameFor(x=>x.TB_GAME_ACCOUNT_DETAIL.BEST_RANK)</label>
-                        <div class="col-sm-8">
-                            
-                            <select name="" class="form-control form-control-sm">
-                                <option value="0">Không rank</option>
-                                <option value="dong">Đồng</option>
-                                <option value="bac">Bạc</option>
-                                <option value="vang">Vàng</option>
-                                <option value="bk">Bạch Kim</option>
-                                <option value="kk">Kim Cương</option>
-                                <option value="ct">Cao Thủ</option>
-                            </select>
+                        <div class="form-group row">
+                            <label class="col-sm-4">@Html.DisplayNameFor(x => x.TB_GAME_ACCOUNT_DETAIL.CURRENT_RANK)</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(x => x.TB_GAME_ACCOUNT_DETAIL.CURRENT_RANK, rank, new { @class = "form-control form-control-sm" })
+                                <small class="text-danger">@Html.ValidationMessageFor(x => x.TB_GAME_ACCOUNT_DETAIL.CURRENT_RANK)</small>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="form-group row">
-                        <label class="col-sm-4">@Html.DisplayNameFor(x => x.TB_GAME_ACCOUNT_DETAIL.CURRENT_RANK)</label>
-                        <div class="col-sm-8">
-                            <select name="" class="form-control form-control-sm">
-                                <option value="0">Không rank</option>
-                                <option value="dong">Đồng</option>
-                                <option value="bac">Bạc</option>
-                                <option value="vang">Vàng</option>
-                                <option value="bk">Bạch Kim</option>
-                                <option value="kk">Kim Cương</option>
-                                <option value="ct">Cao Thủ</option>
-                            </select>
-                        </div>
-                    </div>
-                   
+                    </fieldset>
                 </div>
                 <div class="col-md-6">
-                    <label>Hình ảnh</label>
-                    <input type="file" name="" class="form-control form-control-sm">
+                    <fieldset class="p-3 rounded" style="border: 2px solid #0c176f; overflow: auto">
+                        <legend class="text-danger mb-4 ml-3">Ảnh</legend>
+                        <div class="form-group row">
+                            <label class="col-sm-3">@Html.DisplayNameFor(x => x.RE_IMAGE)</label>
+                            <div class="col-sm-8">
+                                <input type="file" name="RE_IMG">
+                                @Html.ValidationMessageFor(x => x.RE_IMAGE)
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-3">@Html.DisplayNameFor(x => x.TB_GAME_IMAGE.IMG_1)</label>
+                            <div class="col-sm-8">
+                                <input type="file" name="IMG_1">
+                                @Html.ValidationMessageFor(x => x.TB_GAME_IMAGE.IMG_1)
+                            </div>
+
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3">@Html.DisplayNameFor(x => x.TB_GAME_IMAGE.IMG_2)</label>
+                            <div class="col-sm-8">
+                                <input type="file" name="IMG_1">
+                                @Html.ValidationMessageFor(x => x.TB_GAME_IMAGE.IMG_2)
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3">@Html.DisplayNameFor(x => x.TB_GAME_IMAGE.IMG_3)</label>
+                            <div class="col-sm-8">
+                                <input type="file" name="IMG_3">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3">@Html.DisplayNameFor(x => x.TB_GAME_IMAGE.IMG_4)</label>
+                            <div class="col-sm-8">
+                                <input type="file" name="IMG_4">
+                            </div>
+                        </div>
+                    </fieldset>
+                    
                     <small class="form-text text-danger mt-5">* Bắt buộc</small>
                     <button type="submit" class="btn btn-success">Upload</button>
                 </div>
             </div>
-
-
-
         </form>
     </div>
-   
+
 </div>
