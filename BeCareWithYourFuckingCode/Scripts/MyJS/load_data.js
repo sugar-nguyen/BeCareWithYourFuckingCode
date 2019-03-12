@@ -57,7 +57,7 @@ function NumberFormat(num) {
 //function getDetails(str) {
 //    alert("xin chao" + str);
 
-//    //$.ajax({6
+//    //$.ajax({
 //    //    url: "/Home/GetDetails/" + id,
 //    //    type: "GET",
 //    //    contentType: "application/json; charset=utf-8",
@@ -81,13 +81,13 @@ function NumberFormat(num) {
 
 
 function getLogin() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById('modal-body').innerHTML = this.responseText;
-        }
-    };
-    xhttp.open("GET", "/User/Index", true);
-    xhttp.send();
+    
+    $.ajax({
+        url: "/User/Index",
+        type: "GET",
+        dataType: "HTML",
+        success: function (result) {
+            $('#modal-body').html(result);
+        },
+    });
 }
-

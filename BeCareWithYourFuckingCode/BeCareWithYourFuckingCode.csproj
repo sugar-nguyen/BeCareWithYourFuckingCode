@@ -190,6 +190,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -253,6 +254,7 @@
     <Content Include="Views\Shared\_Price_Offer.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\getSignUp.cshtml" />
+    <Content Include="Views\Sale\Sale.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

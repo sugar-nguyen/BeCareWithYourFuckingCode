@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="WEBACCOUNTModelStoreContainer" CdmEntityContainer="WEBACCOUNTEntities2">
+  <EntityContainerMapping StorageEntityContainer="WEBACCOUNTModelStoreContainer" CdmEntityContainer="WEBACCOUNTEntities">
     <EntitySetMapping Name="TB_CARD_DEAL_HISTORY">
       <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_CARD_DEAL_HISTORY">
         <MappingFragment StoreEntitySet="TB_CARD_DEAL_HISTORY">
@@ -24,6 +24,8 @@
           <ScalarProperty Name="ACCEPT_PRICE" ColumnName="ACCEPT_PRICE" />
           <ScalarProperty Name="CURRENT_STATUS" ColumnName="CURRENT_STATUS" />
           <ScalarProperty Name="RE_IMAGE" ColumnName="RE_IMAGE" />
+          <ScalarProperty Name="IMG_ID" ColumnName="IMG_ID" />
+          <ScalarProperty Name="DATE_UPLOAD" ColumnName="DATE_UPLOAD" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -38,7 +40,17 @@
           <ScalarProperty Name="BEST_RANK" ColumnName="BEST_RANK" />
           <ScalarProperty Name="CURRENT_RANK" ColumnName="CURRENT_RANK" />
           <ScalarProperty Name="CLAN_NAME" ColumnName="CLAN_NAME" />
-          <ScalarProperty Name="ID_IMG" ColumnName="ID_IMG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_GAME_IMAGE">
+      <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_GAME_IMAGE">
+        <MappingFragment StoreEntitySet="TB_GAME_IMAGE">
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="IMG_1" ColumnName="IMG_1" />
+          <ScalarProperty Name="IMG_2" ColumnName="IMG_2" />
+          <ScalarProperty Name="IMG_3" ColumnName="IMG_3" />
+          <ScalarProperty Name="IMG_4" ColumnName="IMG_4" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -80,15 +92,6 @@
           <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
           <ScalarProperty Name="PHONE" ColumnName="PHONE" />
           <ScalarProperty Name="CURRENT_ADDRESS" ColumnName="CURRENT_ADDRESS" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TB_GAME_IMAGE">
-      <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_GAME_IMAGE">
-        <MappingFragment StoreEntitySet="TB_GAME_IMAGE">
-          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
-          <ScalarProperty Name="ACCOUNT_IMAGE" ColumnName="ACCOUNT_IMAGE" />
-          <ScalarProperty Name="ID_IMG" ColumnName="ID_IMG" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

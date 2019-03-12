@@ -26,8 +26,11 @@ namespace BeCareWithYourFuckingCode.Models
         public Nullable<int> ACCEPT_PRICE { get; set; }
         public Nullable<int> CURRENT_STATUS { get; set; }
         public string RE_IMAGE { get; set; }
+        public string IMG_ID { get; set; }
+        public Nullable<System.DateTime> DATE_UPLOAD { get; set; }
     
         public virtual TB_GAME_ACCOUNT_DETAIL TB_GAME_ACCOUNT_DETAIL { get; set; }
+        public virtual TB_GAME_IMAGE TB_GAME_IMAGE { get; set; }
         public virtual ICollection<TB_GAME_PRICE_OFFER> TB_GAME_PRICE_OFFER { get; set; }
         public virtual ICollection<TB_SELL_DEAL_HISTORY> TB_SELL_DEAL_HISTORY { get; set; }
     }

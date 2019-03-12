@@ -14,8 +14,17 @@ namespace BeCareWithYourFuckingCode.Models
     
     public partial class TB_GAME_IMAGE
     {
+        public TB_GAME_IMAGE()
+        {
+            this.TB_GAME_ACCOUNT = new HashSet<TB_GAME_ACCOUNT>();
+        }
+    
         public string USERNAME { get; set; }
-        public string ACCOUNT_IMAGE { get; set; }
-        public int ID_IMG { get; set; }
+        public string IMG_1 { get; set; }
+        public string IMG_2 { get; set; }
+        public string IMG_3 { get; set; }
+        public string IMG_4 { get; set; }
+    
+        public virtual ICollection<TB_GAME_ACCOUNT> TB_GAME_ACCOUNT { get; set; }
     }
 }

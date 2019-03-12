@@ -14,7 +14,7 @@ namespace BeCareWithYourFuckingCode.Controllers
         //
         // GET: /User/
 
-        WEBACCOUNTEntities2 Entities = new WEBACCOUNTEntities2();
+        WEBACCOUNTEntities Entities = new WEBACCOUNTEntities();
         public ActionResult Index()
         {
             return View();
@@ -38,7 +38,7 @@ namespace BeCareWithYourFuckingCode.Controllers
                     else
                     {
                         Session["user"] = Valid_User.NAME.ToUpper();
-                        return RedirectToAction("Index", Request.Url.AbsoluteUri);
+                        ViewBag.Success = "Thành công";
 
                     }
                 }

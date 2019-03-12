@@ -13,10 +13,10 @@ namespace BeCareWithYourFuckingCode.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class WEBACCOUNTEntities2 : DbContext
+    public partial class WEBACCOUNTEntities : DbContext
     {
-        public WEBACCOUNTEntities2()
-            : base("name=WEBACCOUNTEntities2")
+        public WEBACCOUNTEntities()
+            : base("name=WEBACCOUNTEntities")
         {
         }
     
@@ -28,10 +28,10 @@ namespace BeCareWithYourFuckingCode.Models
         public virtual DbSet<TB_CARD_DEAL_HISTORY> TB_CARD_DEAL_HISTORY { get; set; }
         public virtual DbSet<TB_GAME_ACCOUNT> TB_GAME_ACCOUNT { get; set; }
         public virtual DbSet<TB_GAME_ACCOUNT_DETAIL> TB_GAME_ACCOUNT_DETAIL { get; set; }
+        public virtual DbSet<TB_GAME_IMAGE> TB_GAME_IMAGE { get; set; }
         public virtual DbSet<TB_GAME_PRICE_OFFER> TB_GAME_PRICE_OFFER { get; set; }
         public virtual DbSet<TB_RANK_NAME> TB_RANK_NAME { get; set; }
         public virtual DbSet<TB_SELL_DEAL_HISTORY> TB_SELL_DEAL_HISTORY { get; set; }
         public virtual DbSet<TB_USER> TB_USER { get; set; }
-        public virtual DbSet<TB_GAME_IMAGE> TB_GAME_IMAGE { get; set; }
     }
 }

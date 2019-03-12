@@ -22,7 +22,6 @@ namespace BeCareWithYourFuckingCode.Models
         public string BEST_RANK { get; set; }
         public string CURRENT_RANK { get; set; }
         public string CLAN_NAME { get; set; }
-        public Nullable<int> ID_IMG { get; set; }
     
         public virtual TB_GAME_ACCOUNT TB_GAME_ACCOUNT { get; set; }
         public virtual TB_RANK_NAME TB_RANK_NAME { get; set; }

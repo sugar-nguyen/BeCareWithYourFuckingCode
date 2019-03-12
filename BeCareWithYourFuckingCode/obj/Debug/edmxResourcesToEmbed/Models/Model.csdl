@@ -24,7 +24,10 @@
     <Property Name="ACCEPT_PRICE" Type="Int32" />
     <Property Name="CURRENT_STATUS" Type="Int32" />
     <Property Name="RE_IMAGE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="IMG_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DATE_UPLOAD" Type="DateTime" Precision="0" />
     <NavigationProperty Name="TB_GAME_ACCOUNT_DETAIL" Relationship="Self.FK_TB_GAME_ACCOUNT_DETAIL_TB_GAME_ACCOUNT" FromRole="TB_GAME_ACCOUNT" ToRole="TB_GAME_ACCOUNT_DETAIL" />
+    <NavigationProperty Name="TB_GAME_IMAGE" Relationship="Self.FK_TB_GAME_ACCOUNT_TB_GAME_IMAGE" FromRole="TB_GAME_ACCOUNT" ToRole="TB_GAME_IMAGE" />
     <NavigationProperty Name="TB_GAME_PRICE_OFFER" Relationship="Self.FK_TB_GAME_PRICE_OFFER_TB_GAME_ACCOUNT" FromRole="TB_GAME_ACCOUNT" ToRole="TB_GAME_PRICE_OFFER" />
     <NavigationProperty Name="TB_SELL_DEAL_HISTORY" Relationship="Self.FK_TB_SELL_DELL_HISTORY_TB_GAME_ACCOUNT" FromRole="TB_GAME_ACCOUNT" ToRole="TB_SELL_DEAL_HISTORY" />
   </EntityType>
@@ -40,10 +43,20 @@
     <Property Name="BEST_RANK" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="CURRENT_RANK" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="CLAN_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="ID_IMG" Type="Int32" />
     <NavigationProperty Name="TB_GAME_ACCOUNT" Relationship="Self.FK_TB_GAME_ACCOUNT_DETAIL_TB_GAME_ACCOUNT" FromRole="TB_GAME_ACCOUNT_DETAIL" ToRole="TB_GAME_ACCOUNT" />
     <NavigationProperty Name="TB_RANK_NAME" Relationship="Self.FK_TB_GAME_ACCOUNT_DETAIL_TB_RANK_NAME" FromRole="TB_GAME_ACCOUNT_DETAIL" ToRole="TB_RANK_NAME" />
     <NavigationProperty Name="TB_RANK_NAME1" Relationship="Self.FK_TB_GAME_ACCOUNT_DETAIL_TB_RANK_NAME1" FromRole="TB_GAME_ACCOUNT_DETAIL" ToRole="TB_RANK_NAME" />
+  </EntityType>
+  <EntityType Name="TB_GAME_IMAGE">
+    <Key>
+      <PropertyRef Name="USERNAME" />
+    </Key>
+    <Property Name="USERNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IMG_1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IMG_2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IMG_3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IMG_4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TB_GAME_ACCOUNT" Relationship="Self.FK_TB_GAME_ACCOUNT_TB_GAME_IMAGE" FromRole="TB_GAME_IMAGE" ToRole="TB_GAME_ACCOUNT" />
   </EntityType>
   <EntityType Name="TB_GAME_PRICE_OFFER">
     <Key>
@@ -92,16 +105,6 @@
     <NavigationProperty Name="TB_GAME_PRICE_OFFER" Relationship="Self.FK_TB_GAME_PRICE_OFFER_TB_USER" FromRole="TB_USER" ToRole="TB_GAME_PRICE_OFFER" />
     <NavigationProperty Name="TB_SELL_DEAL_HISTORY" Relationship="Self.FK_TB_SELL_DELL_HISTORY_TB_USER1" FromRole="TB_USER" ToRole="TB_SELL_DEAL_HISTORY" />
   </EntityType>
-  <EntityType Name="TB_GAME_IMAGE">
-    <Key>
-      <PropertyRef Name="USERNAME" />
-      <PropertyRef Name="ACCOUNT_IMAGE" />
-      <PropertyRef Name="ID_IMG" />
-    </Key>
-    <Property Name="USERNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="ACCOUNT_IMAGE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="ID_IMG" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-  </EntityType>
   <Association Name="FK_TB_CARD_DEAL_HISTORY_TB_USER">
     <End Role="TB_USER" Type="Self.TB_USER" Multiplicity="0..1" />
     <End Role="TB_CARD_DEAL_HISTORY" Type="Self.TB_CARD_DEAL_HISTORY" Multiplicity="*" />
@@ -123,6 +126,18 @@
       </Principal>
       <Dependent Role="TB_GAME_ACCOUNT_DETAIL">
         <PropertyRef Name="USERNAME" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TB_GAME_ACCOUNT_TB_GAME_IMAGE">
+    <End Role="TB_GAME_IMAGE" Type="Self.TB_GAME_IMAGE" Multiplicity="0..1" />
+    <End Role="TB_GAME_ACCOUNT" Type="Self.TB_GAME_ACCOUNT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_GAME_IMAGE">
+        <PropertyRef Name="USERNAME" />
+      </Principal>
+      <Dependent Role="TB_GAME_ACCOUNT">
+        <PropertyRef Name="IMG_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -198,15 +213,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="WEBACCOUNTEntities2" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="WEBACCOUNTEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="TB_CARD_DEAL_HISTORY" EntityType="Self.TB_CARD_DEAL_HISTORY" />
     <EntitySet Name="TB_GAME_ACCOUNT" EntityType="Self.TB_GAME_ACCOUNT" />
     <EntitySet Name="TB_GAME_ACCOUNT_DETAIL" EntityType="Self.TB_GAME_ACCOUNT_DETAIL" />
+    <EntitySet Name="TB_GAME_IMAGE" EntityType="Self.TB_GAME_IMAGE" />
     <EntitySet Name="TB_GAME_PRICE_OFFER" EntityType="Self.TB_GAME_PRICE_OFFER" />
     <EntitySet Name="TB_RANK_NAME" EntityType="Self.TB_RANK_NAME" />
     <EntitySet Name="TB_SELL_DEAL_HISTORY" EntityType="Self.TB_SELL_DEAL_HISTORY" />
     <EntitySet Name="TB_USER" EntityType="Self.TB_USER" />
-    <EntitySet Name="TB_GAME_IMAGE" EntityType="Self.TB_GAME_IMAGE" />
     <AssociationSet Name="FK_TB_CARD_DEAL_HISTORY_TB_USER" Association="Self.FK_TB_CARD_DEAL_HISTORY_TB_USER">
       <End Role="TB_USER" EntitySet="TB_USER" />
       <End Role="TB_CARD_DEAL_HISTORY" EntitySet="TB_CARD_DEAL_HISTORY" />
@@ -214,6 +229,10 @@
     <AssociationSet Name="FK_TB_GAME_ACCOUNT_DETAIL_TB_GAME_ACCOUNT" Association="Self.FK_TB_GAME_ACCOUNT_DETAIL_TB_GAME_ACCOUNT">
       <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
       <End Role="TB_GAME_ACCOUNT_DETAIL" EntitySet="TB_GAME_ACCOUNT_DETAIL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TB_GAME_ACCOUNT_TB_GAME_IMAGE" Association="Self.FK_TB_GAME_ACCOUNT_TB_GAME_IMAGE">
+      <End Role="TB_GAME_IMAGE" EntitySet="TB_GAME_IMAGE" />
+      <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
     </AssociationSet>
     <AssociationSet Name="FK_TB_GAME_PRICE_OFFER_TB_GAME_ACCOUNT" Association="Self.FK_TB_GAME_PRICE_OFFER_TB_GAME_ACCOUNT">
       <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
