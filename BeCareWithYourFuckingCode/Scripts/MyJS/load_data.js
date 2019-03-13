@@ -7,6 +7,7 @@
         success: function (result) {
             var html = '';
             var tmp;
+            result = check_data_enough(result);
             $.each(result, function (key, item) {
                 if (key == 0 || key % 4 == 0) {
                     html += '<div class = "row mb-2">';
@@ -49,6 +50,15 @@
     });
 }
 
+function check_data_enough(result) {
+    if (result.length % 4 == 0)
+        return result;
+    else {
+        var length = result.length % 4;
+        result.length -= length;
+    }
+    return result;
+}
 
 function NumberFormat(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
@@ -81,7 +91,7 @@ function NumberFormat(num) {
 
 
 function getLogin() {
-    
+
     $.ajax({
         url: "/User/Index",
         type: "GET",

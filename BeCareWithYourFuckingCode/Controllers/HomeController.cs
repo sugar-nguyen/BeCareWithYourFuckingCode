@@ -13,14 +13,13 @@ namespace BeCareWithYourFuckingCode.Controllers
         Models.WEBACCOUNTEntities Entities = new Models.WEBACCOUNTEntities();
         public ActionResult Index()
         {
-            Session["user"] = "";
             return View();
         }
 
-        public JsonResult GetAll(string num)
+        public JsonResult GetAll(string id)
         {
-            int limit = num == null ? 8 : int.Parse(num);
-            
+            int limit = id != null ? Int32.Parse(id) : 8;
+
             bool proxyCreation = Entities.Configuration.ProxyCreationEnabled;
             try
             {
@@ -34,8 +33,9 @@ namespace BeCareWithYourFuckingCode.Controllers
                         ngoc = x.TB_GAME_ACCOUNT_DETAIL.GEM_NUMBER,
                         img = x.RE_IMAGE,
                         hang = x.TB_GAME_ACCOUNT_DETAIL.TB_RANK_NAME.RANK_NAME,
-                        gia = x.ORIGINAL_PRICE
-                    }).Take(limit);
+                        gia = x.ORIGINAL_PRICE,
+                        ngay = x.DATE_UPLOAD
+                    }).Take(limit).OrderBy(x => x.ngay);
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -48,7 +48,7 @@ namespace BeCareWithYourFuckingCode.Controllers
             }
         }
 
-       
+
         [HttpPost]
         public ActionResult getDetail(string id)
         {
@@ -66,7 +66,7 @@ namespace BeCareWithYourFuckingCode.Controllers
                 });
                 if (ViewBag.detail != null)
                 {
-                    return Json(data,JsonRequestBehavior.AllowGet);
+                    return Json(data, JsonRequestBehavior.AllowGet);
                 }
                 return Content("Rỗng");
             }

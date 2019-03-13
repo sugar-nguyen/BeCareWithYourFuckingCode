@@ -9,17 +9,19 @@
     <link href="~/Content/Site.css" rel="stylesheet" />
     <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script>
-        var CREATE_NUM = 4;
+        
+        var CREATE_NUM = 8;
         $(function () {
             _getAll(CREATE_NUM);
-        })
+        });
 
 
         $(document).ready(function () {
             $('#see_more').click(function () {
                 CREATE_NUM += 4;
-                alert(CREATE_NUM);
                 _getAll(CREATE_NUM);
+                window.location.href +="?p=" + CREATE_NUM;
+                $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
             });
         });
 
@@ -201,12 +203,15 @@
     <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/Scripts/MyJS/change_background_color_header.js"></script>
     <script type="text/javascript" src="~/Scripts/MyJS/load_data.js"></script>
+    <script type="text/javascript" src="~/Scripts/MyJS/ScrollToTop.js"></script>
     <script type="text/javascript" src="~/Script/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 </body>
 </html>
 
 
 @Html.Partial("_Login_Page");
 @Html.Partial("_Price_Offer");
+

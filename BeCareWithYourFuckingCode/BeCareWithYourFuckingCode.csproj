@@ -177,6 +177,7 @@
     <Content Include="Scripts\MyJS\load_data.js" />
     <Content Include="Scripts\MyJS\menu_dropdown.js" />
     <Content Include="Scripts\MyJS\product_info_down.js" />
+    <Content Include="Scripts\MyJS\ScrollToTop.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
