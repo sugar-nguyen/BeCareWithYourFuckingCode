@@ -9,7 +9,7 @@
     <link href="~/Content/Site.css" rel="stylesheet" />
     <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script>
-        
+
         var CREATE_NUM = 8;
         $(function () {
             _getAll(CREATE_NUM);
@@ -20,7 +20,6 @@
             $('#see_more').click(function () {
                 CREATE_NUM += 4;
                 _getAll(CREATE_NUM);
-                window.location.href +="?p=" + CREATE_NUM;
                 $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
             });
         });
