@@ -35,7 +35,7 @@ namespace BeCareWithYourFuckingCode.Controllers
                         hang = x.TB_GAME_ACCOUNT_DETAIL.TB_RANK_NAME.RANK_NAME,
                         gia = x.ORIGINAL_PRICE,
                         ngay = x.DATE_UPLOAD
-                    }).Take(limit).OrderBy(x => x.ngay);
+                    }).Take(limit);
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
