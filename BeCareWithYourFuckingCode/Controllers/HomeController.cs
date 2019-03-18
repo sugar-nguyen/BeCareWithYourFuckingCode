@@ -16,6 +16,18 @@ namespace BeCareWithYourFuckingCode.Controllers
             return View();
         }
 
+
+        public ActionResult getHeader() // kiểm tra trạng thái đăng nhập để lựa chọn header nào
+        {
+            if (Session["UserID"] != null)
+            {
+                return PartialView("_Header2");
+            }
+            else
+            {
+                return PartialView("_Header1");
+            }  
+        }
         public JsonResult GetAll(string id)
         {
             int limit = id != null ? Int32.Parse(id) : 8;

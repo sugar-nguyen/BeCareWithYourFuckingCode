@@ -90,14 +90,14 @@ function NumberFormat(num) {
 //}
 
 
-function getLogin() {
+//function getLogin() {
 
-    $.ajax({
-        url: "/User/Index",
-        type: "GET",
-        dataType: "HTML",
-        success: function (result) {
-            $('#modal-body').html(result);
-        },
-    });
-}
+//    $.ajax({
+//        url: "/User/Index",
+//        type: "GET",
+//        dataType: "HTML",
+//        success: function (result) {
+//            $('#modal-body').html(result);
+//        },
+//    });
+//}

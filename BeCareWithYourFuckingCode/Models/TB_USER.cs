@@ -23,6 +23,11 @@ namespace BeCareWithYourFuckingCode.Models
             this.TB_SELL_DEAL_HISTORY = new HashSet<TB_SELL_DEAL_HISTORY>();
         }
 
+        public TB_USER(string UserName, string PassWord)
+        {
+            this.USERNAME = USERNAME;
+            this.PASSWORD_KEY = PASSWORD_KEY;
+        }
         public string ID { get; set; }
 
         [Display(Name = "Tên đăng nhập")]

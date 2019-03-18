@@ -15,34 +15,39 @@ namespace BeCareWithYourFuckingCode.Controllers
         // GET: /User/
 
         WEBACCOUNTEntities Entities = new WEBACCOUNTEntities();
-        public ActionResult Index()
-        {
-            return View();
-        }
+
         [HttpPost]
         public ActionResult getLogin(TB_USER user)
         {
-            if (ModelState.IsValid)
-            {
-                if (CheckUserName(user.USERNAME) == null)
-                {
-                    ModelState.AddModelError("", "Tên đăng nhập không đúng");
-                }
-                else
-                {
-                    TB_USER Valid_User = Entities.TB_USER.Where(x => x.PASSWORD_KEY == user.PASSWORD_KEY).SingleOrDefault();
-                    if (Valid_User == null)
-                    {
-                        ModelState.AddModelError("", "Mật khẩu không đúng");
-                    }
-                    else
-                    {
-                        Session["user"] = Valid_User.NAME.ToUpper();
-                        ViewBag.Success = "Thành công";
+            string message = "";
+            TB_USER users = Entities.TB_USER.Where(x => x.USERNAME ==user.USERNAME.Trim() && x.PASSWORD_KEY.Trim() == user.PASSWORD_KEY).Select(x=>x).SingleOrDefault();
 
-                    }
-                }
+            if (users != null)
+            {
+                Session["UserID"] = users.ID;
+                Session["UserName"] = VietHoa(users.NAME);
+                message = "success";
             }
+            else
+            {
+
+                message = "empty";
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+        }
+
+        public ActionResult getSignOut()
+        {
+            Session["UserID"] = null;
+            Session["UserName"] = null;
             return RedirectToAction("Index", "Home");
         }
 
@@ -71,6 +76,32 @@ namespace BeCareWithYourFuckingCode.Controllers
         {
             TB_USER user = Entities.TB_USER.Where(x => x.USERNAME == username).SingleOrDefault();
             return user;
+        }
+
+        public static string VietHoa(string s)
+        {
+            if (String.IsNullOrEmpty(s))
+                return s;
+
+            string result = "";
+
+            //lấy danh sách các từ  
+
+            string[] words = s.Split(' ');
+
+            foreach (string word in words)
+            {
+                // từ nào là các khoảng trắng thừa thì bỏ  
+                if (word.Trim() != "")
+                {
+                    if (word.Length > 1)
+                        result += word.Substring(0, 1).ToUpper() + word.Substring(1).ToLower() + " ";
+                    else
+                        result += word.ToUpper() + " ";
+                }
+
+            }
+            return result.Trim();
         }
 
         public TB_USER CheckEmail(string email)

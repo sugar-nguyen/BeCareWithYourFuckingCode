@@ -1,18 +1,82 @@
 ﻿@model BeCareWithYourFuckingCode.Models.TB_USER
+    @{
+        Layout = null;
+    }
 
-<!-- login -->
+    <script type="text/javascript">
+        function login() {
+            var username = $('#USERNAME').val();
+            var password = $('#PASSWORD_KEY').val();
+            if (username == "" || password  == "") {
+                $('#message1').show();
+                $('#message2').hide();
+                return false;
+            }
+            var data = $('#form-data').serialize();
+            $.ajax({
+                type: 'POST',
+                data: data,
+                url: '/User/getLogin',
+                success: function (result) {
+                    if (result.toString() == "success") {
+                        $('#btn-close').click();
+                        getHeader();
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content my-modal">
-            <div class="modal-header">
-                <h5 class="modal-title text-danger" id="exampleModalLabel">Đăng nhập</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                    } else {
+                        $('#message2').show();
+                        $('#message1').hide();
+                        $('#form-data')[0].reset();
+                        $('#form-data')[1].reset();
+                    }
+                },
+                error: function (result) {
+                    alert(result.responeText);
+                }
+            });
+        }
+    </script>
+    <!-- login -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content my-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title text-danger" id="exampleModalLabel">Đăng nhập</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="modal-body">
+
+                    <form action="/" id="form-data">
+                        @Html.AntiForgeryToken()
+                        <div class="modal-body">
+                            <small class="text-danger" id="message1">Tên đăng nhập hoặc mật khẩu bị bỏ trống</small>
+                            <small class="text-danger" id="message2">Tên đăng nhập hoặc mật khẩu không đúng</small>
+                            <div class="form-group">
+                            </div>
+                            <div class="form-group">
+                                <label>Tên đăng nhập</label>
+                                @Html.TextBoxFor(x => x.USERNAME, new {@class = "form-control", @placeholder = "Tên đăng nhập"})
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Mật khẩu</label>
+                                @Html.PasswordFor(x => x.PASSWORD_KEY, new { @class = "form-control", @placeholder = "Mật khẩu"})
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Ghi nhớ</label>
+                                <a href="#" title="">Quên mật khẩu</a><br>
+                                <small>Chưa có tài khoản </small><a href="/User/getSignUp" class="text-danger" title="">Đăng ký </a><small> hoặc đăng nhập bằng </small><a href="#" title="">Facebook</a>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn-close">Đóng</button>
+                        <button class="btn btn-success" type="submit" onclick="login()">Đăng nhập</button>
+
+                    </div>
+                </div>
             </div>
-            <div id="modal-body"></div>
         </div>
     </div>
-</div>
-<!--end login -->
+    <!--end login -->

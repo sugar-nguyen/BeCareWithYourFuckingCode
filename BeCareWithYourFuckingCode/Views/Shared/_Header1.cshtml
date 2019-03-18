@@ -1,0 +1,51 @@
+﻿<div class="container">
+    <!-- start row -->
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="navbar navbar-expand-lg navbar-dark nav-header">
+                <a class="navbar-brand" href="#"><img src="~/Content/Images/logo2.png" alt=""></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active home">
+                            <a class="nav-link home" href="/Home/Index">Trang chủ<span class="sr-only">(current)</span></a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Hướng dẫn
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Nạp thẻ</a>
+                                <a class="dropdown-item" href="#">Mua bán</a>
+
+                            </div>
+                        </li>
+                        <li class="nav-item napthe">
+                            <a href="#" class="nav-link">Nạp thẻ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Liên hệ</a>
+                        </li>
+                        <li class="nav-item">
+                            <div class="nav-link">
+                                <a href="/Sale/Sale" class="nav-link d-inline">Mua bán</a><img src="https://shopdat09.com/assets/images/hot.gif" alt="" class="d-inline">
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="#" class="btn btn-outline-warning" id="btn-login" data-toggle="modal" data-target="#exampleModal" onclick="load_modal()">Đăng nhập</a>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!--end row -->
+</div>
+
+<script>
+    function load_modal() {
+        $('#message1').hide();
+        $('#message2').hide();
+    }
+</script>
