@@ -61,6 +61,37 @@ namespace BeCareWithYourFuckingCode.Controllers
             }
         }
        
-
+        //get all with the same price
+        public JsonResult GetAllByPrice(string id)
+        {
+            int _id = Int32.Parse(id);
+            bool proxyCreation = Entities.Configuration.ProxyCreationEnabled;
+            try
+            {
+                Entities.Configuration.ProxyCreationEnabled = false;
+                var data = Entities.TB_GAME_ACCOUNT.Where(x=>Math.Abs(x.ACCEPT_PRICE - _id,) >= 0 && x.ACCEPT_PRICE - _id <=100000).Select(x =>
+                    new
+                    {
+                        id = x.ID,
+                        username = x.USERNAME,
+                        tuong = x.TB_GAME_ACCOUNT_DETAIL.GENERAL_NUMBER,
+                        skin = x.TB_GAME_ACCOUNT_DETAIL.SKIN_NUMBER,
+                        ngoc = x.TB_GAME_ACCOUNT_DETAIL.GEM_NUMBER,
+                        img = x.RE_IMAGE,
+                        hang = x.TB_GAME_ACCOUNT_DETAIL.TB_RANK_NAME.RANK_NAME,
+                        gia = x.ORIGINAL_PRICE,
+                        ngay = x.DATE_UPLOAD
+                    }).Take(4);
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
+            finally
+            {
+                Entities.Configuration.ProxyCreationEnabled = proxyCreation;
+            }
+        }
     }
 }
