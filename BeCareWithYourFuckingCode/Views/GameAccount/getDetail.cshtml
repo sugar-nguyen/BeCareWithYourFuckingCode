@@ -1,0 +1,219 @@
+﻿@{
+    ViewBag.Title = "getDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    $().ready(function () {
+        var id = '@ViewBag.id';
+        $.ajax({
+            url: '/GameAccount/getDetailAction/' + id,
+            type: 'POST',
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (result) {
+                if (result.toString == "") {
+                    $('#message').html("Your page resquest is not exists !");
+                    $('#detail-content').addClass("d-none");
+                    return;
+                }
+                var html = '';
+                html += '<div class="col-md-3" id="detail_location" style="font-family: cambria; background-color: #000033">';
+                html += ' <p class="h3 text-success d-inline">Mã: </p><p class="text-danger d-inline h3">' + "#" + result.id + '</p>';
+                html += '<div class="mt-4" style="margin-left: -30px;">';
+                html += ' <ul class="list-groups">';
+                html += ' <li class="list-group-item d-flex justify-content-between align-items-center">Giá:';
+                html += '<span class="badge badge-primary badge-pill">' + NumberFormat(result.gia) + ' Đ' + '</span>';
+                html += '</li>';
+                html += '<li class="list-group-item d-flex justify-content-between align-items-center">Tướng';
+                html += '<span class="badge badge-primary badge-pill">' + result.tuong + '</span>';
+                html += '</li>';
+                html += ' <li class="list-group-item d-flex justify-content-between align-items-center">Trang phục';
+                html += ' <span class="badge badge-primary badge-pill">' + result.skin + '</span>';
+                html += '</li>';
+                html += ' <li class="list-group-item d-flex justify-content-between align-items-center">Bảng ngọc:';
+                html += '<span class="badge badge-primary badge-pill">' + result.ngoc + '</span>';
+                html += '</li>';
+                html += '<li class="list-group-item d-flex justify-content-between align-items-center">Bậc hiện tại:';
+                html += ' <span class="badge badge-primary badge-pill">' + result.hangc + '</span>';
+                html += '</li>';
+                html += '<li class="list-group-item d-flex justify-content-between align-items-center">Bậc cao nhất:';
+                html += ' <span class="badge badge-primary badge-pill">' + result.hangb + '</span>';
+                html += '  </li>';
+                html += '<li class="list-group-item d-flex justify-content-between align-items-center">Clan:';
+                html += ' <span class="badge badge-primary badge-pill">' + result.clan + '</span>';
+                html += '</li>';
+                html += '</ul>';
+                html += '</div>';
+                html += '</div>';
+                html += '<div class="col-md-9  border border-light">';
+                html += '  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin: 0 -15px 0 -15px;">';
+                html += ' <ol class="carousel-indicators">';
+                html += ' <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>';
+                html += ' <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>';
+                html += '<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>';
+                html += '<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>';
+                html += '</ol>';
+                html += '<div class="carousel-inner">';
+                html += ' <div class="carousel-item active">';
+                html += '<img class="d-block w-100" src="image/detail-1.jpg" alt="First slide">';
+                html += '</div>';
+                html += ' <div class="carousel-item">';
+                html += ' <img class="d-block w-100" src="image/detail-2.jpg" alt="Second slide">';
+                html += '</div>';
+                html += ' <div class="carousel-item">';
+                html += ' <img class="d-block w-100" src="image/detail-3.jpg" alt="Third slide">';
+                html += '</div>';
+                html += '<div class="carousel-item">';
+                html += '<img class="d-block w-100" src="image/detail-4.jpg" alt="Third slide">';
+                html += '</div>';
+                html += '</div>';
+                html += '<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">';
+                html += '<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
+                html += '  <span class="sr-only">Previous</span>';
+                html += ' </a>';
+                html += ' <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">';
+                html += '<span class="carousel-control-next-icon" aria-hidden="true"></span>';
+                html += ' <span class="sr-only">Next</span>';
+                html += ' </a>';
+                html += '</div>';
+                html += '</div>';
+                $('#detail_location').html(html);
+                $('#oriprice').text(NumberFormat(result.gia) + " Đ");
+                $.getJSON("/GameAccount/offerPrice/" + result.gia, "", function (res) {
+                    var html = '';
+                    $.each(res, function (key, item) {
+                        html += '<option value="' + item + '">' + NumberFormat(item) + ' Đ'+ '</option>';
+                    });
+                    $('#select-price').html(html);
+                });
+            },
+        });
+    })
+</script>
+<p class="text-danger" id="message"></p>
+<div class="row py-1" style="background-color: #FFF;" id="detail-content">
+    <div class="col-md-12">
+        <div class="h6 font-weight-bold float-left mt-2" style="font-family: cambria;">
+            <marquee>Hãy tham khảo thật kỹ và chọn cho mình 1 mức giá hợp lý để thương lượng hoặc mua ngay nếu giá đã hợp lý bạn nhé ! :)</marquee>
+        </div>
+        <div class="float-right">
+            <a href="#" title="" class="btn btn-info " data-toggle="modal" data-target="#exampleModalCenter" id="offertarget">Trả giá</a>
+            <a href="#" title="" class="btn btn-warning">Mua ngay</a>
+        </div>
+    </div>
+</div>
+<div class="row mt-1" id="detail_location">
+    <!---->
+    <!---->
+</div>
+<div class="row bg-light my-2 py-1 px-2">
+    <div class="col-md-12 text-center">
+        <span class="h5 font-weight-bold">CÁC ACCOUNT CÙNG GIÁ</span>
+    </div>
+
+</div>
+<div class="row mx-2 my-2">
+    <!--box 1-->
+    <div class="product-box col-md border border-warning rounded mr-2 mb-1">
+        <div class="product-info-down w-100 rounded-top p-4">
+            <p class="h5"> Tướng: 35</p>
+            <p class="h5 text-light"> Skin: 40</p>
+            <p class="h5 text-light"> Bảng ngọc: 4</p>
+            <p class="h5 text-light"> Bậc cao nhất: Cao thủ</p>
+
+            <p class="h5 text-light"> Best: Zuka, Murad</p>
+        </div>
+        <div class="product mt-2">
+            <a href="#" title=""><img class="img-fluid" src="image/acc-gank.jpg" alt=""></a>
+            <p class="h3 mt-4 text-center font-weight-bold text-danger">500.000 <sup>đ</sup></p>
+            <div class="row my-2">
+                <div class="col">
+                    <a href="#" class="btn btn-outline-success w-100" title="">Xem</a>
+                </div>
+                <div class="col">
+                    <a href="#" class="btn btn-outline-primary w-100" title="">Trả giá</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--end box 1-->
+    <!--box 2-->
+    <div class="product-box col-md border border-warning rounded mr-2 mb-1">
+        <div class="product-info-down w-100 rounded-top p-4">
+            <p class="h5"> Tướng: 35</p>
+            <p class="h5 text-light"> Skin: 40</p>
+            <p class="h5 text-light"> Bảng ngọc: 4</p>
+            <p class="h5 text-light"> Bậc cao nhất: Cao thủ</p>
+
+            <p class="h5 text-light"> Best: Zuka, Murad</p>
+        </div>
+        <div class="product mt-2">
+            <a href="#" title=""><img class="img-fluid" src="image/acc-gank-4.jpg" alt=""></a>
+            <p class="h3 mt-4 text-center font-weight-bold text-danger">500.000 <sup>đ</sup></p>
+            <div class="row my-2">
+                <div class="col">
+                    <a href="#" class="btn btn-outline-success w-100" title="">Xem</a>
+                </div>
+                <div class="col">
+                    <a href="#" class="btn btn-outline-primary w-100" title="">Trả giá</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--end box 2-->
+    <!--box 3-->
+    <div class="product-box col-md border border-warning rounded mr-2 mb-1">
+        <div class="product-info-down w-100 rounded-top p-4">
+            <p class="h5"> Tướng: 35</p>
+            <p class="h5 text-light"> Skin: 40</p>
+            <p class="h5 text-light"> Bảng ngọc: 4</p>
+            <p class="h5 text-light"> Bậc cao nhất: Cao thủ</p>
+
+            <p class="h5 text-light"> Best: Zuka, Murad</p>
+        </div>
+        <div class="product mt-2">
+            <a href="#" title=""><img class="img-fluid" src="image/acc-gank-2.jpg" alt=""></a>
+            <p class="h3 mt-4 text-center font-weight-bold text-danger">500.000 <sup>đ</sup></p>
+            <div class="row my-2">
+                <div class="col">
+                    <a href="#" class="btn btn-outline-success w-100" title="">Xem</a>
+                </div>
+                <div class="col">
+                    <a href="#" class="btn btn-outline-primary w-100" title="">Trả giá</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--end box 3-->
+    <!--box 4-->
+    <div class="product-box col-md border border-warning rounded mb-1">
+        <div class="product-info-down w-100 rounded-top p-4">
+            <p class="h5"> Tướng: 35</p>
+            <p class="h5 text-light"> Skin: 40</p>
+            <p class="h5 text-light"> Bảng ngọc: 4</p>
+            <p class="h5 text-light"> Bậc cao nhất: Cao thủ</p>
+
+            <p class="h5 text-light"> Best: Zuka, Murad</p>
+        </div>
+        <div class="product mt-2">
+            <a href="#" title=""><img class="img-fluid" src="image/acc-gank-3.jpg" alt=""></a>
+            <p class="h3 mt-4 text-center font-weight-bold text-danger">500.000 <sup>đ</sup></p>
+            <div class="row my-2">
+                <div class="col">
+                    <a href="#" class="btn btn-outline-success w-100" title="">Xem</a>
+                </div>
+                <div class="col">
+                    <a href="#" class="btn btn-outline-primary w-100" title="">Trả giá</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--end box 4-->
+</div>
+
+
+@Html.Partial("_Price_Offer");

@@ -20,8 +20,6 @@
             $('.selected-price').text(val);
         });
     });
-
-
 </script>
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -36,22 +34,14 @@
             <div class="modal-body">
                 <ul class="list-inline">
                     <li class="list-inline-item font-weight-bold">Giá gốc: </li>
-                    <li class="list-inline-item font-weight-bold text-danger"><?php echo number_format(500000)." Đ"; ?></li>
+                    <li class="list-inline-item font-weight-bold text-danger" id="oriprice"></li>
                 </ul>
                 <footer class="blockquote-footer">Hãy chọn giá mà bạn cho rằng hợp lý</footer>
                 <form class="form mt-2">
                     <div class="row">
                         <div class="col-md-6">
                             <select name="" id="select-price" class="form-control">
-                                <?php
-                                $price = 500000;
-                                for($i=95; $i>=5;$i-=5){
-                                $tmp = $price - (($price * $i)/100);
-                                ?>
-                                <option value="<?php echo number_format($tmp).' Đ'; ?>"><?php echo "Giảm ".$i."% - ".  number_format($tmp)." Đ"; ?></option>
-                                <?php
-                                }
-                                ?>
+                                <option value=""></option>
                             </select>
                         </div>
                         <div class="col-md-6">

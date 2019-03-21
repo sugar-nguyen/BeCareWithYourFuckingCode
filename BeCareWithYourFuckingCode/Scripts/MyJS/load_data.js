@@ -25,7 +25,7 @@
                 html += '<p class="h3 mt-4 text-center font-weight-bold text-danger">' + NumberFormat(item.gia) + '<sup>đ</sup></p>';
                 html += '<div class="row my-2">';
                 html += '<div class="col">';
-                html += '<a href="#" class="btn btn-outline-success w-100" onclick="getDetail(\'' + item.id + '\')">Xem</a>';
+                html += '<a href="/GameAccount/getDetail/' + item.id + '" class="btn btn-outline-success w-100" >Xem</a>';
                 html += '</div>';
                 html += '<div class="col">';
                 html += '<a href="#" class="btn btn-outline-primary w-100">Mua</a>';

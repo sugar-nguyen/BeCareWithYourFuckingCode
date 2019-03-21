@@ -1,7 +1,7 @@
 ﻿@model BeCareWithYourFuckingCode.Models.TB_GAME_ACCOUNT
 @using BeCareWithYourFuckingCode.Models;
 @{
-    ViewBag.Title = "Sale";
+    ViewBag.Title = "Upload";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,7 +9,7 @@
     <div class="col-12">
         <form method="post" enctype="multipart/form-data" action="/">
             @Html.AntiForgeryToken()
-            <div><img class="d-inline" src="~/Content/Images/finger.png" alt="Alternate Text" style="width:20px; height:20px;" /><p class="h6 d-inline" style="color:#ff006e">  Hãy điền tất cả thông tin nếu bạn muốn bán một account game</p></div>
+            <div><img class="d-inline" src="~/Content/Images/finger.png" alt="Alternate Text" style="width:20px; height:20px;" /><p class="h6 d-inline" style="color:#ff006e">  Hãy di?n t?t c? thông tin n?u b?n mu?n bán m?t account game</p></div>
             <div class="row mt-4">
                 <div class="col-md-6">
                     <fieldset class="p-3 rounded" style="border: 2px solid #0c176f">
@@ -26,7 +26,7 @@
                         <div class="form-group row">
                             <label class="col-sm-4 ">@Html.DisplayNameFor(x => x.PASSWORD_KEY)</label>
                             <div class="col-sm-8">
-                                @Html.PasswordFor(x => x.PASSWORD_KEY, new { @class = "form-control form-control-sm", @title = "Mật khẩu sẽ được mã hõa và chỉ được giải mã khi bạn nhận được tiền từ người mua nó" })
+                                @Html.PasswordFor(x => x.PASSWORD_KEY, new { @class = "form-control form-control-sm", @title = "M?t kh?u s? du?c mã hõa và ch? du?c gi?i mã khi b?n nh?n du?c ti?n t? ngu?i mua nó" })
                                 <small class="text-danger">@Html.ValidationMessageFor(x => x.PASSWORD_KEY)</small>
                             </div>
                         </div>
@@ -125,8 +125,8 @@
                             </div>
                         </div>
                     </fieldset>
-                    
-                    <small class="form-text text-danger mt-5">* Bắt buộc</small>
+
+                    <small class="form-text text-danger mt-5">* B?t bu?c</small>
                     <button type="submit" class="btn btn-success">Upload</button>
                 </div>
             </div>

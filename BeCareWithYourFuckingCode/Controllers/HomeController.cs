@@ -39,7 +39,8 @@ namespace BeCareWithYourFuckingCode.Controllers
                 var data = Entities.TB_GAME_ACCOUNT.Select(x =>
                     new
                     {
-                        id = x.USERNAME,
+                        id = x.ID,
+                        username = x.USERNAME,
                         tuong = x.TB_GAME_ACCOUNT_DETAIL.GENERAL_NUMBER,
                         skin = x.TB_GAME_ACCOUNT_DETAIL.SKIN_NUMBER,
                         ngoc = x.TB_GAME_ACCOUNT_DETAIL.GEM_NUMBER,
@@ -59,33 +60,7 @@ namespace BeCareWithYourFuckingCode.Controllers
                 Entities.Configuration.ProxyCreationEnabled = proxyCreation;
             }
         }
+       
 
-
-        [HttpPost]
-        public ActionResult getDetail(string id)
-        {
-            try
-            {
-                var data = Entities.TB_GAME_ACCOUNT_DETAIL.Where(x => x.USERNAME == id).Select(x => new
-                {
-                    id = x.USERNAME,
-                    tuong = x.GENERAL_NUMBER,
-                    skin = x.SKIN_NUMBER,
-                    ngoc = x.GEM_NUMBER,
-                    hang = x.TB_RANK_NAME.RANK_NAME,
-                    hang1 = x.TB_RANK_NAME1.RANK_NAME,
-                    clan = x.CLAN_NAME
-                });
-                if (ViewBag.detail != null)
-                {
-                    return Json(data, JsonRequestBehavior.AllowGet);
-                }
-                return Content("Rỗng");
-            }
-            catch (Exception ex)
-            {
-                return Json(ex.Message);
-            }
-        }
     }
 }

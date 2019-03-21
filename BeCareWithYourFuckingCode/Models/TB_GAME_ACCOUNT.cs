@@ -13,7 +13,7 @@ namespace BeCareWithYourFuckingCode.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
-    
+
     public partial class TB_GAME_ACCOUNT
     {
         public TB_GAME_ACCOUNT()
@@ -21,12 +21,12 @@ namespace BeCareWithYourFuckingCode.Models
             this.TB_GAME_PRICE_OFFER = new HashSet<TB_GAME_PRICE_OFFER>();
             this.TB_SELL_DEAL_HISTORY = new HashSet<TB_SELL_DEAL_HISTORY>();
         }
-        
+
         [Display(Name = "Tên đăng nhập Garena")]
         [Required(ErrorMessage = "Chưa nhập tên đăng nhập")]
         public string USERNAME { get; set; }
 
-        [Display(Name ="Mật khẩu")]
+        [Display(Name = "Mật khẩu")]
         [Required(ErrorMessage = "Chưa nhập mật khẩu")]
         public string PASSWORD_KEY { get; set; }
 
@@ -41,7 +41,9 @@ namespace BeCareWithYourFuckingCode.Models
         public string RE_IMAGE { get; set; }
         public string IMG_ID { get; set; }
         public Nullable<System.DateTime> DATE_UPLOAD { get; set; }
-    
+
+        public string ID { get; set; }
+
         public virtual TB_GAME_ACCOUNT_DETAIL TB_GAME_ACCOUNT_DETAIL { get; set; }
         public virtual TB_GAME_IMAGE TB_GAME_IMAGE { get; set; }
         public virtual ICollection<TB_GAME_PRICE_OFFER> TB_GAME_PRICE_OFFER { get; set; }

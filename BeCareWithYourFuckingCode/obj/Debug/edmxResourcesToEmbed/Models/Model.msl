@@ -18,6 +18,7 @@
     <EntitySetMapping Name="TB_GAME_ACCOUNT">
       <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_GAME_ACCOUNT">
         <MappingFragment StoreEntitySet="TB_GAME_ACCOUNT">
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
           <ScalarProperty Name="PASSWORD_KEY" ColumnName="PASSWORD_KEY" />
           <ScalarProperty Name="ORIGINAL_PRICE" ColumnName="ORIGINAL_PRICE" />

@@ -36,6 +36,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
@@ -193,7 +194,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\SaleController.cs" />
+    <Compile Include="Controllers\GameAccountController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -256,9 +257,10 @@
     <Content Include="Views\Shared\_Login_Page.cshtml" />
     <Content Include="Views\Shared\_Price_Offer.cshtml" />
     <Content Include="Views\User\getSignUp.cshtml" />
-    <Content Include="Views\Sale\Sale.cshtml" />
     <Content Include="Views\Shared\_Header1.cshtml" />
     <Content Include="Views\Shared\_Header2.cshtml" />
+    <Content Include="Views\GameAccount\UploadAcc.cshtml" />
+    <Content Include="Views\GameAccount\getDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
