@@ -19,7 +19,7 @@ namespace BeCareWithYourFuckingCode.Models
         public Nullable<decimal> USER_PRICE_OFFER { get; set; }
         public Nullable<byte> CURRENT_STATUS { get; set; }
     
-        public virtual TB_GAME_ACCOUNT TB_GAME_ACCOUNT { get; set; }
         public virtual TB_USER TB_USER { get; set; }
+        public virtual TB_GAME_ACCOUNT TB_GAME_ACCOUNT { get; set; }
     }
 }

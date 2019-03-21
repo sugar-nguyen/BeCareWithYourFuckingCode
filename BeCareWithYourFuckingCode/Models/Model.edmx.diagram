@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="f795fa2b6bbe483d9e8dcbc7b3b00ae5" Name="Diagram1">
         <EntityTypeShape EntityType="WEBACCOUNTModel.TB_CARD_DEAL_HISTORY" Width="1.5" PointX="8.25" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WEBACCOUNTModel.TB_GAME_ACCOUNT" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="WEBACCOUNTModel.TB_GAME_ACCOUNT_DETAIL" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="WEBACCOUNTModel.TB_GAME_IMAGE" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="WEBACCOUNTModel.TB_GAME_PRICE_OFFER" Width="1.5" PointX="8.25" PointY="5.125" IsExpanded="true" />
@@ -14,14 +13,15 @@
         <EntityTypeShape EntityType="WEBACCOUNTModel.TB_SELL_DEAL_HISTORY" Width="1.5" PointX="8.25" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="WEBACCOUNTModel.TB_USER" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="WEBACCOUNTModel.FK_TB_CARD_DEAL_HISTORY_TB_USER" ManuallyRouted="false" />
-        <AssociationConnector Association="WEBACCOUNTModel.FK_TB_GAME_ACCOUNT_DETAIL_TB_GAME_ACCOUNT" ManuallyRouted="false" />
-        <AssociationConnector Association="WEBACCOUNTModel.FK_TB_GAME_ACCOUNT_TB_GAME_IMAGE" ManuallyRouted="false" />
-        <AssociationConnector Association="WEBACCOUNTModel.FK_TB_GAME_PRICE_OFFER_TB_GAME_ACCOUNT" ManuallyRouted="false" />
-        <AssociationConnector Association="WEBACCOUNTModel.FK_TB_SELL_DELL_HISTORY_TB_GAME_ACCOUNT" ManuallyRouted="false" />
         <AssociationConnector Association="WEBACCOUNTModel.FK_TB_GAME_ACCOUNT_DETAIL_TB_RANK_NAME" ManuallyRouted="false" />
         <AssociationConnector Association="WEBACCOUNTModel.FK_TB_GAME_ACCOUNT_DETAIL_TB_RANK_NAME1" ManuallyRouted="false" />
         <AssociationConnector Association="WEBACCOUNTModel.FK_TB_GAME_PRICE_OFFER_TB_USER" ManuallyRouted="false" />
         <AssociationConnector Association="WEBACCOUNTModel.FK_TB_SELL_DELL_HISTORY_TB_USER1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WEBACCOUNTModel.TB_GAME_ACCOUNT" Width="1.5" PointX="3" PointY="4.5" />
+        <AssociationConnector Association="WEBACCOUNTModel.FK_TB_GAME_ACCOUNT_DETAIL_TB_GAME_ACCOUNT" />
+        <AssociationConnector Association="WEBACCOUNTModel.FK_TB_GAME_ACCOUNT_TB_GAME_IMAGE" />
+        <AssociationConnector Association="WEBACCOUNTModel.FK_TB_GAME_PRICE_OFFER_TB_GAME_ACCOUNT" />
+        <AssociationConnector Association="WEBACCOUNTModel.FK_TB_SELL_DELL_HISTORY_TB_GAME_ACCOUNT" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

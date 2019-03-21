@@ -42,7 +42,7 @@ namespace BeCareWithYourFuckingCode.Models
         public string IMG_ID { get; set; }
         public Nullable<System.DateTime> DATE_UPLOAD { get; set; }
 
-        public string ID { get; set; }
+        public Nullable<int> ID { get; set; }
 
         public virtual TB_GAME_ACCOUNT_DETAIL TB_GAME_ACCOUNT_DETAIL { get; set; }
         public virtual TB_GAME_IMAGE TB_GAME_IMAGE { get; set; }

@@ -5,17 +5,20 @@
 <script>
     $().ready(function () {
         var id = '@ViewBag.id';
+        if (id == null) {
+            alert("Không tim thấy cha ơi");
+            return;
+        }
         $.ajax({
             url: '/GameAccount/getDetailAction/' + id,
-            type: 'POST',
+            type: 'GET',
             contentType: 'application/json',
             dataType: 'json',
             success: function (result) {
-                if (result.toString == "") {
-                    $('#message').html("Your page resquest is not exists !");
-                    $('#detail-content').addClass("d-none");
+                if (result.toString() == "") {
+                    alert("Bố biết id mày gửi là " + id +" nhưng bố đéo tìm thấy sản phẩm nào !!!");
                     return;
-                }
+                } 
                 var html = '';
                 html += '<div class="col-md-3" id="detail_location" style="font-family: cambria; background-color: #000033">';
                 html += ' <p class="h3 text-success d-inline">Mã: </p><p class="text-danger d-inline h3">' + "#" + result.id + '</p>';
@@ -90,7 +93,6 @@
         });
     })
 </script>
-<p class="text-danger" id="message"></p>
 <div class="row py-1" style="background-color: #FFF;" id="detail-content">
     <div class="col-md-12">
         <div class="h6 font-weight-bold float-left mt-2" style="font-family: cambria;">

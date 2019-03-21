@@ -15,21 +15,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TB_GAME_ACCOUNT">
-      <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_GAME_ACCOUNT">
-        <MappingFragment StoreEntitySet="TB_GAME_ACCOUNT">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
-          <ScalarProperty Name="PASSWORD_KEY" ColumnName="PASSWORD_KEY" />
-          <ScalarProperty Name="ORIGINAL_PRICE" ColumnName="ORIGINAL_PRICE" />
-          <ScalarProperty Name="ACCEPT_PRICE" ColumnName="ACCEPT_PRICE" />
-          <ScalarProperty Name="CURRENT_STATUS" ColumnName="CURRENT_STATUS" />
-          <ScalarProperty Name="RE_IMAGE" ColumnName="RE_IMAGE" />
-          <ScalarProperty Name="IMG_ID" ColumnName="IMG_ID" />
-          <ScalarProperty Name="DATE_UPLOAD" ColumnName="DATE_UPLOAD" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="TB_GAME_ACCOUNT_DETAIL">
       <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_GAME_ACCOUNT_DETAIL">
         <MappingFragment StoreEntitySet="TB_GAME_ACCOUNT_DETAIL">
@@ -93,6 +78,21 @@
           <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
           <ScalarProperty Name="PHONE" ColumnName="PHONE" />
           <ScalarProperty Name="CURRENT_ADDRESS" ColumnName="CURRENT_ADDRESS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_GAME_ACCOUNT">
+      <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_GAME_ACCOUNT">
+        <MappingFragment StoreEntitySet="TB_GAME_ACCOUNT">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DATE_UPLOAD" ColumnName="DATE_UPLOAD" />
+          <ScalarProperty Name="IMG_ID" ColumnName="IMG_ID" />
+          <ScalarProperty Name="RE_IMAGE" ColumnName="RE_IMAGE" />
+          <ScalarProperty Name="CURRENT_STATUS" ColumnName="CURRENT_STATUS" />
+          <ScalarProperty Name="ACCEPT_PRICE" ColumnName="ACCEPT_PRICE" />
+          <ScalarProperty Name="ORIGINAL_PRICE" ColumnName="ORIGINAL_PRICE" />
+          <ScalarProperty Name="PASSWORD_KEY" ColumnName="PASSWORD_KEY" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

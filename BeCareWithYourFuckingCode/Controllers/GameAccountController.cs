@@ -23,14 +23,15 @@ namespace BeCareWithYourFuckingCode.Controllers
             ViewBag.id = id;
             return View();
         }
-        [HttpPost]
+
         public ActionResult getDetailAction(string id)
         {
             var message = "";
+            int _id = Int32.Parse(id);
             try
             {
 
-                var model = entities.TB_GAME_ACCOUNT.Where(x => x.ID == id).Select(x => new
+                var model = entities.TB_GAME_ACCOUNT.Where(x => x.ID == _id).Select(x => new
                 {
                     id = x.ID,
                     username = x.USERNAME,
@@ -54,7 +55,7 @@ namespace BeCareWithYourFuckingCode.Controllers
             }
             catch (Exception ex)
             {
-                message = "";
+                message = ex.Message;
                 return Json(message, JsonRequestBehavior.AllowGet);
             }
         }
