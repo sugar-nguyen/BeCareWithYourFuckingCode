@@ -60,7 +60,7 @@ namespace BeCareWithYourFuckingCode.Controllers
             }
         }
 
-        public ActionResult offerPrice(string id)
+        public ActionResult offerPrice(string id) // Tính giá để thương lượng
         {
             int _price = Int32.Parse(id);
             List<int> ListPriceOffer = new List<int>();
@@ -70,6 +70,40 @@ namespace BeCareWithYourFuckingCode.Controllers
                 ListPriceOffer.Add(tmp);
             }
             return Json(ListPriceOffer, JsonRequestBehavior.AllowGet);
+        }
+
+
+       // get all with the same price
+        public JsonResult GetAllByPrice(string id)
+        {
+            int _id = Int32.Parse(id);
+            bool proxyCreation = entities.Configuration.ProxyCreationEnabled;
+            try
+            {
+                entities.Configuration.ProxyCreationEnabled = false;
+                var data = entities.TB_GAME_ACCOUNT.Select(x =>
+                    new
+                    {
+                        id = x.ID,
+                        username = x.USERNAME,
+                        tuong = x.TB_GAME_ACCOUNT_DETAIL.GENERAL_NUMBER,
+                        skin = x.TB_GAME_ACCOUNT_DETAIL.SKIN_NUMBER,
+                        ngoc = x.TB_GAME_ACCOUNT_DETAIL.GEM_NUMBER,
+                        img = x.RE_IMAGE,
+                        hang = x.TB_GAME_ACCOUNT_DETAIL.TB_RANK_NAME.RANK_NAME,
+                        gia = x.ORIGINAL_PRICE,
+                        ngay = x.DATE_UPLOAD
+                    }).Take(8);
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
+            finally
+            {
+                entities.Configuration.ProxyCreationEnabled = proxyCreation;
+            }
         }
     }
 }

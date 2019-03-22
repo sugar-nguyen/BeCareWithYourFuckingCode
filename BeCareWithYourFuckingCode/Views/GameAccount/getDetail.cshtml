@@ -89,6 +89,11 @@
                     });
                     $('#select-price').html(html);
                 });
+                $.getJSON("/GameAccount/GetAllByPrice/" + result.gia, "", function (res) {
+                    var html = '';
+                    var htmlstring = htmlString(res, html);
+                    $("#similar-product").html(htmlstring);
+                });
             },
         });
     })
@@ -114,108 +119,10 @@
     </div>
 
 </div>
-<div class="row mx-2 my-2">
-    <!--box 1-->
-    <div class="product-box col-md border border-warning rounded mr-2 mb-1">
-        <div class="product-info-down w-100 rounded-top p-4">
-            <p class="h5"> Tướng: 35</p>
-            <p class="h5 text-light"> Skin: 40</p>
-            <p class="h5 text-light"> Bảng ngọc: 4</p>
-            <p class="h5 text-light"> Bậc cao nhất: Cao thủ</p>
-
-            <p class="h5 text-light"> Best: Zuka, Murad</p>
-        </div>
-        <div class="product mt-2">
-            <a href="#" title=""><img class="img-fluid" src="image/acc-gank.jpg" alt=""></a>
-            <p class="h3 mt-4 text-center font-weight-bold text-danger">500.000 <sup>đ</sup></p>
-            <div class="row my-2">
-                <div class="col">
-                    <a href="#" class="btn btn-outline-success w-100" title="">Xem</a>
-                </div>
-                <div class="col">
-                    <a href="#" class="btn btn-outline-primary w-100" title="">Trả giá</a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <!--end box 1-->
-    <!--box 2-->
-    <div class="product-box col-md border border-warning rounded mr-2 mb-1">
-        <div class="product-info-down w-100 rounded-top p-4">
-            <p class="h5"> Tướng: 35</p>
-            <p class="h5 text-light"> Skin: 40</p>
-            <p class="h5 text-light"> Bảng ngọc: 4</p>
-            <p class="h5 text-light"> Bậc cao nhất: Cao thủ</p>
-
-            <p class="h5 text-light"> Best: Zuka, Murad</p>
-        </div>
-        <div class="product mt-2">
-            <a href="#" title=""><img class="img-fluid" src="image/acc-gank-4.jpg" alt=""></a>
-            <p class="h3 mt-4 text-center font-weight-bold text-danger">500.000 <sup>đ</sup></p>
-            <div class="row my-2">
-                <div class="col">
-                    <a href="#" class="btn btn-outline-success w-100" title="">Xem</a>
-                </div>
-                <div class="col">
-                    <a href="#" class="btn btn-outline-primary w-100" title="">Trả giá</a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <!--end box 2-->
-    <!--box 3-->
-    <div class="product-box col-md border border-warning rounded mr-2 mb-1">
-        <div class="product-info-down w-100 rounded-top p-4">
-            <p class="h5"> Tướng: 35</p>
-            <p class="h5 text-light"> Skin: 40</p>
-            <p class="h5 text-light"> Bảng ngọc: 4</p>
-            <p class="h5 text-light"> Bậc cao nhất: Cao thủ</p>
-
-            <p class="h5 text-light"> Best: Zuka, Murad</p>
-        </div>
-        <div class="product mt-2">
-            <a href="#" title=""><img class="img-fluid" src="image/acc-gank-2.jpg" alt=""></a>
-            <p class="h3 mt-4 text-center font-weight-bold text-danger">500.000 <sup>đ</sup></p>
-            <div class="row my-2">
-                <div class="col">
-                    <a href="#" class="btn btn-outline-success w-100" title="">Xem</a>
-                </div>
-                <div class="col">
-                    <a href="#" class="btn btn-outline-primary w-100" title="">Trả giá</a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <!--end box 3-->
-    <!--box 4-->
-    <div class="product-box col-md border border-warning rounded mb-1">
-        <div class="product-info-down w-100 rounded-top p-4">
-            <p class="h5"> Tướng: 35</p>
-            <p class="h5 text-light"> Skin: 40</p>
-            <p class="h5 text-light"> Bảng ngọc: 4</p>
-            <p class="h5 text-light"> Bậc cao nhất: Cao thủ</p>
-
-            <p class="h5 text-light"> Best: Zuka, Murad</p>
-        </div>
-        <div class="product mt-2">
-            <a href="#" title=""><img class="img-fluid" src="image/acc-gank-3.jpg" alt=""></a>
-            <p class="h3 mt-4 text-center font-weight-bold text-danger">500.000 <sup>đ</sup></p>
-            <div class="row my-2">
-                <div class="col">
-                    <a href="#" class="btn btn-outline-success w-100" title="">Xem</a>
-                </div>
-                <div class="col">
-                    <a href="#" class="btn btn-outline-primary w-100" title="">Trả giá</a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <!--end box 4-->
-</div>
+<div id="similar-product" class="py-2 pl-4 pr-3"></div>
 
 
 @Html.Partial("_Price_Offer");
+
+
+
