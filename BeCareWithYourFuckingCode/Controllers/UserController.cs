@@ -44,6 +44,13 @@ namespace BeCareWithYourFuckingCode.Controllers
 
         }
 
+        //Kiểm tra trạng thái đăng nhập
+        public ActionResult checkLogined()
+        {
+            var status = Session["UserID"] ?? 0;
+            return Json(status, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult getSignOut()
         {
             Session["UserID"] = null;

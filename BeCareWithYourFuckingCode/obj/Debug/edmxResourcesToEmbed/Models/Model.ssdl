@@ -57,7 +57,7 @@
     </Key>
     <Property Name="USERNAME" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="USER_ACCOUNT_ID" Type="varchar" MaxLength="10" Nullable="false" />
-    <Property Name="USER_PRICE_OFFER" Type="money" />
+    <Property Name="USER_PRICE_OFFER" Type="int" />
     <Property Name="CURRENT_STATUS" Type="tinyint" />
   </EntityType>
   <EntityType Name="TB_RANK_NAME">

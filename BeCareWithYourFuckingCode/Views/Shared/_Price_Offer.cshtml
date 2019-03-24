@@ -4,7 +4,7 @@
         $('#select-price').change(function () {
             var val = $('#select-price').val();
             $('.my-info').removeClass('d-none');
-            $('.selected-price').text(val);
+            $('.selected-price').text(NumberFormat(val) + " Đ");
             $('.orther-val').val("");
         });
     });
@@ -20,6 +20,48 @@
             $('.selected-price').text(NumberFormat(val));
         });
     });
+
+    $().ready(function () {
+        $('#capnhatgia').click(function () {
+            var login = "";
+            $.getJSON('/User/checkLogined', '', function (rs) {
+                login = rs.toString();
+                if (login == 0) {
+                    alert("Vui lòng đăng nhập để tiếp tục !");
+                } else {
+                    var val = $('#oriprice2').text();
+                    var UserID = login;
+                    var priceOffer = $('#select-price').val();
+                    var username = $('#user').text();
+                    var newOffer = { 'USERNAME': username, 'USER_ACCOUNT_ID': UserID, 'USER_PRICE_OFFER': priceOffer };
+                    $.ajax({
+                        url: '/Deal/CreateDeal',
+                        type: 'POST',
+                        contentType: 'aplication/json',
+                        dataType: 'json',
+                        data: JSON.stringify(newOffer),
+                        success: function (rs) {
+                            if (rs.toString() == "success") {
+                                $('#message').removeClass('d-none');
+                                $('#message').html("Đã lưu thông tin giao dịch, mọi thông tin sẽ được gửi qua profile");
+                            } else if (rs == '?') {
+                                alert("Bạn đã trả giá cho account này, bạn có muốn trả giá lại ?");
+                            } else {
+                                $('#message').removeClass('d-none');
+                                $('#message').html(rs);
+                            }
+                        },
+                        error: function (rs) {
+                            $('#message').removeClass('d-none');
+                            $('#message').html("Đã xảy ra lỗi 2 !");
+                        }
+                    });
+                }
+            });
+
+
+        });
+    })
 </script>
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -35,37 +77,26 @@
                 <ul class="list-inline">
                     <li class="list-inline-item font-weight-bold">Giá gốc: </li>
                     <li class="list-inline-item font-weight-bold text-danger" id="oriprice"></li>
+                    <li class="list-inline-item font-weight-bold text-danger d-none" id="oriprice2"></li>
+                    <li class="list-inline-item font-weight-bold text-danger d-none" id="user"></li>
                 </ul>
-                <footer class="blockquote-footer">Hãy chọn giá mà bạn cho rằng hợp lý</footer>
+                <footer class="blockquote-footer">Hãy chọn giá mà bạn cho rằng hợp lý (5% - 75%)</footer>
                 <form class="form mt-2">
                     <div class="row">
                         <div class="col-md-6">
-                            <select name="" id="select-price" class="form-control">
-                                <option value=""></option>
-                            </select>
+                            <select name="" id="select-price" class="form-control"></select>
                         </div>
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label for="" class="h6">Số khác:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control text-center orther-val" placeholder="5% - 95%">
-                                </div>
-                            </div>
-
-                        </div>
-
                     </div>
                     <div class="mt-2 my-info  d-none w-100" style="word-wrap: break-word;">
                         <p class="d-inline h6 ">Bạn chọn giá: </p><span class="d-inline text-danger font-weight-bold selected-price"></span>
                     </div>
                 </form>
+                <div class="alert alert-info mt-3 d-none" id="message"></div>
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <input type="submit" class="btn btn-primary" value="Cập nhật">
+                <button class="btn btn-success" type="submit" id="capnhatgia">Cập nhật</button>
             </div>
 
         </div>

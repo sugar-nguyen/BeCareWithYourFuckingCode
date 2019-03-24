@@ -82,9 +82,12 @@
                 html += '</div>';
                 $('#detail_location').html(html);
                 $('#oriprice').text(NumberFormat(result.gia) + " Đ");
+                $('#oriprice2').text(result.gia);
+                $('#user').text(result.username);
                 $.getJSON("/GameAccount/offerPrice/" + result.gia, "", function (res) {
                     var html = '';
                     $.each(res, function (key, item) {
+                      
                         html += '<option value="' + item + '">' + NumberFormat(item) + ' Đ'+ '</option>';
                     });
                     $('#select-price').html(html);

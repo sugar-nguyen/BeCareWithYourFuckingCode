@@ -40,16 +40,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TB_GAME_PRICE_OFFER">
-      <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_GAME_PRICE_OFFER">
-        <MappingFragment StoreEntitySet="TB_GAME_PRICE_OFFER">
-          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
-          <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
-          <ScalarProperty Name="USER_PRICE_OFFER" ColumnName="USER_PRICE_OFFER" />
-          <ScalarProperty Name="CURRENT_STATUS" ColumnName="CURRENT_STATUS" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="TB_RANK_NAME">
       <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_RANK_NAME">
         <MappingFragment StoreEntitySet="TB_RANK_NAME">
@@ -92,6 +82,16 @@
           <ScalarProperty Name="ACCEPT_PRICE" ColumnName="ACCEPT_PRICE" />
           <ScalarProperty Name="ORIGINAL_PRICE" ColumnName="ORIGINAL_PRICE" />
           <ScalarProperty Name="PASSWORD_KEY" ColumnName="PASSWORD_KEY" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_GAME_PRICE_OFFER">
+      <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_GAME_PRICE_OFFER">
+        <MappingFragment StoreEntitySet="TB_GAME_PRICE_OFFER">
+          <ScalarProperty Name="CURRENT_STATUS" ColumnName="CURRENT_STATUS" />
+          <ScalarProperty Name="USER_PRICE_OFFER" ColumnName="USER_PRICE_OFFER" />
+          <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
           <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
         </MappingFragment>
       </EntityTypeMapping>
