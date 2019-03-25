@@ -15,9 +15,10 @@ namespace BeCareWithYourFuckingCode.Controllers
         [HttpPost]
         public ActionResult CreateDeal(TB_GAME_PRICE_OFFER newOffer) // kiểm tra xem tải khoản đã trả giá cho acc đó chưa nếu rồi thì phản hồi và gọi action cập nhật
         {
+            var message = "";
             try
             {
-                var message = "";
+                
                 TB_GAME_PRICE_OFFER offer = entities.TB_GAME_PRICE_OFFER.Where(x => x.USER_ACCOUNT_ID == newOffer.USER_ACCOUNT_ID && x.USERNAME == newOffer.USERNAME).SingleOrDefault();
                 if (offer == null)
                 {
@@ -32,10 +33,12 @@ namespace BeCareWithYourFuckingCode.Controllers
             }
             catch (Exception ex)
             {
-                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+                message = "fail";
+                return Json(message, JsonRequestBehavior.AllowGet);
             }
         }
 
+        [HttpPost]
         public ActionResult updateDeal(TB_GAME_PRICE_OFFER newOffer)
         {
             try

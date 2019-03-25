@@ -1,23 +1,11 @@
 ﻿<!--sự kiện chọn giá trong select box-->
+@model BeCareWithYourFuckingCode.Models.TB_GAME_PRICE_OFFER
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#select-price').change(function () {
-            var val = $('#select-price').val();
+        $('#USER_PRICE_OFFER').change(function () {
+            var val = $(this).val();
             $('.my-info').removeClass('d-none');
             $('.selected-price').text(NumberFormat(val) + " Đ");
-            $('.orther-val').val("");
-        });
-    });
-    // sự kiện ấn phím trong textbox
-    $(document).ready(function () {
-        $('.orther-val').keyup(function () {
-            var val = $('.orther-val').val();
-            if (val == "") {
-                $('.my-info').addClass('d-none');
-                return;
-            }
-            $('.my-info').removeClass('d-none');
-            $('.selected-price').text(NumberFormat(val));
         });
     });
 
@@ -29,31 +17,35 @@
                 if (login == 0) {
                     alert("Vui lòng đăng nhập để tiếp tục !");
                 } else {
-                    var val = $('#oriprice2').text();
-                    var UserID = login;
-                    var priceOffer = $('#select-price').val();
-                    var username = $('#user').text();
-                    var newOffer = { 'USERNAME': username, 'USER_ACCOUNT_ID': UserID, 'USER_PRICE_OFFER': priceOffer };
+                    $('#USER_ACCOUNT_ID').val(login);
+                    $('#CURRENT_STATUS').val(0);
+                    var data = $('#form-offer').serialize();
                     $.ajax({
                         url: '/Deal/CreateDeal',
                         type: 'POST',
-                        contentType: 'aplication/json',
-                        dataType: 'json',
-                        data: JSON.stringify(newOffer),
+                        data: data,
                         success: function (rs) {
                             if (rs.toString() == "success") {
                                 $('#message').removeClass('d-none');
-                                $('#message').html("Đã lưu thông tin giao dịch, mọi thông tin sẽ được gửi qua profile");
+                                $('#message').addClass('alert-success');
+                                $('#message').html('<p class ="h6 font-weight-bold">Đã lưu thông tin giao dịch, mọi thông tin sẽ được gửi qua profile</p>');
                             } else if (rs == '?') {
-                                alert("Bạn đã trả giá cho account này, bạn có muốn trả giá lại ?");
+                                var html = '';
+                                html += '<p class ="h6 font-weight-bold d-inline">Bạn đã trả giá cho account này, bạn có muốn trả giá lại ?</p>';
+                                html += '<div class="d-inline"><button class="btn btn-default" onclick="capnhatOffer()">Yes</button>/<button class="btn btn-default">No</button></div>';
+                                $('#message').removeClass('d-none');
+                                $('#message').addClass('alert-info');
+                                $('#message').html(html);
                             } else {
                                 $('#message').removeClass('d-none');
-                                $('#message').html(rs);
+                                $('#message').addClass('alert-danger');
+                                $('#message').html('<p class = "h6 font-weight-bold">' + 'Không thể cập nhật dữ liệu ' + '</p>');
                             }
                         },
                         error: function (rs) {
                             $('#message').removeClass('d-none');
-                            $('#message').html("Đã xảy ra lỗi 2 !");
+                            $('#message').addClass('alert-danger');
+                            $('#message').html('<p class = "h6 font-weight-bold">' + 'Có lỗi vui lòng thử lại: ' + rs.toString() + '</p>');
                         }
                     });
                 }
@@ -62,6 +54,29 @@
 
         });
     })
+
+    function capnhatOffer() {
+        var data = $('#form-offer').serialize();
+        $.ajax({
+            url: '/Deal/updateDeal',
+            type: 'POST',
+            data: data,
+            success: function (rs) {
+                if (rs.toString() == 'success') {
+                    $('#message').removeClass('alert-info');
+                    $('#message').addClass('alert-success');
+                    $('#message').html('<p class ="h6 font-weight-bold">Đã lưu thông tin giao dịch, mọi thông tin sẽ được gửi qua profile</p>');
+                } else if (rs.toString() == 'fail') {
+                    $('#message').html('<p class = "h6 font-weight-bold">' + 'Không thể cập nhật dữ liệu ' + '</p>');
+                } else {
+                    $('#message').html('<p class = "h6 font-weight-bold">' + 'Có lỗi vui lòng thử lại: ' + rs.toString() + '</p>');
+                }
+            },
+            error: function () {
+                $('#message').html('<p class = "h6 font-weight-bold">' + 'Có lỗi vui lòng thử lại: ' + rs.toString() + '</p>');
+            },
+        });
+    }
 </script>
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -77,21 +92,25 @@
                 <ul class="list-inline">
                     <li class="list-inline-item font-weight-bold">Giá gốc: </li>
                     <li class="list-inline-item font-weight-bold text-danger" id="oriprice"></li>
-                    <li class="list-inline-item font-weight-bold text-danger d-none" id="oriprice2"></li>
-                    <li class="list-inline-item font-weight-bold text-danger d-none" id="user"></li>
                 </ul>
+                <div class="alert my-2 d-none" id="message"></div>
                 <footer class="blockquote-footer">Hãy chọn giá mà bạn cho rằng hợp lý (5% - 75%)</footer>
-                <form class="form mt-2">
+                <form class="form mt-2" id="form-offer">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
                     <div class="row">
                         <div class="col-md-6">
-                            <select name="" id="select-price" class="form-control"></select>
+                            @Html.TextBoxFor(x => x.USER_ACCOUNT_ID, new { @class = "d-none" })
+                            @Html.TextBoxFor(x => x.USERNAME, new { @class = "d-none" })
+                            @Html.TextBoxFor(x => x.CURRENT_STATUS, new { @class = "d-none", @type = "number" })
+                            <select name="USER_PRICE_OFFER" id="USER_PRICE_OFFER" class="form-control"></select>
                         </div>
                     </div>
                     <div class="mt-2 my-info  d-none w-100" style="word-wrap: break-word;">
                         <p class="d-inline h6 ">Bạn chọn giá: </p><span class="d-inline text-danger font-weight-bold selected-price"></span>
                     </div>
                 </form>
-                <div class="alert alert-info mt-3 d-none" id="message"></div>
+
             </div>
 
             <div class="modal-footer">

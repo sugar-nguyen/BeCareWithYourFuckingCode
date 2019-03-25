@@ -20,3 +20,4 @@ D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\S
 D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\System.Web.WebPages.Razor.xml
 D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\obj\Debug\BeCareWithYourFuckingCode.dll
 D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\obj\Debug\BeCareWithYourFuckingCode.pdb
+D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\obj\Debug\BeCareWithYourFuckingCode.csprojResolveAssemblyReference.cache
