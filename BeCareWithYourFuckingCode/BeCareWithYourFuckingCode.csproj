@@ -37,6 +37,17 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="WEBACCOUNTEntities-Deployment" Order="1">
+          <Destination Path="workstation id=WEBACCOUNT.mssql.somee.com%3bpacket size=4096%3buser id=linhduong_SQLLogin_1%3bpwd=ul7vvvkzlj%3bdata source=WEBACCOUNT.mssql.somee.com%3bpersist security info=False%3binitial catalog=WEBACCOUNT" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=LINHDUONG-PC\SQLEXPRESS%3bInitial Catalog=WEBACCOUNT%3bIntegrated Security=True%3bApplication Name=EntityFramework" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Release\AutoScripts\WEBACCOUNTEntities-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
