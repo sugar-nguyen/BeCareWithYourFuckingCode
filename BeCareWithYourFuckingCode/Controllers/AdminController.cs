@@ -70,6 +70,11 @@ namespace BeCareWithYourFuckingCode.Models
             return View(entities.TB_GAME_ACCOUNT);
         }
 
+
+        public ActionResult getTBUSER()
+        {
+            return View(entities.TB_USER);
+        }
      
     }
 }
