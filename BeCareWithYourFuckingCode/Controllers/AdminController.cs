@@ -64,20 +64,12 @@ namespace BeCareWithYourFuckingCode.Models
 
         }
 
-        public ActionResult TableList()  // return table list
-        {
-            return View();
-        }
-
+      
         public ActionResult getTBGameAccount()
         {
             return View(entities.TB_GAME_ACCOUNT);
         }
 
-        public ActionResult getTb_GameAccount(int? page)
-        {
-            int startPage = page ?? 1;
-            return View("_TBGameAccount", entities.TB_GAME_ACCOUNT);
-        }
+     
     }
 }
