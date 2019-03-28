@@ -69,7 +69,7 @@
 	left: 0;
 	z-index: 1000;
 	display: none;
-	background-color:rgba(1,0, 0, 0.4);
+	background-color:rgba(1,0, 0, 0.6);
 }
 
 .main-contain .product-box .product img{

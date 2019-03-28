@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="WEBACCOUNTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TB_ADMIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USERNAME" Type="varchar" MaxLength="20" />
+          <Property Name="PASSWORD_KEY" Type="varchar" MaxLength="20" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="TB_CARD_DEAL_HISTORY">
           <Key>
             <PropertyRef Name="HIS_ID" />
@@ -202,6 +211,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="WEBACCOUNTModelStoreContainer">
+          <EntitySet Name="TB_ADMIN" EntityType="Self.TB_ADMIN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_CARD_DEAL_HISTORY" EntityType="Self.TB_CARD_DEAL_HISTORY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_GAME_ACCOUNT" EntityType="Self.TB_GAME_ACCOUNT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_GAME_ACCOUNT_DETAIL" EntityType="Self.TB_GAME_ACCOUNT_DETAIL" Schema="dbo" store:Type="Tables" />
@@ -420,6 +430,7 @@
             <End Role="TB_USER" EntitySet="TB_USER" />
             <End Role="TB_GAME_PRICE_OFFER" EntitySet="TB_GAME_PRICE_OFFER" />
           </AssociationSet>
+          <EntitySet Name="TB_ADMIN" EntityType="WEBACCOUNTModel.TB_ADMIN" />
         </EntityContainer>
         <EntityType Name="TB_GAME_ACCOUNT">
           <Key>
@@ -511,6 +522,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TB_ADMIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USERNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORD_KEY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -609,6 +629,16 @@
                 <ScalarProperty Name="USER_PRICE_OFFER" ColumnName="USER_PRICE_OFFER" />
                 <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
                 <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_ADMIN">
+            <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_ADMIN">
+              <MappingFragment StoreEntitySet="TB_ADMIN">
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="PASSWORD_KEY" ColumnName="PASSWORD_KEY" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -61,6 +61,12 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -105,6 +111,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\adminStyle\demo.css" />
+    <Content Include="Content\adminStyle\jquery.dataTables.min.css" />
+    <Content Include="Content\adminStyle\paper-dashboard.css" />
+    <Content Include="Content\adminStyle\paper-dashboard.min.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -127,6 +137,27 @@
     <Content Include="Content\Images\acc-gank-8.jpg" />
     <Content Include="Content\Images\acc-gank-9.jpg" />
     <Content Include="Content\Images\acc-gank.jpg" />
+    <Content Include="Content\Images\admin\apple-icon.png" />
+    <Content Include="Content\Images\admin\bg5.jpg" />
+    <Content Include="Content\Images\admin\damir-bosnjak.jpg" />
+    <Content Include="Content\Images\admin\default-avatar.png" />
+    <Content Include="Content\Images\admin\faces\ayo-ogunseinde-1.jpg" />
+    <Content Include="Content\Images\admin\faces\ayo-ogunseinde-2.jpg" />
+    <Content Include="Content\Images\admin\faces\clem-onojeghuo-1.jpg" />
+    <Content Include="Content\Images\admin\faces\clem-onojeghuo-2.jpg" />
+    <Content Include="Content\Images\admin\faces\clem-onojeghuo-3.jpg" />
+    <Content Include="Content\Images\admin\faces\clem-onojeghuo-4.jpg" />
+    <Content Include="Content\Images\admin\faces\erik-lucatero-1.jpg" />
+    <Content Include="Content\Images\admin\faces\erik-lucatero-2.jpg" />
+    <Content Include="Content\Images\admin\faces\joe-gardner-1.jpg" />
+    <Content Include="Content\Images\admin\faces\joe-gardner-2.jpg" />
+    <Content Include="Content\Images\admin\faces\kaci-baum-1.jpg" />
+    <Content Include="Content\Images\admin\faces\kaci-baum-2.jpg" />
+    <Content Include="Content\Images\admin\favicon.png" />
+    <Content Include="Content\Images\admin\header.jpg" />
+    <Content Include="Content\Images\admin\jan-sendereks.jpg" />
+    <Content Include="Content\Images\admin\logo-small.png" />
+    <Content Include="Content\Images\admin\mike.jpg" />
     <Content Include="Content\Images\background-2.jpg" />
     <Content Include="Content\Images\background-3.jpg" />
     <Content Include="Content\Images\background-4.jpg" />
@@ -206,6 +237,7 @@
     <Content Include="Content\Images\one.png" />
     <Content Include="Content\Images\three.png" />
     <Content Include="Content\Images\two.png" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -248,6 +280,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Content Include="Content\adminStyle\paper-dashboard.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -263,6 +296,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\MyJS\admin\jquery.dataTables.min.js" />
     <Content Include="Scripts\MyJS\background-random.js" />
     <Content Include="Scripts\MyJS\change_background_color_header.js" />
     <Content Include="Scripts\MyJS\load_data.js" />
@@ -283,6 +317,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\DealController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\GameAccountController.cs" />
@@ -304,6 +339,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TB_ADMIN.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TB_CARD_DEAL_HISTORY.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -352,6 +390,12 @@
     <Content Include="Views\Shared\_Header2.cshtml" />
     <Content Include="Views\GameAccount\UploadAcc.cshtml" />
     <Content Include="Views\GameAccount\getDetail.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\TableList.cshtml" />
+    <Content Include="Views\Admin\_TBGameAccount.cshtml" />
+    <Content Include="Views\Admin\getTBGameAccount.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

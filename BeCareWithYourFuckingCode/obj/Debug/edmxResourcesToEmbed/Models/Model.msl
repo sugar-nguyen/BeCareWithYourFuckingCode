@@ -96,5 +96,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TB_ADMIN">
+      <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_ADMIN">
+        <MappingFragment StoreEntitySet="TB_ADMIN">
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="PASSWORD_KEY" ColumnName="PASSWORD_KEY" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

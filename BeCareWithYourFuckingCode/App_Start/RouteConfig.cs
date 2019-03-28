@@ -18,6 +18,11 @@ namespace BeCareWithYourFuckingCode
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "admin",
+                url: "Admin/{action}/{id}",
+                defaults: new { controller = "Admin", action = "Login", id = UrlParameter.Optional}
+            );
         }
     }
 }

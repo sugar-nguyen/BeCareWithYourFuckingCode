@@ -22,6 +22,7 @@
         <EntityTypeShape EntityType="WEBACCOUNTModel.TB_GAME_PRICE_OFFER" Width="1.5" PointX="8.25" PointY="5.25" />
         <AssociationConnector Association="WEBACCOUNTModel.FK_TB_GAME_PRICE_OFFER_TB_GAME_ACCOUNT" />
         <AssociationConnector Association="WEBACCOUNTModel.FK_TB_GAME_PRICE_OFFER_TB_USER" />
+        <EntityTypeShape EntityType="WEBACCOUNTModel.TB_ADMIN" Width="1.5" PointX="5.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,5 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="WEBACCOUNTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="TB_ADMIN">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USERNAME" Type="varchar" MaxLength="20" />
+    <Property Name="PASSWORD_KEY" Type="varchar" MaxLength="20" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="20" />
+  </EntityType>
   <EntityType Name="TB_CARD_DEAL_HISTORY">
     <Key>
       <PropertyRef Name="HIS_ID" />
@@ -197,6 +206,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="WEBACCOUNTModelStoreContainer">
+    <EntitySet Name="TB_ADMIN" EntityType="Self.TB_ADMIN" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_CARD_DEAL_HISTORY" EntityType="Self.TB_CARD_DEAL_HISTORY" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_GAME_ACCOUNT" EntityType="Self.TB_GAME_ACCOUNT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_GAME_ACCOUNT_DETAIL" EntityType="Self.TB_GAME_ACCOUNT_DETAIL" Schema="dbo" store:Type="Tables" />

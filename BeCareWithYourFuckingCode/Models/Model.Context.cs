@@ -33,5 +33,6 @@ namespace BeCareWithYourFuckingCode.Models
         public virtual DbSet<TB_USER> TB_USER { get; set; }
         public virtual DbSet<TB_GAME_ACCOUNT> TB_GAME_ACCOUNT { get; set; }
         public virtual DbSet<TB_GAME_PRICE_OFFER> TB_GAME_PRICE_OFFER { get; set; }
+        public virtual DbSet<TB_ADMIN> TB_ADMIN { get; set; }
     }
 }

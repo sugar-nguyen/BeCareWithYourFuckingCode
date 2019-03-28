@@ -1,0 +1,62 @@
+﻿@model BeCareWithYourFuckingCode.Models.TB_ADMIN
+
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script>
+    function CheckLogin() {
+        var username = $('#USERNAME').val();
+        var pass = $('#PASSWORD_KEY').val();
+        if (username == '' || pass == '') {
+            $('#message').html("Tên đăng nhập hoặc mật khẩu bị bỏ trống ");
+            return;
+        }
+        var data = $('#form-login').serialize();
+        $.ajax({
+            url: '/Admin/getLogin',
+            data: data,
+            type: 'POST',
+            success: function (rs) {
+                if (rs.toString() == "fail") {
+                    $('#message').html("Tên đăng nhập hoặc mật khẩu không đúng");
+                } else {
+                    window.location = rs.toString();
+                }
+            },
+            error: function (rs) {
+                $('#message').html("Lỗi: " + rs.responseText);
+            },
+        });
+    }
+</script>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3"  style="font-family:Cambria">
+            <div class="p-4 mt-5 rounded border bg-white">
+                <fieldset class="h4">
+                    <div class="text-center">
+                        <label class="h3 text-danger font-weight-bolder">Vui lòng đăng nhập</label>
+                    </div>
+                    
+                    <form role="form" class="mt-2" id="form-login">
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Tên đăng nhập</label>
+                            @Html.TextBoxFor(x => x.USERNAME, new { @class = "form-control", @placeholder = "Username" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Mật khẩu</label>
+                            @Html.PasswordFor(x => x.PASSWORD_KEY, new { @class = "form-control", @placeholder = "Password" })
+                        </div>
+
+                    </form>
+                    <p class="text-danger h6 font-weight-bolder" id="message"></p>
+                    <button type="submit" class="btn btn-primary w-100 mt-2" onclick="CheckLogin()" >Đăng nhập</button>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
