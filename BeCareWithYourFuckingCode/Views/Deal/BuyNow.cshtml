@@ -3,8 +3,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script>
-    var id = '@ViewBag.id';
-    $().ready(function () {
+    var id = '@ViewBag.id'; // lấy id của sản phẩm được truyền qua từ action Buynow
+    $().ready(function () { // Hiển thị các bảng chi tiết sp
         if (id != "") {
             $.getJSON('/Deal/BuyNowAction/' + id, "", function (rs) {
                 var html = '';
@@ -14,9 +14,11 @@
                 html += '<td>' + NumberFormat(rs.price2) + '</td>';
                 html += '</tr>';
                 $('#tbody1').html(html);
+                // gán dữ liệu cho form ẩn
                 $('#GAME_ACCOUNT_ID').val(rs.id);
                 $('#OFFER_PRICE').val(rs.price1);
                 $('#SUCCESS_PRICE').val(rs.price2);
+                //
                 var html2 = '';
                 html2 += '<tr>';
                 html2 += '<td>' + rs.tuong + '</td>';
@@ -26,7 +28,7 @@
                 html2 += '</tr>';
                 $('#tbody2').html(html2);
             });
-            $.getJSON('/User/checkLogined', '', function (rs) {
+            $.getJSON('/User/checkLogined', '', function (rs) { // kiểm tra rạng thái đăng nhậo
                 if (rs.toString() != 0) {
                     $.getJSON('/User/getUser/' + rs.toString(), function (res) {
                         if (res != null) {
@@ -45,7 +47,7 @@
 
     });
 
-
+    //Thanh toán khi nhấn nút thanh toán
     function Payment() {
         $.getJSON('/User/checkLogined', '', function (rs) {
             if (rs.toString() == 0) {

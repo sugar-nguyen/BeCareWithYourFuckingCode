@@ -39,7 +39,7 @@ namespace BeCareWithYourFuckingCode.Controllers
         }
 
         [HttpPost]
-        public ActionResult updateDeal(TB_GAME_PRICE_OFFER newOffer)
+        public ActionResult updateDeal(TB_GAME_PRICE_OFFER newOffer)  //update lại giá mới cho lần trả giá thứ 2
         {
             try
             {
@@ -60,13 +60,13 @@ namespace BeCareWithYourFuckingCode.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-        public ActionResult BuyNow(string id)
+        public ActionResult BuyNow(string id) //return view Buynow
         {
             ViewBag.id = id;
             return View();
         }
 
-        public ActionResult BuyNowAction(string id)
+        public ActionResult BuyNowAction(string id)  //action Buynow
         {
             int _id = int.Parse(id);
             var model = entities.TB_GAME_ACCOUNT.Where(x => x.ID == _id).Select(x => new

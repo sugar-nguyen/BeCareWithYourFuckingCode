@@ -17,7 +17,7 @@ namespace BeCareWithYourFuckingCode.Controllers
         WEBACCOUNTEntities Entities = new WEBACCOUNTEntities();
 
         [HttpPost]
-        public ActionResult getLogin(TB_USER user)
+        public ActionResult getLogin(TB_USER user) // đăng nhập
         {
             string message = "";
             TB_USER users = Entities.TB_USER.Where(x => x.USERNAME ==user.USERNAME.Trim() && x.PASSWORD_KEY.Trim() == user.PASSWORD_KEY).Select(x=>x).SingleOrDefault();
@@ -58,7 +58,7 @@ namespace BeCareWithYourFuckingCode.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult getUser(string id)
+        public ActionResult getUser(string id) // trả về tên, số dư
         {
             if (id == null) return Json(null, JsonRequestBehavior.AllowGet);
             var model = Entities.TB_USER.Find(id);
@@ -69,13 +69,13 @@ namespace BeCareWithYourFuckingCode.Controllers
             }
             return Json(null, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult getSignUp()
+        public ActionResult getSignUp() //trả về view đăng ký
         {
 
             return View();
         }
 
-        public string CreateID()
+        public string CreateID() // Cơ chế sinh mã
         {
             string id = "";
             Random rand = new Random();
@@ -145,7 +145,7 @@ namespace BeCareWithYourFuckingCode.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult getSignUp(TB_USER user)
+        public ActionResult getSignUp(TB_USER user)  // đăng ký
         {
             try
             {
