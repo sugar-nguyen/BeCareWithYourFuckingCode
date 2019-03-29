@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "BuyNow";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    var id = '@ViewBag.id';
+    $().ready(function () {
+        if (id != "") {
+            $.getJSON('/Deal/BuyNowAction/' + id, "", function (rs) {
+                var html = '';
+                html += '<tr>';
+                html += '<td><a href="/GameAccount/getDetail/' + rs.id + '">' + rs.id + '</a></td>';
+                html += '<td>' + NumberFormat(rs.price1) + '</td>';
+                html += '<td>' + NumberFormat(rs.price2) + '</td>';
+                html += '</tr>';
+                $('#tbody1').html(html);
+                var html2 = '';
+                html2 += '<tr>';
+                html2 += '<td>' + rs.tuong + '</td>';
+                html2 += '<td>' + rs.skin + '</td>';
+                html2 += '<td>' + rs.ngoc + '</td>';
+                html2 += '<td>' + rs.hang + '</td>';
+                html2 += '</tr>';
+                $('#tbody2').html(html2);
+            });
+            $.getJSON('/User/checkLogined', '', function (rs) {
+                if (rs.toString() != 0) {
+                    $.getJSON('/User/getUser/' + rs.toString(), function (res) {
+                        if (rs != null) {
+                            var html = '';
+                            html += '<tr>';
+                            html += '<td>' + res.name + '</td>';
+                            html += '<td>' + NumberFormat(res.sodu) + '</td>';
+                            html += '</tr>';
+                            $('#tbody3').html(html);
+                        }
+                    });
+                }
+            });
+        }
+
+    });
+</script>
+<div class="row bg-white p-4">
+    <div class="col-md-6">
+        <p class="text-info">Thông tin đơn hàng</p>
+        <table class="table table-sm table-bordered text-center mt-1">
+            <thead>
+                <tr>
+                    <th>Mã Account</th>
+                    <th>Giá đề nghị</th>
+                    <th>Giá bán</th>
+                </tr>
+            </thead>
+            <tbody id="tbody1"></tbody>
+        </table>
+        <p class="text-info">Thông tin account</p>
+        <table class="table table-sm table-striped text-center mt-1">
+            <thead>
+                <tr>
+                    <th>Số lượng tướng</th>
+                    <th>Số lượng trang phục</th>
+                    <th>Số lượng bảng ngọc</th>
+                    <th>Bậc cao nhất</th>
+                </tr>
+            </thead>
+            <tbody id="tbody2"></tbody>
+        </table>
+        <small class="text-muted">=> Bạn sẽ nhận được thông tin đăng nhập sau khi thanh toán thành công</small>
+    </div>
+    <div class="col-md-6">
+        <div>
+            <p class="text-info">Thông tin người mua</p>
+            <table class="table table-sm table-dark text-center mt-1">
+                <thead>
+                    <tr>
+                        <th>Tên</th>
+                        <th>Số dư</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody3"></tbody>
+            </table>
+        </div>
+        <div class="float-right"><button class="btn btn-success">Thanh toán</button></div>
+    </div>
+</div>
+

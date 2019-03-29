@@ -106,5 +106,27 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TB_BILL">
+      <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_BILL">
+        <MappingFragment StoreEntitySet="TB_BILL">
+          <ScalarProperty Name="BILL_DATE" ColumnName="BILL_DATE" />
+          <ScalarProperty Name="SUCCESS_PRICE" ColumnName="SUCCESS_PRICE" />
+          <ScalarProperty Name="OFFER_PRICE" ColumnName="OFFER_PRICE" />
+          <ScalarProperty Name="GAME_ACCOUNT_ID" ColumnName="GAME_ACCOUNT_ID" />
+          <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_MONEY">
+      <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_MONEY">
+        <MappingFragment StoreEntitySet="TB_MONEY">
+          <ScalarProperty Name="TIME_FOR_FREE" ColumnName="TIME_FOR_FREE" />
+          <ScalarProperty Name="NEWBIE" ColumnName="NEWBIE" />
+          <ScalarProperty Name="TOTAL_MONEY" ColumnName="TOTAL_MONEY" />
+          <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

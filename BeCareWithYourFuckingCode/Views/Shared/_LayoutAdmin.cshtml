@@ -29,6 +29,17 @@
             display: none;
         }
     </style>
+
+    <script>
+        $().ready(function () {
+            $.getJSON('/Admin/getAdmin', "", function (rs) {
+                if (rs.toString() != "") {
+                    $("#adminName").html(rs.toString());
+                }
+            });
+           
+        });
+    </script>
 </head>
 <body>
     <div class="wrapper ">
@@ -42,15 +53,15 @@
                         <img src="~/Content/Images/admin/logo-small.png">
                     </div>
                 </a>
-                <a href="#" class="simple-text logo-normal">
-                    @Session["adminName"].ToString()
+                <a href="#" class="simple-text logo-normal" id="adminName">
+                   
 
                 </a>
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li class="active ">
-                        <a href="#">
+                        <a href="/Admin/Index">
                             <i class="nc-icon nc-bank"></i>
                             <p>Trang chủ</p>
                         </a>

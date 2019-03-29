@@ -18,6 +18,7 @@ namespace BeCareWithYourFuckingCode.Models
         {
             this.TB_SELL_DEAL_HISTORY = new HashSet<TB_SELL_DEAL_HISTORY>();
             this.TB_GAME_PRICE_OFFER = new HashSet<TB_GAME_PRICE_OFFER>();
+            this.TB_BILL = new HashSet<TB_BILL>();
         }
     
         public string USERNAME { get; set; }
@@ -34,5 +35,6 @@ namespace BeCareWithYourFuckingCode.Models
         public virtual TB_GAME_IMAGE TB_GAME_IMAGE { get; set; }
         public virtual ICollection<TB_SELL_DEAL_HISTORY> TB_SELL_DEAL_HISTORY { get; set; }
         public virtual ICollection<TB_GAME_PRICE_OFFER> TB_GAME_PRICE_OFFER { get; set; }
+        public virtual ICollection<TB_BILL> TB_BILL { get; set; }
     }
 }

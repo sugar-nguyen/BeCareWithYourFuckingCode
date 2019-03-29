@@ -11,20 +11,9 @@ namespace BeCareWithYourFuckingCode.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class TB_ADMIN
     {
-        public TB_ADMIN()
-        {
-
-        }
-        public TB_ADMIN(string USERNAME, string PASSWORD_KEY)
-        {
-            this.USERNAME = USERNAME;
-            this.PASSWORD_KEY = PASSWORD_KEY;
-        }
-
         public int ID { get; set; }
         public string USERNAME { get; set; }
         public string PASSWORD_KEY { get; set; }

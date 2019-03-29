@@ -58,6 +58,17 @@ namespace BeCareWithYourFuckingCode.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult getUser(string id)
+        {
+            if (id == null) return Json(null, JsonRequestBehavior.AllowGet);
+            var model = Entities.TB_USER.Find(id);
+            if (model != null)
+            {
+                var obj = new { name = model.NAME, sodu = model.TB_MONEY.TOTAL_MONEY };
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult getSignUp()
         {
 

@@ -64,6 +64,11 @@ namespace BeCareWithYourFuckingCode.Models
 
         }
 
+        public ActionResult getAdmin()
+        {
+            var name = Session["adminName"].ToString() ?? "";
+            return Json(name, JsonRequestBehavior.AllowGet);
+        }
       
         public ActionResult getTBGameAccount()
         {

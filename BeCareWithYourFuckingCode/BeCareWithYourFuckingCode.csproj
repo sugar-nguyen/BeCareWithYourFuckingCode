@@ -343,6 +343,9 @@
     <Compile Include="Models\TB_ADMIN.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TB_BILL.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TB_CARD_DEAL_HISTORY.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -356,6 +359,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TB_GAME_PRICE_OFFER.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TB_MONEY.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TB_RANK_NAME.cs">
@@ -396,6 +402,7 @@
     <Content Include="Views\Admin\TableList.cshtml" />
     <Content Include="Views\Admin\getTBGameAccount.cshtml" />
     <Content Include="Views\Admin\getTBUSER.cshtml" />
+    <Content Include="Views\Deal\BuyNow.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -405,7 +412,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Deal\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

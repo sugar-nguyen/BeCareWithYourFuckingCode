@@ -59,7 +59,7 @@ function htmlString(result, html) {
         html += '<a href="/GameAccount/getDetail/' + item.id + '" class="btn btn-outline-success w-100" >Xem</a>';
         html += '</div>';
         html += '<div class="col">';
-        html += '<a href="#" class="btn btn-outline-primary w-100">Mua</a>';
+        html += '<a href="/Deal/BuyNow/'+item.id+'" class="btn btn-outline-primary w-100">Mua</a>';
         html += '</div>';
         html += '</div>';
         html += '</div>';

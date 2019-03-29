@@ -60,5 +60,27 @@ namespace BeCareWithYourFuckingCode.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
+        public ActionResult BuyNow(string id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
+
+        public ActionResult BuyNowAction(string id)
+        {
+            int _id = int.Parse(id);
+            var model = entities.TB_GAME_ACCOUNT.Where(x => x.ID == _id).Select(x => new
+            {
+                id = x.ID,
+                price1 = x.ORIGINAL_PRICE,
+                price2 = x.ORIGINAL_PRICE,
+                tuong = x.TB_GAME_ACCOUNT_DETAIL.GENERAL_NUMBER,
+                skin = x.TB_GAME_ACCOUNT_DETAIL.SKIN_NUMBER,
+                ngoc = x.TB_GAME_ACCOUNT_DETAIL.GEM_NUMBER,
+                hang = x.TB_GAME_ACCOUNT_DETAIL.TB_RANK_NAME1.RANK_NAME
+            }).SingleOrDefault();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
     }
+
 }
