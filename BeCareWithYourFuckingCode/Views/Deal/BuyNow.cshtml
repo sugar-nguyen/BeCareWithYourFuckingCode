@@ -65,7 +65,7 @@
                             if (sodu < pay) {
                                 alert("Số dư không đủ vui lòng nạp thêm !");
                             } else {
-                                alert("Ok mua hen, uh mua rồi đó. ủa username, password đâu hen. ý chết mẹ quên show rồi. đợi dăm ba bửa liên hệ đưa sau hen, ahihi đũy chó.");
+                                $('#acceptModal').modal();
                             }
                         });
                         
@@ -126,4 +126,28 @@
         <div class="float-right"><button type="submit" class="btn btn-success" onclick="Payment()">Thanh toán</button></div>
     </div>
 </div>
-
+<!--Modal-->
+<div class="modal fade" id="acceptModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-info" id="exampleModalLongTitle">Xác nhận</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="h5 text-danger">Bạn đồng ý mua account này ?</p>
+                        <small class="text-muted">Username và Password sẽ được kiểm tra lại và giao sau 24h và bạn sẽ phải mất 30% phí đặt cọc.</small>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" onclick="AgreeToBuy()">Đồng ý</button>
+            </div>
+        </div>
+    </div>
+</div>

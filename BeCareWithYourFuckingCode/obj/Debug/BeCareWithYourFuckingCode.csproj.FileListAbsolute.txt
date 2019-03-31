@@ -4,6 +4,8 @@ D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\B
 D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\EntityFramework.dll
 D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\EntityFramework.SqlServer.dll
 D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\Microsoft.Web.Infrastructure.dll
+D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\PagedList.dll
+D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\PagedList.Mvc.dll
 D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\System.Web.Helpers.dll
 D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\System.Web.Mvc.dll
 D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\System.Web.Razor.dll
@@ -12,6 +14,8 @@ D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\S
 D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\System.Web.WebPages.Razor.dll
 D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\EntityFramework.xml
 D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\EntityFramework.SqlServer.xml
+D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\PagedList.xml
+D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\PagedList.Mvc.xml
 D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\System.Web.Helpers.xml
 D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\System.Web.Mvc.xml
 D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\System.Web.Razor.xml
@@ -21,7 +25,3 @@ D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\S
 D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\obj\Debug\BeCareWithYourFuckingCode.dll
 D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\obj\Debug\BeCareWithYourFuckingCode.pdb
 D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\obj\Debug\BeCareWithYourFuckingCode.csprojResolveAssemblyReference.cache
-D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\PagedList.dll
-D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\PagedList.Mvc.dll
-D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\PagedList.xml
-D:\Data\Visual\asp.net\BeCareWithYourFuckingCode\BeCareWithYourFuckingCode\bin\PagedList.Mvc.xml
