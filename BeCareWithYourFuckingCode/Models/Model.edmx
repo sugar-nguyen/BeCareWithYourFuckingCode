@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="WEBACCOUNTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="WEBACCOUNTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="TB_ADMIN">
           <Key>
             <PropertyRef Name="ID" />
@@ -17,10 +17,11 @@
         <EntityType Name="TB_BILL">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="GAME_ACCOUNT_ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="USER_ACCOUNT_ID" Type="varchar" MaxLength="10" />
-          <Property Name="GAME_ACCOUNT_ID" Type="varchar" MaxLength="50" />
+          <Property Name="USER_ACCOUNT_ID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="GAME_ACCOUNT_ID" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="OFFER_PRICE" Type="int" />
           <Property Name="SUCCESS_PRICE" Type="int" />
           <Property Name="BILL_DATE" Type="date" />
@@ -51,6 +52,7 @@
           <Property Name="IMG_ID" Type="varchar" MaxLength="50" />
           <Property Name="DATE_UPLOAD" Type="date" />
           <Property Name="ID" Type="int" />
+          <Property Name="USER_ACCOUNT_ID" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="TB_GAME_ACCOUNT_DETAIL">
           <Key>
@@ -85,6 +87,8 @@
           <Property Name="USER_PRICE_OFFER" Type="int" />
           <Property Name="CURRENT_STATUS" Type="tinyint" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'WEBACCOUNT.dbo.TB_MONEY' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TB_MONEY">
           <Key>
             <PropertyRef Name="USER_ACCOUNT_ID" />
@@ -123,7 +127,7 @@
           <Property Name="CURRENT_ADDRESS" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <Association Name="FK_TB_BILL_TB_GAME_ACCOUNT">
-          <End Role="TB_GAME_ACCOUNT" Type="Self.TB_GAME_ACCOUNT" Multiplicity="0..1" />
+          <End Role="TB_GAME_ACCOUNT" Type="Self.TB_GAME_ACCOUNT" Multiplicity="1" />
           <End Role="TB_BILL" Type="Self.TB_BILL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_GAME_ACCOUNT">
@@ -135,7 +139,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TB_BILL_TB_USER">
-          <End Role="TB_USER" Type="Self.TB_USER" Multiplicity="0..1" />
+          <End Role="TB_USER" Type="Self.TB_USER" Multiplicity="1" />
           <End Role="TB_BILL" Type="Self.TB_BILL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_USER">
@@ -206,6 +210,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TB_GAME_ACCOUNT_TB_USER">
+          <End Role="TB_USER" Type="Self.TB_USER" Multiplicity="0..1" />
+          <End Role="TB_GAME_ACCOUNT" Type="Self.TB_GAME_ACCOUNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TB_GAME_ACCOUNT">
+              <PropertyRef Name="USER_ACCOUNT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TB_GAME_PRICE_OFFER_TB_GAME_ACCOUNT">
           <End Role="TB_GAME_ACCOUNT" Type="Self.TB_GAME_ACCOUNT" Multiplicity="1" />
           <End Role="TB_GAME_PRICE_OFFER" Type="Self.TB_GAME_PRICE_OFFER" Multiplicity="*" />
@@ -226,6 +242,18 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="TB_GAME_PRICE_OFFER">
+              <PropertyRef Name="USER_ACCOUNT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_MONEY_TB_USER">
+          <End Role="TB_USER" Type="Self.TB_USER" Multiplicity="1" />
+          <End Role="TB_MONEY" Type="Self.TB_MONEY" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TB_USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TB_MONEY">
               <PropertyRef Name="USER_ACCOUNT_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -254,18 +282,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TB_USER_TB_MONEY">
-          <End Role="TB_MONEY" Type="Self.TB_MONEY" Multiplicity="1" />
-          <End Role="TB_USER" Type="Self.TB_USER" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="TB_MONEY">
-              <PropertyRef Name="USER_ACCOUNT_ID" />
-            </Principal>
-            <Dependent Role="TB_USER">
-              <PropertyRef Name="ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="WEBACCOUNTModelStoreContainer">
           <EntitySet Name="TB_ADMIN" EntityType="Self.TB_ADMIN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_BILL" EntityType="Self.TB_BILL" Schema="dbo" store:Type="Tables" />
@@ -274,10 +290,17 @@
           <EntitySet Name="TB_GAME_ACCOUNT_DETAIL" EntityType="Self.TB_GAME_ACCOUNT_DETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_GAME_IMAGE" EntityType="Self.TB_GAME_IMAGE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_GAME_PRICE_OFFER" EntityType="Self.TB_GAME_PRICE_OFFER" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TB_MONEY" EntityType="Self.TB_MONEY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_RANK_NAME" EntityType="Self.TB_RANK_NAME" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_SELL_DEAL_HISTORY" EntityType="Self.TB_SELL_DEAL_HISTORY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_USER" EntityType="Self.TB_USER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_MONEY" EntityType="Self.TB_MONEY" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TB_MONEY].[USER_ACCOUNT_ID] AS [USER_ACCOUNT_ID], 
+    [TB_MONEY].[TOTAL_MONEY] AS [TOTAL_MONEY], 
+    [TB_MONEY].[NEWBIE] AS [NEWBIE], 
+    [TB_MONEY].[TIME_FOR_FREE] AS [TIME_FOR_FREE]
+    FROM [dbo].[TB_MONEY] AS [TB_MONEY]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_TB_BILL_TB_GAME_ACCOUNT" Association="Self.FK_TB_BILL_TB_GAME_ACCOUNT">
             <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
             <End Role="TB_BILL" EntitySet="TB_BILL" />
@@ -306,6 +329,10 @@
             <End Role="TB_GAME_IMAGE" EntitySet="TB_GAME_IMAGE" />
             <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
           </AssociationSet>
+          <AssociationSet Name="FK_TB_GAME_ACCOUNT_TB_USER" Association="Self.FK_TB_GAME_ACCOUNT_TB_USER">
+            <End Role="TB_USER" EntitySet="TB_USER" />
+            <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
+          </AssociationSet>
           <AssociationSet Name="FK_TB_GAME_PRICE_OFFER_TB_GAME_ACCOUNT" Association="Self.FK_TB_GAME_PRICE_OFFER_TB_GAME_ACCOUNT">
             <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
             <End Role="TB_GAME_PRICE_OFFER" EntitySet="TB_GAME_PRICE_OFFER" />
@@ -313,6 +340,10 @@
           <AssociationSet Name="FK_TB_GAME_PRICE_OFFER_TB_USER" Association="Self.FK_TB_GAME_PRICE_OFFER_TB_USER">
             <End Role="TB_USER" EntitySet="TB_USER" />
             <End Role="TB_GAME_PRICE_OFFER" EntitySet="TB_GAME_PRICE_OFFER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_MONEY_TB_USER" Association="Self.FK_TB_MONEY_TB_USER">
+            <End Role="TB_USER" EntitySet="TB_USER" />
+            <End Role="TB_MONEY" EntitySet="TB_MONEY" />
           </AssociationSet>
           <AssociationSet Name="FK_TB_SELL_DELL_HISTORY_TB_GAME_ACCOUNT" Association="Self.FK_TB_SELL_DELL_HISTORY_TB_GAME_ACCOUNT">
             <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
@@ -322,15 +353,35 @@
             <End Role="TB_USER" EntitySet="TB_USER" />
             <End Role="TB_SELL_DEAL_HISTORY" EntitySet="TB_SELL_DEAL_HISTORY" />
           </AssociationSet>
-          <AssociationSet Name="FK_TB_USER_TB_MONEY" Association="Self.FK_TB_USER_TB_MONEY">
-            <End Role="TB_MONEY" EntitySet="TB_MONEY" />
-            <End Role="TB_USER" EntitySet="TB_USER" />
-          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WEBACCOUNTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TB_ADMIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USERNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORD_KEY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TB_BILL">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="GAME_ACCOUNT_ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USER_ACCOUNT_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GAME_ACCOUNT_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OFFER_PRICE" Type="Int32" />
+          <Property Name="SUCCESS_PRICE" Type="Int32" />
+          <Property Name="BILL_DATE" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="TB_GAME_ACCOUNT" Relationship="Self.FK_TB_BILL_TB_GAME_ACCOUNT" FromRole="TB_BILL" ToRole="TB_GAME_ACCOUNT" />
+          <NavigationProperty Name="TB_USER" Relationship="Self.FK_TB_BILL_TB_USER" FromRole="TB_BILL" ToRole="TB_USER" />
+        </EntityType>
         <EntityType Name="TB_CARD_DEAL_HISTORY">
           <Key>
             <PropertyRef Name="HIS_ID" />
@@ -345,6 +396,27 @@
           <Property Name="ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TB_USER" Relationship="Self.FK_TB_CARD_DEAL_HISTORY_TB_USER" FromRole="TB_CARD_DEAL_HISTORY" ToRole="TB_USER" />
         </EntityType>
+        <EntityType Name="TB_GAME_ACCOUNT">
+          <Key>
+            <PropertyRef Name="USERNAME" />
+          </Key>
+          <Property Name="USERNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PASSWORD_KEY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ORIGINAL_PRICE" Type="Int32" />
+          <Property Name="ACCEPT_PRICE" Type="Int32" />
+          <Property Name="CURRENT_STATUS" Type="Int32" />
+          <Property Name="RE_IMAGE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IMG_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_UPLOAD" Type="DateTime" Precision="0" />
+          <Property Name="ID" Type="Int32" />
+          <Property Name="USER_ACCOUNT_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TB_BILL" Relationship="Self.FK_TB_BILL_TB_GAME_ACCOUNT" FromRole="TB_GAME_ACCOUNT" ToRole="TB_BILL" />
+          <NavigationProperty Name="TB_GAME_ACCOUNT_DETAIL" Relationship="Self.FK_TB_GAME_ACCOUNT_DETAIL_TB_GAME_ACCOUNT" FromRole="TB_GAME_ACCOUNT" ToRole="TB_GAME_ACCOUNT_DETAIL" />
+          <NavigationProperty Name="TB_GAME_IMAGE" Relationship="Self.FK_TB_GAME_ACCOUNT_TB_GAME_IMAGE" FromRole="TB_GAME_ACCOUNT" ToRole="TB_GAME_IMAGE" />
+          <NavigationProperty Name="TB_USER" Relationship="Self.FK_TB_GAME_ACCOUNT_TB_USER" FromRole="TB_GAME_ACCOUNT" ToRole="TB_USER" />
+          <NavigationProperty Name="TB_GAME_PRICE_OFFER" Relationship="Self.FK_TB_GAME_PRICE_OFFER_TB_GAME_ACCOUNT" FromRole="TB_GAME_ACCOUNT" ToRole="TB_GAME_PRICE_OFFER" />
+          <NavigationProperty Name="TB_SELL_DEAL_HISTORY" Relationship="Self.FK_TB_SELL_DELL_HISTORY_TB_GAME_ACCOUNT" FromRole="TB_GAME_ACCOUNT" ToRole="TB_SELL_DEAL_HISTORY" />
+        </EntityType>
         <EntityType Name="TB_GAME_ACCOUNT_DETAIL">
           <Key>
             <PropertyRef Name="USERNAME" />
@@ -357,9 +429,9 @@
           <Property Name="BEST_RANK" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CURRENT_RANK" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CLAN_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TB_GAME_ACCOUNT" Relationship="Self.FK_TB_GAME_ACCOUNT_DETAIL_TB_GAME_ACCOUNT" FromRole="TB_GAME_ACCOUNT_DETAIL" ToRole="TB_GAME_ACCOUNT" />
           <NavigationProperty Name="TB_RANK_NAME" Relationship="Self.FK_TB_GAME_ACCOUNT_DETAIL_TB_RANK_NAME" FromRole="TB_GAME_ACCOUNT_DETAIL" ToRole="TB_RANK_NAME" />
           <NavigationProperty Name="TB_RANK_NAME1" Relationship="Self.FK_TB_GAME_ACCOUNT_DETAIL_TB_RANK_NAME1" FromRole="TB_GAME_ACCOUNT_DETAIL" ToRole="TB_RANK_NAME" />
-          <NavigationProperty Name="TB_GAME_ACCOUNT" Relationship="WEBACCOUNTModel.FK_TB_GAME_ACCOUNT_DETAIL_TB_GAME_ACCOUNT" FromRole="TB_GAME_ACCOUNT_DETAIL" ToRole="TB_GAME_ACCOUNT" />
         </EntityType>
         <EntityType Name="TB_GAME_IMAGE">
           <Key>
@@ -370,7 +442,19 @@
           <Property Name="IMG_2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IMG_3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IMG_4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TB_GAME_ACCOUNT" Relationship="WEBACCOUNTModel.FK_TB_GAME_ACCOUNT_TB_GAME_IMAGE" FromRole="TB_GAME_IMAGE" ToRole="TB_GAME_ACCOUNT" />
+          <NavigationProperty Name="TB_GAME_ACCOUNT" Relationship="Self.FK_TB_GAME_ACCOUNT_TB_GAME_IMAGE" FromRole="TB_GAME_IMAGE" ToRole="TB_GAME_ACCOUNT" />
+        </EntityType>
+        <EntityType Name="TB_GAME_PRICE_OFFER">
+          <Key>
+            <PropertyRef Name="USERNAME" />
+            <PropertyRef Name="USER_ACCOUNT_ID" />
+          </Key>
+          <Property Name="USERNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USER_ACCOUNT_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USER_PRICE_OFFER" Type="Int32" />
+          <Property Name="CURRENT_STATUS" Type="Byte" />
+          <NavigationProperty Name="TB_GAME_ACCOUNT" Relationship="Self.FK_TB_GAME_PRICE_OFFER_TB_GAME_ACCOUNT" FromRole="TB_GAME_PRICE_OFFER" ToRole="TB_GAME_ACCOUNT" />
+          <NavigationProperty Name="TB_USER" Relationship="Self.FK_TB_GAME_PRICE_OFFER_TB_USER" FromRole="TB_GAME_PRICE_OFFER" ToRole="TB_USER" />
         </EntityType>
         <EntityType Name="TB_RANK_NAME">
           <Key>
@@ -389,8 +473,8 @@
           <Property Name="HIS_DATE" Type="DateTime" Precision="3" />
           <Property Name="USER_ACCOUNT_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="GAME_ACCOUNT_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TB_GAME_ACCOUNT" Relationship="Self.FK_TB_SELL_DELL_HISTORY_TB_GAME_ACCOUNT" FromRole="TB_SELL_DEAL_HISTORY" ToRole="TB_GAME_ACCOUNT" />
           <NavigationProperty Name="TB_USER" Relationship="Self.FK_TB_SELL_DELL_HISTORY_TB_USER1" FromRole="TB_SELL_DEAL_HISTORY" ToRole="TB_USER" />
-          <NavigationProperty Name="TB_GAME_ACCOUNT" Relationship="WEBACCOUNTModel.FK_TB_SELL_DELL_HISTORY_TB_GAME_ACCOUNT" FromRole="TB_SELL_DEAL_HISTORY" ToRole="TB_GAME_ACCOUNT" />
         </EntityType>
         <EntityType Name="TB_USER">
           <Key>
@@ -403,12 +487,47 @@
           <Property Name="EMAIL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="PHONE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="CURRENT_ADDRESS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TB_BILL" Relationship="Self.FK_TB_BILL_TB_USER" FromRole="TB_USER" ToRole="TB_BILL" />
           <NavigationProperty Name="TB_CARD_DEAL_HISTORY" Relationship="Self.FK_TB_CARD_DEAL_HISTORY_TB_USER" FromRole="TB_USER" ToRole="TB_CARD_DEAL_HISTORY" />
+          <NavigationProperty Name="TB_GAME_ACCOUNT" Relationship="Self.FK_TB_GAME_ACCOUNT_TB_USER" FromRole="TB_USER" ToRole="TB_GAME_ACCOUNT" />
+          <NavigationProperty Name="TB_GAME_PRICE_OFFER" Relationship="Self.FK_TB_GAME_PRICE_OFFER_TB_USER" FromRole="TB_USER" ToRole="TB_GAME_PRICE_OFFER" />
           <NavigationProperty Name="TB_SELL_DEAL_HISTORY" Relationship="Self.FK_TB_SELL_DELL_HISTORY_TB_USER1" FromRole="TB_USER" ToRole="TB_SELL_DEAL_HISTORY" />
-          <NavigationProperty Name="TB_GAME_PRICE_OFFER" Relationship="WEBACCOUNTModel.FK_TB_GAME_PRICE_OFFER_TB_USER" FromRole="TB_USER" ToRole="TB_GAME_PRICE_OFFER" />
-          <NavigationProperty Name="TB_BILL" Relationship="WEBACCOUNTModel.FK_TB_BILL_TB_USER" FromRole="TB_USER" ToRole="TB_BILL" />
-          <NavigationProperty Name="TB_MONEY" Relationship="WEBACCOUNTModel.FK_TB_USER_TB_MONEY" FromRole="TB_USER" ToRole="TB_MONEY" />
+          <NavigationProperty Name="TB_MONEY" Relationship="Self.FK_TB_MONEY_TB_USER" FromRole="TB_USER" ToRole="TB_MONEY" />
         </EntityType>
+        <EntityType Name="TB_MONEY">
+          <Key>
+            <PropertyRef Name="USER_ACCOUNT_ID" />
+          </Key>
+          <Property Name="USER_ACCOUNT_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TOTAL_MONEY" Type="Int32" />
+          <Property Name="NEWBIE" Type="Int32" />
+          <Property Name="TIME_FOR_FREE" Type="Int32" />
+          <NavigationProperty Name="TB_USER" Relationship="Self.FK_TB_MONEY_TB_USER" FromRole="TB_MONEY" ToRole="TB_USER" />
+        </EntityType>
+        <Association Name="FK_TB_BILL_TB_GAME_ACCOUNT">
+          <End Role="TB_GAME_ACCOUNT" Type="Self.TB_GAME_ACCOUNT" Multiplicity="1" />
+          <End Role="TB_BILL" Type="Self.TB_BILL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_GAME_ACCOUNT">
+              <PropertyRef Name="USERNAME" />
+            </Principal>
+            <Dependent Role="TB_BILL">
+              <PropertyRef Name="GAME_ACCOUNT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_BILL_TB_USER">
+          <End Role="TB_USER" Type="Self.TB_USER" Multiplicity="1" />
+          <End Role="TB_BILL" Type="Self.TB_BILL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TB_BILL">
+              <PropertyRef Name="USER_ACCOUNT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TB_CARD_DEAL_HISTORY_TB_USER">
           <End Role="TB_USER" Type="Self.TB_USER" Multiplicity="0..1" />
           <End Role="TB_CARD_DEAL_HISTORY" Type="Self.TB_CARD_DEAL_HISTORY" Multiplicity="*" />
@@ -418,6 +537,66 @@
             </Principal>
             <Dependent Role="TB_CARD_DEAL_HISTORY">
               <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_GAME_ACCOUNT_DETAIL_TB_GAME_ACCOUNT">
+          <End Role="TB_GAME_ACCOUNT" Type="Self.TB_GAME_ACCOUNT" Multiplicity="1" />
+          <End Role="TB_GAME_ACCOUNT_DETAIL" Type="Self.TB_GAME_ACCOUNT_DETAIL" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TB_GAME_ACCOUNT">
+              <PropertyRef Name="USERNAME" />
+            </Principal>
+            <Dependent Role="TB_GAME_ACCOUNT_DETAIL">
+              <PropertyRef Name="USERNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_GAME_ACCOUNT_TB_GAME_IMAGE">
+          <End Role="TB_GAME_IMAGE" Type="Self.TB_GAME_IMAGE" Multiplicity="0..1" />
+          <End Role="TB_GAME_ACCOUNT" Type="Self.TB_GAME_ACCOUNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_GAME_IMAGE">
+              <PropertyRef Name="USERNAME" />
+            </Principal>
+            <Dependent Role="TB_GAME_ACCOUNT">
+              <PropertyRef Name="IMG_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_GAME_ACCOUNT_TB_USER">
+          <End Role="TB_USER" Type="Self.TB_USER" Multiplicity="0..1" />
+          <End Role="TB_GAME_ACCOUNT" Type="Self.TB_GAME_ACCOUNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TB_GAME_ACCOUNT">
+              <PropertyRef Name="USER_ACCOUNT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_GAME_PRICE_OFFER_TB_GAME_ACCOUNT">
+          <End Role="TB_GAME_ACCOUNT" Type="Self.TB_GAME_ACCOUNT" Multiplicity="1" />
+          <End Role="TB_GAME_PRICE_OFFER" Type="Self.TB_GAME_PRICE_OFFER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_GAME_ACCOUNT">
+              <PropertyRef Name="USERNAME" />
+            </Principal>
+            <Dependent Role="TB_GAME_PRICE_OFFER">
+              <PropertyRef Name="USERNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_SELL_DELL_HISTORY_TB_GAME_ACCOUNT">
+          <End Role="TB_GAME_ACCOUNT" Type="Self.TB_GAME_ACCOUNT" Multiplicity="0..1" />
+          <End Role="TB_SELL_DEAL_HISTORY" Type="Self.TB_SELL_DEAL_HISTORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_GAME_ACCOUNT">
+              <PropertyRef Name="USERNAME" />
+            </Principal>
+            <Dependent Role="TB_SELL_DEAL_HISTORY">
+              <PropertyRef Name="GAME_ACCOUNT_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -445,6 +624,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TB_GAME_PRICE_OFFER_TB_USER">
+          <End Role="TB_USER" Type="Self.TB_USER" Multiplicity="1" />
+          <End Role="TB_GAME_PRICE_OFFER" Type="Self.TB_GAME_PRICE_OFFER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TB_GAME_PRICE_OFFER">
+              <PropertyRef Name="USER_ACCOUNT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TB_SELL_DELL_HISTORY_TB_USER1">
           <End Role="TB_USER" Type="Self.TB_USER" Multiplicity="0..1" />
           <End Role="TB_SELL_DEAL_HISTORY" Type="Self.TB_SELL_DEAL_HISTORY" Multiplicity="*" />
@@ -457,16 +648,61 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TB_MONEY_TB_USER">
+          <End Role="TB_USER" Type="Self.TB_USER" Multiplicity="1" />
+          <End Role="TB_MONEY" Type="Self.TB_MONEY" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TB_USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TB_MONEY">
+              <PropertyRef Name="USER_ACCOUNT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="WEBACCOUNTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TB_ADMIN" EntityType="Self.TB_ADMIN" />
+          <EntitySet Name="TB_BILL" EntityType="Self.TB_BILL" />
           <EntitySet Name="TB_CARD_DEAL_HISTORY" EntityType="Self.TB_CARD_DEAL_HISTORY" />
+          <EntitySet Name="TB_GAME_ACCOUNT" EntityType="Self.TB_GAME_ACCOUNT" />
           <EntitySet Name="TB_GAME_ACCOUNT_DETAIL" EntityType="Self.TB_GAME_ACCOUNT_DETAIL" />
           <EntitySet Name="TB_GAME_IMAGE" EntityType="Self.TB_GAME_IMAGE" />
+          <EntitySet Name="TB_GAME_PRICE_OFFER" EntityType="Self.TB_GAME_PRICE_OFFER" />
           <EntitySet Name="TB_RANK_NAME" EntityType="Self.TB_RANK_NAME" />
           <EntitySet Name="TB_SELL_DEAL_HISTORY" EntityType="Self.TB_SELL_DEAL_HISTORY" />
           <EntitySet Name="TB_USER" EntityType="Self.TB_USER" />
+          <EntitySet Name="TB_MONEY" EntityType="Self.TB_MONEY" />
+          <AssociationSet Name="FK_TB_BILL_TB_GAME_ACCOUNT" Association="Self.FK_TB_BILL_TB_GAME_ACCOUNT">
+            <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
+            <End Role="TB_BILL" EntitySet="TB_BILL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_BILL_TB_USER" Association="Self.FK_TB_BILL_TB_USER">
+            <End Role="TB_USER" EntitySet="TB_USER" />
+            <End Role="TB_BILL" EntitySet="TB_BILL" />
+          </AssociationSet>
           <AssociationSet Name="FK_TB_CARD_DEAL_HISTORY_TB_USER" Association="Self.FK_TB_CARD_DEAL_HISTORY_TB_USER">
             <End Role="TB_USER" EntitySet="TB_USER" />
             <End Role="TB_CARD_DEAL_HISTORY" EntitySet="TB_CARD_DEAL_HISTORY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_GAME_ACCOUNT_DETAIL_TB_GAME_ACCOUNT" Association="Self.FK_TB_GAME_ACCOUNT_DETAIL_TB_GAME_ACCOUNT">
+            <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
+            <End Role="TB_GAME_ACCOUNT_DETAIL" EntitySet="TB_GAME_ACCOUNT_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_GAME_ACCOUNT_TB_GAME_IMAGE" Association="Self.FK_TB_GAME_ACCOUNT_TB_GAME_IMAGE">
+            <End Role="TB_GAME_IMAGE" EntitySet="TB_GAME_IMAGE" />
+            <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_GAME_ACCOUNT_TB_USER" Association="Self.FK_TB_GAME_ACCOUNT_TB_USER">
+            <End Role="TB_USER" EntitySet="TB_USER" />
+            <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_GAME_PRICE_OFFER_TB_GAME_ACCOUNT" Association="Self.FK_TB_GAME_PRICE_OFFER_TB_GAME_ACCOUNT">
+            <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
+            <End Role="TB_GAME_PRICE_OFFER" EntitySet="TB_GAME_PRICE_OFFER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_SELL_DELL_HISTORY_TB_GAME_ACCOUNT" Association="Self.FK_TB_SELL_DELL_HISTORY_TB_GAME_ACCOUNT">
+            <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
+            <End Role="TB_SELL_DEAL_HISTORY" EntitySet="TB_SELL_DEAL_HISTORY" />
           </AssociationSet>
           <AssociationSet Name="FK_TB_GAME_ACCOUNT_DETAIL_TB_RANK_NAME" Association="Self.FK_TB_GAME_ACCOUNT_DETAIL_TB_RANK_NAME">
             <End Role="TB_RANK_NAME" EntitySet="TB_RANK_NAME" />
@@ -476,213 +712,47 @@
             <End Role="TB_RANK_NAME" EntitySet="TB_RANK_NAME" />
             <End Role="TB_GAME_ACCOUNT_DETAIL" EntitySet="TB_GAME_ACCOUNT_DETAIL" />
           </AssociationSet>
+          <AssociationSet Name="FK_TB_GAME_PRICE_OFFER_TB_USER" Association="Self.FK_TB_GAME_PRICE_OFFER_TB_USER">
+            <End Role="TB_USER" EntitySet="TB_USER" />
+            <End Role="TB_GAME_PRICE_OFFER" EntitySet="TB_GAME_PRICE_OFFER" />
+          </AssociationSet>
           <AssociationSet Name="FK_TB_SELL_DELL_HISTORY_TB_USER1" Association="Self.FK_TB_SELL_DELL_HISTORY_TB_USER1">
             <End Role="TB_USER" EntitySet="TB_USER" />
             <End Role="TB_SELL_DEAL_HISTORY" EntitySet="TB_SELL_DEAL_HISTORY" />
           </AssociationSet>
-          <EntitySet Name="TB_GAME_ACCOUNT" EntityType="WEBACCOUNTModel.TB_GAME_ACCOUNT" />
-          <AssociationSet Name="FK_TB_GAME_ACCOUNT_DETAIL_TB_GAME_ACCOUNT" Association="WEBACCOUNTModel.FK_TB_GAME_ACCOUNT_DETAIL_TB_GAME_ACCOUNT">
-            <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
-            <End Role="TB_GAME_ACCOUNT_DETAIL" EntitySet="TB_GAME_ACCOUNT_DETAIL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_GAME_ACCOUNT_TB_GAME_IMAGE" Association="WEBACCOUNTModel.FK_TB_GAME_ACCOUNT_TB_GAME_IMAGE">
-            <End Role="TB_GAME_IMAGE" EntitySet="TB_GAME_IMAGE" />
-            <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_SELL_DELL_HISTORY_TB_GAME_ACCOUNT" Association="WEBACCOUNTModel.FK_TB_SELL_DELL_HISTORY_TB_GAME_ACCOUNT">
-            <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
-            <End Role="TB_SELL_DEAL_HISTORY" EntitySet="TB_SELL_DEAL_HISTORY" />
-          </AssociationSet>
-          <EntitySet Name="TB_GAME_PRICE_OFFER" EntityType="WEBACCOUNTModel.TB_GAME_PRICE_OFFER" />
-          <AssociationSet Name="FK_TB_GAME_PRICE_OFFER_TB_GAME_ACCOUNT" Association="WEBACCOUNTModel.FK_TB_GAME_PRICE_OFFER_TB_GAME_ACCOUNT">
-            <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
-            <End Role="TB_GAME_PRICE_OFFER" EntitySet="TB_GAME_PRICE_OFFER" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_GAME_PRICE_OFFER_TB_USER" Association="WEBACCOUNTModel.FK_TB_GAME_PRICE_OFFER_TB_USER">
+          <AssociationSet Name="FK_TB_MONEY_TB_USER" Association="Self.FK_TB_MONEY_TB_USER">
             <End Role="TB_USER" EntitySet="TB_USER" />
-            <End Role="TB_GAME_PRICE_OFFER" EntitySet="TB_GAME_PRICE_OFFER" />
-          </AssociationSet>
-          <EntitySet Name="TB_ADMIN" EntityType="WEBACCOUNTModel.TB_ADMIN" />
-          <EntitySet Name="TB_BILL" EntityType="WEBACCOUNTModel.TB_BILL" />
-          <AssociationSet Name="FK_TB_BILL_TB_GAME_ACCOUNT" Association="WEBACCOUNTModel.FK_TB_BILL_TB_GAME_ACCOUNT">
-            <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
-            <End Role="TB_BILL" EntitySet="TB_BILL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_BILL_TB_USER" Association="WEBACCOUNTModel.FK_TB_BILL_TB_USER">
-            <End Role="TB_USER" EntitySet="TB_USER" />
-            <End Role="TB_BILL" EntitySet="TB_BILL" />
-          </AssociationSet>
-          <EntitySet Name="TB_MONEY" EntityType="WEBACCOUNTModel.TB_MONEY" />
-          <AssociationSet Name="FK_TB_USER_TB_MONEY" Association="WEBACCOUNTModel.FK_TB_USER_TB_MONEY">
             <End Role="TB_MONEY" EntitySet="TB_MONEY" />
-            <End Role="TB_USER" EntitySet="TB_USER" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="TB_GAME_ACCOUNT">
-          <Key>
-            <PropertyRef Name="USERNAME" />
-          </Key>
-          <Property Name="USERNAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PASSWORD_KEY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ORIGINAL_PRICE" Type="Int32" />
-          <Property Name="ACCEPT_PRICE" Type="Int32" />
-          <Property Name="CURRENT_STATUS" Type="Int32" />
-          <Property Name="RE_IMAGE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IMG_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DATE_UPLOAD" Type="DateTime" Precision="0" />
-          <Property Name="ID" Type="Int32" />
-          <NavigationProperty Name="TB_GAME_ACCOUNT_DETAIL" Relationship="WEBACCOUNTModel.FK_TB_GAME_ACCOUNT_DETAIL_TB_GAME_ACCOUNT" FromRole="TB_GAME_ACCOUNT" ToRole="TB_GAME_ACCOUNT_DETAIL" />
-          <NavigationProperty Name="TB_GAME_IMAGE" Relationship="WEBACCOUNTModel.FK_TB_GAME_ACCOUNT_TB_GAME_IMAGE" FromRole="TB_GAME_ACCOUNT" ToRole="TB_GAME_IMAGE" />
-          <NavigationProperty Name="TB_SELL_DEAL_HISTORY" Relationship="WEBACCOUNTModel.FK_TB_SELL_DELL_HISTORY_TB_GAME_ACCOUNT" FromRole="TB_GAME_ACCOUNT" ToRole="TB_SELL_DEAL_HISTORY" />
-          <NavigationProperty Name="TB_GAME_PRICE_OFFER" Relationship="WEBACCOUNTModel.FK_TB_GAME_PRICE_OFFER_TB_GAME_ACCOUNT" FromRole="TB_GAME_ACCOUNT" ToRole="TB_GAME_PRICE_OFFER" />
-          <NavigationProperty Name="TB_BILL" Relationship="WEBACCOUNTModel.FK_TB_BILL_TB_GAME_ACCOUNT" FromRole="TB_GAME_ACCOUNT" ToRole="TB_BILL" />
-        </EntityType>
-        <Association Name="FK_TB_GAME_ACCOUNT_DETAIL_TB_GAME_ACCOUNT">
-          <End Type="WEBACCOUNTModel.TB_GAME_ACCOUNT" Role="TB_GAME_ACCOUNT" Multiplicity="1" />
-          <End Type="WEBACCOUNTModel.TB_GAME_ACCOUNT_DETAIL" Role="TB_GAME_ACCOUNT_DETAIL" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="TB_GAME_ACCOUNT">
-              <PropertyRef Name="USERNAME" />
-            </Principal>
-            <Dependent Role="TB_GAME_ACCOUNT_DETAIL">
-              <PropertyRef Name="USERNAME" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_GAME_ACCOUNT_TB_GAME_IMAGE">
-          <End Type="WEBACCOUNTModel.TB_GAME_IMAGE" Role="TB_GAME_IMAGE" Multiplicity="0..1" />
-          <End Type="WEBACCOUNTModel.TB_GAME_ACCOUNT" Role="TB_GAME_ACCOUNT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_GAME_IMAGE">
-              <PropertyRef Name="USERNAME" />
-            </Principal>
-            <Dependent Role="TB_GAME_ACCOUNT">
-              <PropertyRef Name="IMG_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_SELL_DELL_HISTORY_TB_GAME_ACCOUNT">
-          <End Type="WEBACCOUNTModel.TB_GAME_ACCOUNT" Role="TB_GAME_ACCOUNT" Multiplicity="0..1" />
-          <End Type="WEBACCOUNTModel.TB_SELL_DEAL_HISTORY" Role="TB_SELL_DEAL_HISTORY" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_GAME_ACCOUNT">
-              <PropertyRef Name="USERNAME" />
-            </Principal>
-            <Dependent Role="TB_SELL_DEAL_HISTORY">
-              <PropertyRef Name="GAME_ACCOUNT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="TB_GAME_PRICE_OFFER">
-          <Key>
-            <PropertyRef Name="USERNAME" />
-            <PropertyRef Name="USER_ACCOUNT_ID" />
-          </Key>
-          <Property Name="USERNAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="USER_ACCOUNT_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="USER_PRICE_OFFER" Type="Int32" />
-          <Property Name="CURRENT_STATUS" Type="Byte" />
-          <NavigationProperty Name="TB_GAME_ACCOUNT" Relationship="WEBACCOUNTModel.FK_TB_GAME_PRICE_OFFER_TB_GAME_ACCOUNT" FromRole="TB_GAME_PRICE_OFFER" ToRole="TB_GAME_ACCOUNT" />
-          <NavigationProperty Name="TB_USER" Relationship="WEBACCOUNTModel.FK_TB_GAME_PRICE_OFFER_TB_USER" FromRole="TB_GAME_PRICE_OFFER" ToRole="TB_USER" />
-        </EntityType>
-        <Association Name="FK_TB_GAME_PRICE_OFFER_TB_GAME_ACCOUNT">
-          <End Type="WEBACCOUNTModel.TB_GAME_ACCOUNT" Role="TB_GAME_ACCOUNT" Multiplicity="1" />
-          <End Type="WEBACCOUNTModel.TB_GAME_PRICE_OFFER" Role="TB_GAME_PRICE_OFFER" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_GAME_ACCOUNT">
-              <PropertyRef Name="USERNAME" />
-            </Principal>
-            <Dependent Role="TB_GAME_PRICE_OFFER">
-              <PropertyRef Name="USERNAME" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_GAME_PRICE_OFFER_TB_USER">
-          <End Type="WEBACCOUNTModel.TB_USER" Role="TB_USER" Multiplicity="1" />
-          <End Type="WEBACCOUNTModel.TB_GAME_PRICE_OFFER" Role="TB_GAME_PRICE_OFFER" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_USER">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TB_GAME_PRICE_OFFER">
-              <PropertyRef Name="USER_ACCOUNT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="TB_ADMIN">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="USERNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="PASSWORD_KEY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="TB_BILL">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="USER_ACCOUNT_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="GAME_ACCOUNT_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OFFER_PRICE" Type="Int32" />
-          <Property Name="SUCCESS_PRICE" Type="Int32" />
-          <Property Name="BILL_DATE" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="TB_GAME_ACCOUNT" Relationship="WEBACCOUNTModel.FK_TB_BILL_TB_GAME_ACCOUNT" FromRole="TB_BILL" ToRole="TB_GAME_ACCOUNT" />
-          <NavigationProperty Name="TB_USER" Relationship="WEBACCOUNTModel.FK_TB_BILL_TB_USER" FromRole="TB_BILL" ToRole="TB_USER" />
-        </EntityType>
-        <Association Name="FK_TB_BILL_TB_GAME_ACCOUNT">
-          <End Type="WEBACCOUNTModel.TB_GAME_ACCOUNT" Role="TB_GAME_ACCOUNT" Multiplicity="0..1" />
-          <End Type="WEBACCOUNTModel.TB_BILL" Role="TB_BILL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_GAME_ACCOUNT">
-              <PropertyRef Name="USERNAME" />
-            </Principal>
-            <Dependent Role="TB_BILL">
-              <PropertyRef Name="GAME_ACCOUNT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_BILL_TB_USER">
-          <End Type="WEBACCOUNTModel.TB_USER" Role="TB_USER" Multiplicity="0..1" />
-          <End Type="WEBACCOUNTModel.TB_BILL" Role="TB_BILL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_USER">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TB_BILL">
-              <PropertyRef Name="USER_ACCOUNT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="TB_MONEY">
-          <Key>
-            <PropertyRef Name="USER_ACCOUNT_ID" />
-          </Key>
-          <Property Name="USER_ACCOUNT_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="TOTAL_MONEY" Type="Int32" />
-          <Property Name="NEWBIE" Type="Int32" />
-          <Property Name="TIME_FOR_FREE" Type="Int32" />
-          <NavigationProperty Name="TB_USER" Relationship="WEBACCOUNTModel.FK_TB_USER_TB_MONEY" FromRole="TB_MONEY" ToRole="TB_USER" />
-        </EntityType>
-        <Association Name="FK_TB_USER_TB_MONEY">
-          <End Type="WEBACCOUNTModel.TB_MONEY" Role="TB_MONEY" Multiplicity="1" />
-          <End Type="WEBACCOUNTModel.TB_USER" Role="TB_USER" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="TB_MONEY">
-              <PropertyRef Name="USER_ACCOUNT_ID" />
-            </Principal>
-            <Dependent Role="TB_USER">
-              <PropertyRef Name="ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="WEBACCOUNTModelStoreContainer" CdmEntityContainer="WEBACCOUNTEntities">
+          <EntitySetMapping Name="TB_ADMIN">
+            <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_ADMIN">
+              <MappingFragment StoreEntitySet="TB_ADMIN">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="PASSWORD_KEY" ColumnName="PASSWORD_KEY" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_BILL">
+            <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_BILL">
+              <MappingFragment StoreEntitySet="TB_BILL">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
+                <ScalarProperty Name="GAME_ACCOUNT_ID" ColumnName="GAME_ACCOUNT_ID" />
+                <ScalarProperty Name="OFFER_PRICE" ColumnName="OFFER_PRICE" />
+                <ScalarProperty Name="SUCCESS_PRICE" ColumnName="SUCCESS_PRICE" />
+                <ScalarProperty Name="BILL_DATE" ColumnName="BILL_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TB_CARD_DEAL_HISTORY">
             <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_CARD_DEAL_HISTORY">
               <MappingFragment StoreEntitySet="TB_CARD_DEAL_HISTORY">
@@ -694,6 +764,22 @@
                 <ScalarProperty Name="DENOMINATIONS" ColumnName="DENOMINATIONS" />
                 <ScalarProperty Name="RESULT" ColumnName="RESULT" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_GAME_ACCOUNT">
+            <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_GAME_ACCOUNT">
+              <MappingFragment StoreEntitySet="TB_GAME_ACCOUNT">
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="PASSWORD_KEY" ColumnName="PASSWORD_KEY" />
+                <ScalarProperty Name="ORIGINAL_PRICE" ColumnName="ORIGINAL_PRICE" />
+                <ScalarProperty Name="ACCEPT_PRICE" ColumnName="ACCEPT_PRICE" />
+                <ScalarProperty Name="CURRENT_STATUS" ColumnName="CURRENT_STATUS" />
+                <ScalarProperty Name="RE_IMAGE" ColumnName="RE_IMAGE" />
+                <ScalarProperty Name="IMG_ID" ColumnName="IMG_ID" />
+                <ScalarProperty Name="DATE_UPLOAD" ColumnName="DATE_UPLOAD" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -719,6 +805,16 @@
                 <ScalarProperty Name="IMG_2" ColumnName="IMG_2" />
                 <ScalarProperty Name="IMG_3" ColumnName="IMG_3" />
                 <ScalarProperty Name="IMG_4" ColumnName="IMG_4" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_GAME_PRICE_OFFER">
+            <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_GAME_PRICE_OFFER">
+              <MappingFragment StoreEntitySet="TB_GAME_PRICE_OFFER">
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
+                <ScalarProperty Name="USER_PRICE_OFFER" ColumnName="USER_PRICE_OFFER" />
+                <ScalarProperty Name="CURRENT_STATUS" ColumnName="CURRENT_STATUS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -753,60 +849,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TB_GAME_ACCOUNT">
-            <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_GAME_ACCOUNT">
-              <MappingFragment StoreEntitySet="TB_GAME_ACCOUNT">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="DATE_UPLOAD" ColumnName="DATE_UPLOAD" />
-                <ScalarProperty Name="IMG_ID" ColumnName="IMG_ID" />
-                <ScalarProperty Name="RE_IMAGE" ColumnName="RE_IMAGE" />
-                <ScalarProperty Name="CURRENT_STATUS" ColumnName="CURRENT_STATUS" />
-                <ScalarProperty Name="ACCEPT_PRICE" ColumnName="ACCEPT_PRICE" />
-                <ScalarProperty Name="ORIGINAL_PRICE" ColumnName="ORIGINAL_PRICE" />
-                <ScalarProperty Name="PASSWORD_KEY" ColumnName="PASSWORD_KEY" />
-                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_GAME_PRICE_OFFER">
-            <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_GAME_PRICE_OFFER">
-              <MappingFragment StoreEntitySet="TB_GAME_PRICE_OFFER">
-                <ScalarProperty Name="CURRENT_STATUS" ColumnName="CURRENT_STATUS" />
-                <ScalarProperty Name="USER_PRICE_OFFER" ColumnName="USER_PRICE_OFFER" />
-                <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
-                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_ADMIN">
-            <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_ADMIN">
-              <MappingFragment StoreEntitySet="TB_ADMIN">
-                <ScalarProperty Name="NAME" ColumnName="NAME" />
-                <ScalarProperty Name="PASSWORD_KEY" ColumnName="PASSWORD_KEY" />
-                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_BILL">
-            <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_BILL">
-              <MappingFragment StoreEntitySet="TB_BILL">
-                <ScalarProperty Name="BILL_DATE" ColumnName="BILL_DATE" />
-                <ScalarProperty Name="SUCCESS_PRICE" ColumnName="SUCCESS_PRICE" />
-                <ScalarProperty Name="OFFER_PRICE" ColumnName="OFFER_PRICE" />
-                <ScalarProperty Name="GAME_ACCOUNT_ID" ColumnName="GAME_ACCOUNT_ID" />
-                <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TB_MONEY">
             <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_MONEY">
               <MappingFragment StoreEntitySet="TB_MONEY">
-                <ScalarProperty Name="TIME_FOR_FREE" ColumnName="TIME_FOR_FREE" />
-                <ScalarProperty Name="NEWBIE" ColumnName="NEWBIE" />
-                <ScalarProperty Name="TOTAL_MONEY" ColumnName="TOTAL_MONEY" />
                 <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
+                <ScalarProperty Name="TOTAL_MONEY" ColumnName="TOTAL_MONEY" />
+                <ScalarProperty Name="NEWBIE" ColumnName="NEWBIE" />
+                <ScalarProperty Name="TIME_FOR_FREE" ColumnName="TIME_FOR_FREE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

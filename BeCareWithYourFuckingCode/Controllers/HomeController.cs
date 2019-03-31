@@ -10,7 +10,7 @@ namespace BeCareWithYourFuckingCode.Controllers
     {
         //
         // GET: /Home/
-        Models.WEBACCOUNTEntities Entities = new Models.WEBACCOUNTEntities();
+        WEBACCOUNTEntities Entities = new Models.WEBACCOUNTEntities();
         public ActionResult Index()
         {
             return View();

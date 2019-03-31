@@ -23,8 +23,8 @@ namespace BeCareWithYourFuckingCode.Models
         public string CURRENT_RANK { get; set; }
         public string CLAN_NAME { get; set; }
     
+        public virtual TB_GAME_ACCOUNT TB_GAME_ACCOUNT { get; set; }
         public virtual TB_RANK_NAME TB_RANK_NAME { get; set; }
         public virtual TB_RANK_NAME TB_RANK_NAME1 { get; set; }
-        public virtual TB_GAME_ACCOUNT TB_GAME_ACCOUNT { get; set; }
     }
 }

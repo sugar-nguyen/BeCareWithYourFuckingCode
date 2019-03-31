@@ -24,6 +24,14 @@ namespace BeCareWithYourFuckingCode.Controllers
             return View();
         }
 
+        public ActionResult isBoss(int id) // kiểm tra xem người mua có phải là chủ sở hữu của account hiện tại
+        {
+            var message = 0;
+            if(Session["UserID"] == null) return Json(message,JsonRequestBehavior.AllowGet);
+            message = entities.TB_GAME_ACCOUNT.Where(x => x.ID == id).First().USER_ACCOUNT_ID == Session["UserID"].ToString() ? 1 : 0; // lấy ra userid trong bảng account để so sánh với session hiện tại
+            return Json(message, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult getDetailAction(string id)
         {
             var message = "";

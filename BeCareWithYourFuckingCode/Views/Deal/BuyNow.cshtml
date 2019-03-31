@@ -15,7 +15,7 @@
                 html += '</tr>';
                 $('#tbody1').html(html);
                 // gán dữ liệu cho form ẩn
-                $('#GAME_ACCOUNT_ID').val(rs.id);
+                $('#GAME_ACCOUNT_ID').val(rs.username);
                 $('#OFFER_PRICE').val(rs.price1);
                 $('#SUCCESS_PRICE').val(rs.price2);
                 //
@@ -52,28 +52,56 @@
         $.getJSON('/User/checkLogined', '', function (rs) {
             if (rs.toString() == 0) {
                 alert("Vui lòng đăng nhập để tiếp tục");
-            } else {  
-                // var data = $('#bill-info').serialize();
-                $.getJSON('/User/getUser/' + rs.toString(), "", function (rs) {
-                    if (rs != null) {
-                        var arrayVal = new Array();
-                        arrayVal[0] = rs.sodu;
-                        $.getJSON('/Deal/BuyNowAction/' + id, "", function (rs) {
-                            arrayVal[1] = rs.price2;
-                            var sodu = arrayVal[0];
-                            var pay = arrayVal[1];
-                            if (sodu < pay) {
-                                alert("Số dư không đủ vui lòng nạp thêm !");
-                            } else {
-                                $('#acceptModal').modal();
+            } else {
+                $.getJSON('/GameAccount/isBoss/' + id, '', function (rs1) {
+                    if (rs1.toString() == "1") {
+                        alert("Không thể mua vì bạn là chủ sở hữu !");
+                        return;
+                    } else {
+                        $.getJSON('/User/getUser/' + rs.toString(), "", function (rs) {
+                            if (rs != null) {
+                                var arrayVal = new Array();
+                                arrayVal[0] = rs.sodu;
+                                $.getJSON('/Deal/BuyNowAction/' + id, "", function (rs) {
+                                    arrayVal[1] = rs.price2;
+                                    var sodu = arrayVal[0];
+                                    var pay = arrayVal[1];
+                                    if (sodu < pay) {
+                                        alert("Số dư không đủ vui lòng nạp thêm !");
+                                    } else {
+                                        $('#acceptModal').modal();
+                                    }
+                                });
+
                             }
                         });
-                        
                     }
                 });
-               
             }
 
+        });
+    }
+
+
+    function AgreeToBuy() // cập nhật csdl
+    {
+        var data = $('#bill-info').serialize();
+        $.ajax({
+            url: '/Deal/CreateBill',
+            type: 'post',
+            data: data,
+            success: function (res) {
+                if (res == "sucess") {
+                    $('#messageForCreateBill').html('<p class="text-success">Cảm ơn bạn đã mua account tại accg.net, thông tin về account sẽ được gửi đến profile trong 24h tới !</p>')
+                } else {
+                    $('#messageForCreateBill').html('<p class="text-danger">'+res.toString()+'</p>');
+                }
+            },
+            error: function (errormessage) {
+                //$('#messageForCreateBill').html('<p class="text-danger">Đã xảy ra lỗi, vui lòng thử lại sau !</p>');
+                alert(data.toString());
+                $('#messageForCreateBill').html('<p class="text-danger">' + errormessage.responseText + '</p>');
+            },
         });
     }
 </script>
@@ -117,13 +145,7 @@
                 <tbody id="tbody3"></tbody>
             </table>
         </div>
-        <form action="/" method="post" id="bill-info">
-            <input type="hidden" name="USER_ACCOUNT_ID" id="USER_ACCOUNT_ID" value="" />
-            <input type="hidden" name="GAME_ACCOUNT_ID" id="GAME_ACCOUNT_ID" value="" />
-            <input type="hidden" name="OFFER_PRICE" id="OFFER_PRICE" value="" />
-            <input type="hidden" name="SUCCESS_PRICE" id="SUCCESS_PRICE" value="" />
-        </form>
-        <div class="float-right"><button type="submit" class="btn btn-success" onclick="Payment()">Thanh toán</button></div>
+        <div class="float-right"><button class="btn btn-success" onclick="Payment()">Thanh toán</button></div>
     </div>
 </div>
 <!--Modal-->
@@ -138,15 +160,21 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12" id="messageForCreateBill">
                         <p class="h5 text-danger">Bạn đồng ý mua account này ?</p>
                         <small class="text-muted">Username và Password sẽ được kiểm tra lại và giao sau 24h và bạn sẽ phải mất 30% phí đặt cọc.</small>
                     </div>
                 </div>
+                <form action="/" id="bill-info">
+                    @*<input type="hidden" name="USER_ACCOUNT_ID" id="USER_ACCOUNT_ID" value="" />*@
+                    <input type="hidden" name="GAME_ACCOUNT_ID" id="GAME_ACCOUNT_ID" value="" />
+                    <input type="hidden" name="OFFER_PRICE" id="OFFER_PRICE" value="" />
+                    <input type="hidden" name="SUCCESS_PRICE" id="SUCCESS_PRICE" value="" />
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-primary" onclick="AgreeToBuy()">Đồng ý</button>
+                <button type="submit" class="btn btn-primary" onclick="AgreeToBuy()">Đồng ý</button>
             </div>
         </div>
     </div>

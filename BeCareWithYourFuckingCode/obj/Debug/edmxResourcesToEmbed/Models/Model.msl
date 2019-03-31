@@ -1,6 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="WEBACCOUNTModelStoreContainer" CdmEntityContainer="WEBACCOUNTEntities">
+    <EntitySetMapping Name="TB_ADMIN">
+      <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_ADMIN">
+        <MappingFragment StoreEntitySet="TB_ADMIN">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="PASSWORD_KEY" ColumnName="PASSWORD_KEY" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_BILL">
+      <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_BILL">
+        <MappingFragment StoreEntitySet="TB_BILL">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
+          <ScalarProperty Name="GAME_ACCOUNT_ID" ColumnName="GAME_ACCOUNT_ID" />
+          <ScalarProperty Name="OFFER_PRICE" ColumnName="OFFER_PRICE" />
+          <ScalarProperty Name="SUCCESS_PRICE" ColumnName="SUCCESS_PRICE" />
+          <ScalarProperty Name="BILL_DATE" ColumnName="BILL_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="TB_CARD_DEAL_HISTORY">
       <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_CARD_DEAL_HISTORY">
         <MappingFragment StoreEntitySet="TB_CARD_DEAL_HISTORY">
@@ -12,6 +34,22 @@
           <ScalarProperty Name="DENOMINATIONS" ColumnName="DENOMINATIONS" />
           <ScalarProperty Name="RESULT" ColumnName="RESULT" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_GAME_ACCOUNT">
+      <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_GAME_ACCOUNT">
+        <MappingFragment StoreEntitySet="TB_GAME_ACCOUNT">
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="PASSWORD_KEY" ColumnName="PASSWORD_KEY" />
+          <ScalarProperty Name="ORIGINAL_PRICE" ColumnName="ORIGINAL_PRICE" />
+          <ScalarProperty Name="ACCEPT_PRICE" ColumnName="ACCEPT_PRICE" />
+          <ScalarProperty Name="CURRENT_STATUS" ColumnName="CURRENT_STATUS" />
+          <ScalarProperty Name="RE_IMAGE" ColumnName="RE_IMAGE" />
+          <ScalarProperty Name="IMG_ID" ColumnName="IMG_ID" />
+          <ScalarProperty Name="DATE_UPLOAD" ColumnName="DATE_UPLOAD" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -37,6 +75,16 @@
           <ScalarProperty Name="IMG_2" ColumnName="IMG_2" />
           <ScalarProperty Name="IMG_3" ColumnName="IMG_3" />
           <ScalarProperty Name="IMG_4" ColumnName="IMG_4" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_GAME_PRICE_OFFER">
+      <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_GAME_PRICE_OFFER">
+        <MappingFragment StoreEntitySet="TB_GAME_PRICE_OFFER">
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
+          <ScalarProperty Name="USER_PRICE_OFFER" ColumnName="USER_PRICE_OFFER" />
+          <ScalarProperty Name="CURRENT_STATUS" ColumnName="CURRENT_STATUS" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -71,60 +119,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TB_GAME_ACCOUNT">
-      <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_GAME_ACCOUNT">
-        <MappingFragment StoreEntitySet="TB_GAME_ACCOUNT">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="DATE_UPLOAD" ColumnName="DATE_UPLOAD" />
-          <ScalarProperty Name="IMG_ID" ColumnName="IMG_ID" />
-          <ScalarProperty Name="RE_IMAGE" ColumnName="RE_IMAGE" />
-          <ScalarProperty Name="CURRENT_STATUS" ColumnName="CURRENT_STATUS" />
-          <ScalarProperty Name="ACCEPT_PRICE" ColumnName="ACCEPT_PRICE" />
-          <ScalarProperty Name="ORIGINAL_PRICE" ColumnName="ORIGINAL_PRICE" />
-          <ScalarProperty Name="PASSWORD_KEY" ColumnName="PASSWORD_KEY" />
-          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TB_GAME_PRICE_OFFER">
-      <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_GAME_PRICE_OFFER">
-        <MappingFragment StoreEntitySet="TB_GAME_PRICE_OFFER">
-          <ScalarProperty Name="CURRENT_STATUS" ColumnName="CURRENT_STATUS" />
-          <ScalarProperty Name="USER_PRICE_OFFER" ColumnName="USER_PRICE_OFFER" />
-          <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
-          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TB_ADMIN">
-      <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_ADMIN">
-        <MappingFragment StoreEntitySet="TB_ADMIN">
-          <ScalarProperty Name="NAME" ColumnName="NAME" />
-          <ScalarProperty Name="PASSWORD_KEY" ColumnName="PASSWORD_KEY" />
-          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TB_BILL">
-      <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_BILL">
-        <MappingFragment StoreEntitySet="TB_BILL">
-          <ScalarProperty Name="BILL_DATE" ColumnName="BILL_DATE" />
-          <ScalarProperty Name="SUCCESS_PRICE" ColumnName="SUCCESS_PRICE" />
-          <ScalarProperty Name="OFFER_PRICE" ColumnName="OFFER_PRICE" />
-          <ScalarProperty Name="GAME_ACCOUNT_ID" ColumnName="GAME_ACCOUNT_ID" />
-          <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="TB_MONEY">
       <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_MONEY">
         <MappingFragment StoreEntitySet="TB_MONEY">
-          <ScalarProperty Name="TIME_FOR_FREE" ColumnName="TIME_FOR_FREE" />
-          <ScalarProperty Name="NEWBIE" ColumnName="NEWBIE" />
-          <ScalarProperty Name="TOTAL_MONEY" ColumnName="TOTAL_MONEY" />
           <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
+          <ScalarProperty Name="TOTAL_MONEY" ColumnName="TOTAL_MONEY" />
+          <ScalarProperty Name="NEWBIE" ColumnName="NEWBIE" />
+          <ScalarProperty Name="TIME_FOR_FREE" ColumnName="TIME_FOR_FREE" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

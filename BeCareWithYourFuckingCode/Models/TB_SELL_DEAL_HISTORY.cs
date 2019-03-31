@@ -19,7 +19,7 @@ namespace BeCareWithYourFuckingCode.Models
         public string USER_ACCOUNT_ID { get; set; }
         public string GAME_ACCOUNT_ID { get; set; }
     
-        public virtual TB_USER TB_USER { get; set; }
         public virtual TB_GAME_ACCOUNT TB_GAME_ACCOUNT { get; set; }
+        public virtual TB_USER TB_USER { get; set; }
     }
 }
