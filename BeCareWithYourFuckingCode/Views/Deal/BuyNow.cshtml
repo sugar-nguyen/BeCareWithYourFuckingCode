@@ -1,4 +1,5 @@
-﻿@{
+﻿@model BeCareWithYourFuckingCode.Models.TB_BILL
+@{
     ViewBag.Title = "BuyNow";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -91,8 +92,13 @@
             type: 'post',
             data: data,
             success: function (res) {
-                if (res == "sucess") {
-                    $('#messageForCreateBill').html('<p class="text-success">Cảm ơn bạn đã mua account tại accg.net, thông tin về account sẽ được gửi đến profile trong 24h tới !</p>')
+                if (res == "success") {
+                    html = '<p class="text-success">Cảm ơn bạn đã mua account tại accg.net, thông tin về account sẽ được gửi đến profile trong 24h tới !</p>';
+                    html += '<a href = "/Home/Index">Trang chủ</a>'
+                    $('#messageForCreateBill').html(html);
+                    $('#AgreeToBuy').attr("disabled","");
+                    $('#CloseAgreeToBuy').attr("disabled","");
+
                 } else {
                     $('#messageForCreateBill').html('<p class="text-danger">'+res.toString()+'</p>');
                 }
@@ -166,15 +172,15 @@
                     </div>
                 </div>
                 <form action="/" id="bill-info">
-                    @*<input type="hidden" name="USER_ACCOUNT_ID" id="USER_ACCOUNT_ID" value="" />*@
+                    <input type="hidden" name="USER_ACCOUNT_ID" id="USER_ACCOUNT_ID" value="" />
                     <input type="hidden" name="GAME_ACCOUNT_ID" id="GAME_ACCOUNT_ID" value="" />
                     <input type="hidden" name="OFFER_PRICE" id="OFFER_PRICE" value="" />
                     <input type="hidden" name="SUCCESS_PRICE" id="SUCCESS_PRICE" value="" />
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                <button type="submit" class="btn btn-primary" onclick="AgreeToBuy()">Đồng ý</button>
+                <button type="button" class="btn btn-secondary" id="CloseAgreeToBuy" data-dismiss="modal">Hủy</button>
+                <button type="submit" class="btn btn-primary" id="AgreeToBuy" onclick="AgreeToBuy()">Đồng ý</button>
             </div>
         </div>
     </div>

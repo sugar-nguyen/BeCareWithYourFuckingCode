@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WEBACCOUNTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WEBACCOUNTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="TB_ADMIN">
           <Key>
             <PropertyRef Name="ID" />
@@ -87,8 +87,6 @@
           <Property Name="USER_PRICE_OFFER" Type="int" />
           <Property Name="CURRENT_STATUS" Type="tinyint" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'WEBACCOUNT.dbo.TB_MONEY' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TB_MONEY">
           <Key>
             <PropertyRef Name="USER_ACCOUNT_ID" />
@@ -290,17 +288,10 @@ warning 6002: The table/view 'WEBACCOUNT.dbo.TB_MONEY' does not have a primary k
           <EntitySet Name="TB_GAME_ACCOUNT_DETAIL" EntityType="Self.TB_GAME_ACCOUNT_DETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_GAME_IMAGE" EntityType="Self.TB_GAME_IMAGE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_GAME_PRICE_OFFER" EntityType="Self.TB_GAME_PRICE_OFFER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_MONEY" EntityType="Self.TB_MONEY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_RANK_NAME" EntityType="Self.TB_RANK_NAME" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_SELL_DEAL_HISTORY" EntityType="Self.TB_SELL_DEAL_HISTORY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_USER" EntityType="Self.TB_USER" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TB_MONEY" EntityType="Self.TB_MONEY" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TB_MONEY].[USER_ACCOUNT_ID] AS [USER_ACCOUNT_ID], 
-    [TB_MONEY].[TOTAL_MONEY] AS [TOTAL_MONEY], 
-    [TB_MONEY].[NEWBIE] AS [NEWBIE], 
-    [TB_MONEY].[TIME_FOR_FREE] AS [TIME_FOR_FREE]
-    FROM [dbo].[TB_MONEY] AS [TB_MONEY]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_TB_BILL_TB_GAME_ACCOUNT" Association="Self.FK_TB_BILL_TB_GAME_ACCOUNT">
             <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
             <End Role="TB_BILL" EntitySet="TB_BILL" />
@@ -354,8 +345,7 @@ warning 6002: The table/view 'WEBACCOUNT.dbo.TB_MONEY' does not have a primary k
             <End Role="TB_SELL_DEAL_HISTORY" EntitySet="TB_SELL_DEAL_HISTORY" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WEBACCOUNTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -492,17 +482,7 @@ warning 6002: The table/view 'WEBACCOUNT.dbo.TB_MONEY' does not have a primary k
           <NavigationProperty Name="TB_GAME_ACCOUNT" Relationship="Self.FK_TB_GAME_ACCOUNT_TB_USER" FromRole="TB_USER" ToRole="TB_GAME_ACCOUNT" />
           <NavigationProperty Name="TB_GAME_PRICE_OFFER" Relationship="Self.FK_TB_GAME_PRICE_OFFER_TB_USER" FromRole="TB_USER" ToRole="TB_GAME_PRICE_OFFER" />
           <NavigationProperty Name="TB_SELL_DEAL_HISTORY" Relationship="Self.FK_TB_SELL_DELL_HISTORY_TB_USER1" FromRole="TB_USER" ToRole="TB_SELL_DEAL_HISTORY" />
-          <NavigationProperty Name="TB_MONEY" Relationship="Self.FK_TB_MONEY_TB_USER" FromRole="TB_USER" ToRole="TB_MONEY" />
-        </EntityType>
-        <EntityType Name="TB_MONEY">
-          <Key>
-            <PropertyRef Name="USER_ACCOUNT_ID" />
-          </Key>
-          <Property Name="USER_ACCOUNT_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TOTAL_MONEY" Type="Int32" />
-          <Property Name="NEWBIE" Type="Int32" />
-          <Property Name="TIME_FOR_FREE" Type="Int32" />
-          <NavigationProperty Name="TB_USER" Relationship="Self.FK_TB_MONEY_TB_USER" FromRole="TB_MONEY" ToRole="TB_USER" />
+          <NavigationProperty Name="TB_MONEY" Relationship="WEBACCOUNTModel.FK_TB_MONEY_TB_USER" FromRole="TB_USER" ToRole="TB_MONEY" />
         </EntityType>
         <Association Name="FK_TB_BILL_TB_GAME_ACCOUNT">
           <End Role="TB_GAME_ACCOUNT" Type="Self.TB_GAME_ACCOUNT" Multiplicity="1" />
@@ -648,18 +628,6 @@ warning 6002: The table/view 'WEBACCOUNT.dbo.TB_MONEY' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TB_MONEY_TB_USER">
-          <End Role="TB_USER" Type="Self.TB_USER" Multiplicity="1" />
-          <End Role="TB_MONEY" Type="Self.TB_MONEY" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="TB_USER">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TB_MONEY">
-              <PropertyRef Name="USER_ACCOUNT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="WEBACCOUNTEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="TB_ADMIN" EntityType="Self.TB_ADMIN" />
           <EntitySet Name="TB_BILL" EntityType="Self.TB_BILL" />
@@ -671,7 +639,6 @@ warning 6002: The table/view 'WEBACCOUNT.dbo.TB_MONEY' does not have a primary k
           <EntitySet Name="TB_RANK_NAME" EntityType="Self.TB_RANK_NAME" />
           <EntitySet Name="TB_SELL_DEAL_HISTORY" EntityType="Self.TB_SELL_DEAL_HISTORY" />
           <EntitySet Name="TB_USER" EntityType="Self.TB_USER" />
-          <EntitySet Name="TB_MONEY" EntityType="Self.TB_MONEY" />
           <AssociationSet Name="FK_TB_BILL_TB_GAME_ACCOUNT" Association="Self.FK_TB_BILL_TB_GAME_ACCOUNT">
             <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
             <End Role="TB_BILL" EntitySet="TB_BILL" />
@@ -720,11 +687,34 @@ warning 6002: The table/view 'WEBACCOUNT.dbo.TB_MONEY' does not have a primary k
             <End Role="TB_USER" EntitySet="TB_USER" />
             <End Role="TB_SELL_DEAL_HISTORY" EntitySet="TB_SELL_DEAL_HISTORY" />
           </AssociationSet>
-          <AssociationSet Name="FK_TB_MONEY_TB_USER" Association="Self.FK_TB_MONEY_TB_USER">
+          <EntitySet Name="TB_MONEY" EntityType="WEBACCOUNTModel.TB_MONEY" />
+          <AssociationSet Name="FK_TB_MONEY_TB_USER" Association="WEBACCOUNTModel.FK_TB_MONEY_TB_USER">
             <End Role="TB_USER" EntitySet="TB_USER" />
             <End Role="TB_MONEY" EntitySet="TB_MONEY" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="TB_MONEY">
+          <Key>
+            <PropertyRef Name="USER_ACCOUNT_ID" />
+          </Key>
+          <Property Name="USER_ACCOUNT_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TOTAL_MONEY" Type="Int32" />
+          <Property Name="NEWBIE" Type="Int32" />
+          <Property Name="TIME_FOR_FREE" Type="Int32" />
+          <NavigationProperty Name="TB_USER" Relationship="WEBACCOUNTModel.FK_TB_MONEY_TB_USER" FromRole="TB_MONEY" ToRole="TB_USER" />
+        </EntityType>
+        <Association Name="FK_TB_MONEY_TB_USER">
+          <End Type="WEBACCOUNTModel.TB_USER" Role="TB_USER" Multiplicity="1" />
+          <End Type="WEBACCOUNTModel.TB_MONEY" Role="TB_MONEY" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TB_USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TB_MONEY">
+              <PropertyRef Name="USER_ACCOUNT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -852,10 +842,10 @@ warning 6002: The table/view 'WEBACCOUNT.dbo.TB_MONEY' does not have a primary k
           <EntitySetMapping Name="TB_MONEY">
             <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_MONEY">
               <MappingFragment StoreEntitySet="TB_MONEY">
-                <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
-                <ScalarProperty Name="TOTAL_MONEY" ColumnName="TOTAL_MONEY" />
-                <ScalarProperty Name="NEWBIE" ColumnName="NEWBIE" />
                 <ScalarProperty Name="TIME_FOR_FREE" ColumnName="TIME_FOR_FREE" />
+                <ScalarProperty Name="NEWBIE" ColumnName="NEWBIE" />
+                <ScalarProperty Name="TOTAL_MONEY" ColumnName="TOTAL_MONEY" />
+                <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

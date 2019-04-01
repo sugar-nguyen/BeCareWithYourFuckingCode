@@ -88,14 +88,13 @@ namespace BeCareWithYourFuckingCode.Controllers
             try
             {
                 bill.BILL_DATE = DateTime.Now;
-                bill.USER_ACCOUNT_ID = Session["UserID"].ToString();
                 entities.TB_BILL.Add(bill);
                 if (entities.SaveChanges() > 0)
                 {
                     TB_GAME_ACCOUNT account = entities.TB_GAME_ACCOUNT.Find(bill.GAME_ACCOUNT_ID);
-                    account.CURRENT_STATUS = 2;
-                    TB_MONEY money = entities.TB_MONEY.Where(x => x.USER_ACCOUNT_ID == bill.USER_ACCOUNT_ID).First();
-                    money.TOTAL_MONEY = money.TOTAL_MONEY - bill.SUCCESS_PRICE;
+                    account.CURRENT_STATUS = 2; // cập nhật lại trạng thái 2(đã bán)
+                    TB_USER user = entities.TB_USER.Find(bill.USER_ACCOUNT_ID);
+                    user.TB_MONEY.TOTAL_MONEY = user.TB_MONEY.TOTAL_MONEY - bill.SUCCESS_PRICE; // cập nhật lại số dư
                     if (entities.SaveChanges() > 0)
                     {
                         message = "success";

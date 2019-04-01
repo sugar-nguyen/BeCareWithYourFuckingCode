@@ -15,7 +15,6 @@
         <EntityTypeShape EntityType="WEBACCOUNTModel.TB_RANK_NAME" Width="1.5" PointX="6" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="WEBACCOUNTModel.TB_SELL_DEAL_HISTORY" Width="1.5" PointX="11.25" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="WEBACCOUNTModel.TB_USER" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="WEBACCOUNTModel.TB_MONEY" Width="1.5" PointX="3" PointY="19.875" IsExpanded="true" />
         <AssociationConnector Association="WEBACCOUNTModel.FK_TB_BILL_TB_GAME_ACCOUNT" ManuallyRouted="false" />
         <AssociationConnector Association="WEBACCOUNTModel.FK_TB_BILL_TB_USER" ManuallyRouted="false" />
         <AssociationConnector Association="WEBACCOUNTModel.FK_TB_CARD_DEAL_HISTORY_TB_USER" ManuallyRouted="false" />
@@ -28,7 +27,8 @@
         <AssociationConnector Association="WEBACCOUNTModel.FK_TB_GAME_ACCOUNT_DETAIL_TB_RANK_NAME1" ManuallyRouted="false" />
         <AssociationConnector Association="WEBACCOUNTModel.FK_TB_GAME_PRICE_OFFER_TB_USER" ManuallyRouted="false" />
         <AssociationConnector Association="WEBACCOUNTModel.FK_TB_SELL_DELL_HISTORY_TB_USER1" ManuallyRouted="false" />
-        <AssociationConnector Association="WEBACCOUNTModel.FK_TB_MONEY_TB_USER" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WEBACCOUNTModel.TB_MONEY" Width="1.5" PointX="3" PointY="16" />
+        <AssociationConnector Association="WEBACCOUNTModel.FK_TB_MONEY_TB_USER" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

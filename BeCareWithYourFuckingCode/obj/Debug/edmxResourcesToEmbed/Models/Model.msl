@@ -122,10 +122,10 @@
     <EntitySetMapping Name="TB_MONEY">
       <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_MONEY">
         <MappingFragment StoreEntitySet="TB_MONEY">
-          <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
-          <ScalarProperty Name="TOTAL_MONEY" ColumnName="TOTAL_MONEY" />
-          <ScalarProperty Name="NEWBIE" ColumnName="NEWBIE" />
           <ScalarProperty Name="TIME_FOR_FREE" ColumnName="TIME_FOR_FREE" />
+          <ScalarProperty Name="NEWBIE" ColumnName="NEWBIE" />
+          <ScalarProperty Name="TOTAL_MONEY" ColumnName="TOTAL_MONEY" />
+          <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

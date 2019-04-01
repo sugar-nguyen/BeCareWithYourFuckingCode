@@ -82,8 +82,6 @@
     <Property Name="USER_PRICE_OFFER" Type="int" />
     <Property Name="CURRENT_STATUS" Type="tinyint" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'WEBACCOUNT.dbo.TB_MONEY' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="TB_MONEY">
     <Key>
       <PropertyRef Name="USER_ACCOUNT_ID" />
@@ -285,17 +283,10 @@ warning 6002: The table/view 'WEBACCOUNT.dbo.TB_MONEY' does not have a primary k
     <EntitySet Name="TB_GAME_ACCOUNT_DETAIL" EntityType="Self.TB_GAME_ACCOUNT_DETAIL" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_GAME_IMAGE" EntityType="Self.TB_GAME_IMAGE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_GAME_PRICE_OFFER" EntityType="Self.TB_GAME_PRICE_OFFER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_MONEY" EntityType="Self.TB_MONEY" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_RANK_NAME" EntityType="Self.TB_RANK_NAME" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_SELL_DEAL_HISTORY" EntityType="Self.TB_SELL_DEAL_HISTORY" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_USER" EntityType="Self.TB_USER" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TB_MONEY" EntityType="Self.TB_MONEY" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [TB_MONEY].[USER_ACCOUNT_ID] AS [USER_ACCOUNT_ID], 
-    [TB_MONEY].[TOTAL_MONEY] AS [TOTAL_MONEY], 
-    [TB_MONEY].[NEWBIE] AS [NEWBIE], 
-    [TB_MONEY].[TIME_FOR_FREE] AS [TIME_FOR_FREE]
-    FROM [dbo].[TB_MONEY] AS [TB_MONEY]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_TB_BILL_TB_GAME_ACCOUNT" Association="Self.FK_TB_BILL_TB_GAME_ACCOUNT">
       <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
       <End Role="TB_BILL" EntitySet="TB_BILL" />

@@ -36,7 +36,7 @@ namespace BeCareWithYourFuckingCode.Controllers
             try
             {
                 Entities.Configuration.ProxyCreationEnabled = false;
-                var data = Entities.TB_GAME_ACCOUNT.Select(x =>
+                var data = Entities.TB_GAME_ACCOUNT.Where(x=>x.CURRENT_STATUS == 1).Select(x =>
                     new
                     {
                         id = x.ID,
