@@ -53,20 +53,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TB_GAME_ACCOUNT_DETAIL">
-      <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_GAME_ACCOUNT_DETAIL">
-        <MappingFragment StoreEntitySet="TB_GAME_ACCOUNT_DETAIL">
-          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
-          <ScalarProperty Name="GENERAL_NUMBER" ColumnName="GENERAL_NUMBER" />
-          <ScalarProperty Name="SKIN_NUMBER" ColumnName="SKIN_NUMBER" />
-          <ScalarProperty Name="GEM_NUMBER" ColumnName="GEM_NUMBER" />
-          <ScalarProperty Name="LEVEL_NUMBER" ColumnName="LEVEL_NUMBER" />
-          <ScalarProperty Name="BEST_RANK" ColumnName="BEST_RANK" />
-          <ScalarProperty Name="CURRENT_RANK" ColumnName="CURRENT_RANK" />
-          <ScalarProperty Name="CLAN_NAME" ColumnName="CLAN_NAME" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="TB_GAME_IMAGE">
       <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_GAME_IMAGE">
         <MappingFragment StoreEntitySet="TB_GAME_IMAGE">
@@ -126,6 +112,20 @@
           <ScalarProperty Name="NEWBIE" ColumnName="NEWBIE" />
           <ScalarProperty Name="TOTAL_MONEY" ColumnName="TOTAL_MONEY" />
           <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_GAME_ACCOUNT_DETAIL">
+      <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_GAME_ACCOUNT_DETAIL">
+        <MappingFragment StoreEntitySet="TB_GAME_ACCOUNT_DETAIL">
+          <ScalarProperty Name="CLAN_NAME" ColumnName="CLAN_NAME" />
+          <ScalarProperty Name="CURRENT_RANK" ColumnName="CURRENT_RANK" />
+          <ScalarProperty Name="BEST_RANK" ColumnName="BEST_RANK" />
+          <ScalarProperty Name="LEVEL_NUMBER" ColumnName="LEVEL_NUMBER" />
+          <ScalarProperty Name="GEM_NUMBER" ColumnName="GEM_NUMBER" />
+          <ScalarProperty Name="SKIN_NUMBER" ColumnName="SKIN_NUMBER" />
+          <ScalarProperty Name="GENERAL_NUMBER" ColumnName="GENERAL_NUMBER" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
