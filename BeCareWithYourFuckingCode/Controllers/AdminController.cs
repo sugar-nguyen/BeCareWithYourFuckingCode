@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BeCareWithYourFuckingCode.Models;
@@ -80,6 +81,52 @@ namespace BeCareWithYourFuckingCode.Models
         {
             return View(entities.TB_USER);
         }
-     
+
+        public ActionResult DetailsTB_GAME_ACCOUNT(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var model = entities.TB_GAME_ACCOUNT.Find(id);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+            return View(model);
+        }
+
+        // sua
+        public ActionResult EditTB_GAME_ACCOUNT(string username)
+        {
+            
+            var model = entities.TB_GAME_ACCOUNT.Find(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateTB_GAME_ACCOUNT(TB_GAME_ACCOUNT entity)
+        {
+            if (entity == null) return Content("Null cmnr");
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    TB_GAME_ACCOUNT model = entities.TB_GAME_ACCOUNT.Find(entity.USERNAME);
+                    model.ORIGINAL_PRICE = entity.ORIGINAL_PRICE;
+                    model.CURRENT_STATUS = entity.CURRENT_STATUS;
+                    entities.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+                    return Content(e.Message);
+                }
+                return RedirectToAction("getTBGameAccount");
+            }
+            return View(entity);
+        }
+
     }
 }

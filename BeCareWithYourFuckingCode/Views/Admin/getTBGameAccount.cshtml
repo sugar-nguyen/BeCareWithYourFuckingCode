@@ -36,34 +36,36 @@
                                     <th>Hình 1</th>
                                     <th>Hình 2</th>
                                     <th>Hình 3</th>
-                                    <th>Hình 4</th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>Hình 4</th>  
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="accountTbody">
                                 @foreach (var x in Model)
                                 {
-                                    <tr>
-                                        <td>@x.ID</td>
-                                        <td>@x.USERNAME</td>
-                                        <td>@x.PASSWORD_KEY</td>
-                                        <td>@x.ORIGINAL_PRICE</td>
-                                        <td>@x.RE_IMAGE</td>
-                                        <td>@x.TB_GAME_ACCOUNT_DETAIL.LEVEL_NUMBER</td>
-                                        <td>@x.TB_GAME_ACCOUNT_DETAIL.GENERAL_NUMBER</td>
-                                        <td>@x.TB_GAME_ACCOUNT_DETAIL.SKIN_NUMBER</td>
-                                        <td>@x.TB_GAME_ACCOUNT_DETAIL.GEM_NUMBER</td>
-                                        <td>@x.TB_GAME_ACCOUNT_DETAIL.TB_RANK_NAME.RANK_NAME</td>
-                                        <td>@x.TB_GAME_ACCOUNT_DETAIL.TB_RANK_NAME1.RANK_NAME</td>
-                                        <td>@x.TB_GAME_ACCOUNT_DETAIL.CLAN_NAME</td>
-                                        <td>@x.TB_GAME_IMAGE.IMG_1</td>
-                                        <td>@x.TB_GAME_IMAGE.IMG_2</td>
-                                        <td>@x.TB_GAME_IMAGE.IMG_3</td>
-                                        <td>@x.TB_GAME_IMAGE.IMG_4</td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
+                                <tr>
+                                    <td>@x.ID</td>
+                                    <td>@x.USERNAME</td>
+                                    <td>@x.PASSWORD_KEY</td>
+                                    <td>@x.ORIGINAL_PRICE</td>
+                                    <td>@x.RE_IMAGE</td>
+                                    <td>@x.TB_GAME_ACCOUNT_DETAIL.LEVEL_NUMBER</td>
+                                    <td>@x.TB_GAME_ACCOUNT_DETAIL.GENERAL_NUMBER</td>
+                                    <td>@x.TB_GAME_ACCOUNT_DETAIL.SKIN_NUMBER</td>
+                                    <td>@x.TB_GAME_ACCOUNT_DETAIL.GEM_NUMBER</td>
+                                    <td>@x.TB_GAME_ACCOUNT_DETAIL.TB_RANK_NAME.RANK_NAME</td>
+                                    <td>@x.TB_GAME_ACCOUNT_DETAIL.TB_RANK_NAME1.RANK_NAME</td>
+                                    <td>@x.TB_GAME_ACCOUNT_DETAIL.CLAN_NAME</td>
+                                    <td>@x.TB_GAME_IMAGE.IMG_1</td>
+                                    <td>@x.TB_GAME_IMAGE.IMG_2</td>
+                                    <td>@x.TB_GAME_IMAGE.IMG_3</td>
+                                    <td>@x.TB_GAME_IMAGE.IMG_4</td>
+                                    <td>@x.CURRENT_STATUS</td>
+                                    <td>
+                                        @Html.ActionLink("Cập nhật trạng thái", "EditTB_GAME_ACCOUNT", new { id = x.USERNAME }) 
+                                    </td>
+                                </tr>
                                 }
 
 
