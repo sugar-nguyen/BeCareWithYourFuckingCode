@@ -79,6 +79,7 @@
 
 .footer{
 	height: 200px;
+   
 
 }
 
@@ -110,3 +111,82 @@
 #myBtn:hover {
   background-color: #00ffff; /* Add a dark-grey background on hover */
 }
+
+/* The side navigation menu */
+.sidebar {
+ 
+ max-width:300px;
+  height:auto;
+  background-color: #f1f1f1;
+  height: auto;
+  overflow: auto;
+  
+}
+
+/* Sidebar links */
+.sidebar button {
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+  display:block;
+  
+}
+
+.nav-fill h4{
+    color:black;
+    font-weight:bold;
+    padding:20px;
+    
+
+}
+
+center{
+    font-size:20px;
+    text-align:center;
+    color:black;
+    margin-top:10px;
+    font-weight:bold;
+}
+
+
+/* Active/current link */
+.sidebar button.active {
+  
+  color: black;
+  text-align:center;
+  border-bottom:1px solid black;
+
+}
+
+/* Links on mouse-over */
+.sidebar button:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+.row ul li{
+    list-style-type:none;
+    
+}
+
+.row ul li button{
+    color: black;
+  border: 2px solid #e7e7e7;
+    width:200px;
+    display:block;
+    
+
+ 
+}
+.row ul li button:hover{
+    background-color: #e7e7e7;
+}
+
+
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+div.content {
+    width:600px;
+    height:504px;
+    
+}
+

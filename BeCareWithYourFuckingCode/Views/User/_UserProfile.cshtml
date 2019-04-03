@@ -1,0 +1,45 @@
+﻿@model BeCareWithYourFuckingCode.Models.TB_USER
+           
+
+<div class="nav-fill">
+    <h4 class="text-center mt-lg-2 black-text">THÔNG TIN TÀI KHOẢN</h4>
+	<hr />
+    <table class="table m-auto p-0">
+        <thead class="white black-text">
+            <tr>
+          
+                <th scope="col">Tên đăng nhập</th>
+                <th scope="col">Họ và tên</th>
+                <th scope="col">Email</th>
+                <th scope="col">Số điện thoại</th>
+                <th scope="col">Địa chỉ</th>
+                <th scope="col">Số dư</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                
+                <td>
+                @Html.DisplayFor(model => model.USERNAME)
+                </td>
+                <td>
+                @Html.DisplayFor(model => model.NAME)
+                </td>
+                <td>
+                @Html.DisplayFor(model => model.EMAIL)
+                </td>
+                <td>
+                @Html.DisplayFor(model => model.PHONE)
+                </td>
+                <td>
+                @Html.DisplayFor(model => model.CURRENT_ADDRESS)
+                </td>
+                <td>
+                @Html.DisplayFor(model => model.TB_MONEY.TOTAL_MONEY)
+                </td>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>
+

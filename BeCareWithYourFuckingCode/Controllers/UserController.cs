@@ -15,7 +15,35 @@ namespace BeCareWithYourFuckingCode.Controllers
         // GET: /User/
 
         WEBACCOUNTEntities Entities = new WEBACCOUNTEntities();
+        // Thông tin 
+        public ActionResult getProfile()
+        {
+            string id = Session["UserID"].ToString();
+            var model = Entities.TB_USER.Find(id);
+            return View(model);
+        }
 
+        public ActionResult getUserProfile()
+        {
+            if (Session["UserID"] != null)
+            {
+                string id = Session["UserID"].ToString();
+                var model = Entities.TB_USER.Find(id);
+                return View("_UserProfile", model);
+            }
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult getDealHistory(TB_BILL his)
+        {
+            TB_BILL hist=Entities.TB_BILL.Where(x=>x.GAME_ACCOUNT_ID==his.GAME_ACCOUNT_ID.Select(x=>x).SingleOrDefault();
+            if()
+            {
+                var model = Entities.TB_BILL.Where(x => x.GAME_ACCOUNT_ID != null );
+                return View("_UserDealHistory", model);
+        }
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         public ActionResult getLogin(TB_USER user) // đăng nhập
         {

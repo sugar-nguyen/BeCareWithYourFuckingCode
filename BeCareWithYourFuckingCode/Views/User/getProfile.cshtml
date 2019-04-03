@@ -1,0 +1,59 @@
+﻿@model BeCareWithYourFuckingCode.Models.TB_USER
+@{
+    ViewBag.Title = "getProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script>
+    $().ready(function () {
+        $('#userprofile').click(function () {
+            $.get('/User/getUserProfile', function (res) {
+                $('#content').html(res);
+            });
+        });
+
+    })
+
+    $().ready(function () {
+        $('#lsgiaodich').click(function () {
+            $.get('/User/getDealHistory', function (res) {
+                $('#content').html(res);
+            });
+        });
+
+    })
+</script>
+
+
+<link rel="stylesheet" href="Content/Images/Site.css" />
+<div class="row">
+    <div class="sidebar col-md-4 col-lg-4">
+       <center>HỒ SƠ </center>
+        <hr/>
+        <ul>
+            <li>
+
+                <button id="userprofile">Thông tin tài khoản</button>
+                <button id="lsgiaodich">Lịch sử giao dịch</button>
+                <button>Lịch sử nạp thẻ</button>
+                <button>Các account đang trả giá</button>
+                <button>Các account đã đăng lên</button>
+                <button>Nạp thẻ vào game</button>
+                <button>Rút tiền </button>
+                <button>Đổi mật khẩu</button>
+            </li>
+        </ul>
+
+    </div>
+
+    <!-- Page content -->
+    <div class="content col-md-8 col-lg-8">
+        <div id="content" class="text-light bg-white">
+            @*@Html.Partial("_UserProfile", Model);*@
+        </div>
+
+    </div>
+</div>
+
+

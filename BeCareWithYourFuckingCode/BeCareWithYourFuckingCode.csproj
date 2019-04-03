@@ -403,6 +403,9 @@
     <Content Include="Views\Admin\getTBGameAccount.cshtml" />
     <Content Include="Views\Admin\getTBUSER.cshtml" />
     <Content Include="Views\Deal\BuyNow.cshtml" />
+    <Content Include="Views\User\getProfile.cshtml" />
+    <Content Include="Views\User\_UserProfile.cshtml" />
+    <Content Include="Views\User\_UserDealHistory.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
