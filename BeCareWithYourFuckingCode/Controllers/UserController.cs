@@ -34,16 +34,35 @@ namespace BeCareWithYourFuckingCode.Controllers
             return Json(null, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult getDealHistory(TB_BILL his)
+        public ActionResult getDealHistory()
         {
-            TB_BILL hist=Entities.TB_BILL.Where(x=>x.GAME_ACCOUNT_ID==his.GAME_ACCOUNT_ID.Select(x=>x).SingleOrDefault();
-            if()
+            if (Session["UserID"] != null)
             {
-                var model = Entities.TB_BILL.Where(x => x.GAME_ACCOUNT_ID != null );
+                string id = Session["UserID"].ToString();
+                var model = Entities.TB_BILL.Where(x => x.USER_ACCOUNT_ID == id).ToList();
                 return View("_UserDealHistory", model);
+            }
+            return Json(null, JsonRequestBehavior.AllowGet); 
         }
+
+        public ActionResult changePassword()
+        {
+            if (Session["UserID"] != null) {
+                string id = Session["UserID"].ToString();
+                var model = Entities.TB_USER.Find(id);
+                return View("_getChangePassword", model);
+            }
             return Json(null, JsonRequestBehavior.AllowGet);
+           
         }
+      
+
+
+
+
+
+
+
         [HttpPost]
         public ActionResult getLogin(TB_USER user) // đăng nhập
         {

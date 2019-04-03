@@ -406,6 +406,7 @@
     <Content Include="Views\User\getProfile.cshtml" />
     <Content Include="Views\User\_UserProfile.cshtml" />
     <Content Include="Views\User\_UserDealHistory.cshtml" />
+    <Content Include="Views\User\_getChangePassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

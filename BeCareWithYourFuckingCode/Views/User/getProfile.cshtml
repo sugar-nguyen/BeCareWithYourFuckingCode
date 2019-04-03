@@ -23,6 +23,15 @@
         });
 
     })
+
+    $().ready(function () {
+        $('#changepass').click(function () {
+            $.get('/User/changePassword', function (res) {
+                $('#content').html(res);
+            });
+        });
+
+    })
 </script>
 
 
@@ -41,7 +50,7 @@
                 <button>Các account đã đăng lên</button>
                 <button>Nạp thẻ vào game</button>
                 <button>Rút tiền </button>
-                <button>Đổi mật khẩu</button>
+                <button id="changepass">Đổi mật khẩu</button>
             </li>
         </ul>
 
@@ -50,7 +59,7 @@
     <!-- Page content -->
     <div class="content col-md-8 col-lg-8">
         <div id="content" class="text-light bg-white">
-            @*@Html.Partial("_UserProfile", Model);*@
+            @*@Html.Partial("_UserDealHistory", Model);*@         
         </div>
 
     </div>
