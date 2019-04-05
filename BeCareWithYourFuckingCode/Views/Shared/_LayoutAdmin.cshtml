@@ -31,7 +31,14 @@
         }
     </style>
 
-    <script>
+    <script language="javascript" type="text/javascript">
+        setInterval(function () {
+            $.getJSON('/Admin/checkAdminLogin', function (rs) {
+                if (rs.toString() == "") {
+                    window.location = '/Admin/Login';
+                }
+            })
+        }, 10000);
         $().ready(function () {
             $.getJSON('/Admin/getAdmin', "", function (rs) {
                 if (rs.toString() != "") {

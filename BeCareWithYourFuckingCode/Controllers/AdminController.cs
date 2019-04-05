@@ -5,13 +5,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BeCareWithYourFuckingCode.Models;
-using PagedList;
+using BeCareWithYourFuckingCode.Controllers;
 namespace BeCareWithYourFuckingCode.Models
 {
     public class AdminController : Controller
     {
         WEBACCOUNTEntities entities = new WEBACCOUNTEntities();
-
+        GameAccountController GameAccount = new GameAccountController();
         public ActionResult checkAdminLogin() // Kiểm tra trạng thái đăng nhập của admin
         {
             var message = "";
@@ -70,39 +70,49 @@ namespace BeCareWithYourFuckingCode.Models
             var name = Session["adminName"].ToString() ?? "";
             return Json(name, JsonRequestBehavior.AllowGet);
         }
-      
+
         public ActionResult getTBGameAccount()
         {
             return View(entities.TB_GAME_ACCOUNT);
         }
-
+        [HttpPost]
+        public ActionResult getTBGameAccountAcc(int id)
+        {
+            if (id == -1)
+            {
+                return Json(entities.TB_GAME_ACCOUNT.Select(x=> new {
+                    id = x.ID,
+                    username = x.USERNAME,
+                    pass = x.PASSWORD_KEY,
+                    gia = x.ORIGINAL_PRICE,
+                    level = x.TB_GAME_ACCOUNT_DETAIL.LEVEL_NUMBER,
+                    img = x.RE_IMAGE,
+                    status = x.CURRENT_STATUS
+                }), JsonRequestBehavior.AllowGet);
+            }
+            return Json(entities.TB_GAME_ACCOUNT.Where(x=>x.CURRENT_STATUS == id).Select(x=>new {
+                id = x.ID,
+                    username = x.USERNAME,
+                    pass = x.PASSWORD_KEY,
+                    gia = x.ORIGINAL_PRICE,
+                    level = x.TB_GAME_ACCOUNT_DETAIL.LEVEL_NUMBER,
+                    img = x.RE_IMAGE,
+                    status = x.CURRENT_STATUS
+            }),JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult getTBUSER()
         {
             return View(entities.TB_USER);
         }
 
-        public ActionResult DetailsTB_GAME_ACCOUNT(int? id)
+        public ActionResult DetailsTB_GAME_ACCOUNT(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var model = entities.TB_GAME_ACCOUNT.Find(id);
-            if (model == null)
-            {
-                return HttpNotFound();
-            }
-            return View(model);
+            return GameAccount.getDetailAction(id);
         }
 
         // sua
-        public ActionResult EditTB_GAME_ACCOUNT(string username)
-        {
-            
-            var model = entities.TB_GAME_ACCOUNT.Find(id);
-            return View(model);
-        }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

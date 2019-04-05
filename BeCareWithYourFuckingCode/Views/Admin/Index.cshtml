@@ -4,7 +4,7 @@
 }
 
 
-<script>
+<script type="text/javascript" language="javascript">
     $.getJSON("/Admin/checkAdminLogin", "", function (rs) {
         if (rs.toString() == "") {
             $('body').html('<div class = "col-md-6 offset-md-3 mt-5"><p class = "h2 text-danger">Oop ! Maybe Somthing wrong !</p></div>');
