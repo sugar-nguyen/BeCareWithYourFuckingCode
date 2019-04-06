@@ -36,21 +36,29 @@
 
     function getAllAccount(val){
         $.getJSON('/Admin/getTBGameAccountAcc/' + val, function (rs) {
-            console.log(rs); return;
             var html = '';
             $.each(rs, function (key, item) {
                 html += '<tr>';
-                html += ' <td><div title="Chi tiết" class="text-dark bg-transparent" onclick="getdetail(' + item.id + ')" style="cursor: pointer">' + item.ID + '</div></td>';
-                html += '<td>'+item.username+'</td>';
+                html += ' <td><div title="Chi tiết" class="text-dark bg-transparent" onclick="getdetail(' + item.id + ')" style="cursor: pointer">' + item.id + '</div></td>';
+                html += '<td>' + item.username + '</td>';
+                html += '<td>' + item.pass + '</td>';
                 html += '<td>'+item.gia+'</td>';
                 html += '<td>'+item.level+'</td>';
                 html += '<td>' + item.img + '</td>';
                 if (item.status == 0) html += '<td>Đang chờ duyệt   <button  title="Duyệt account hợp lệ">Duyệt</button></td>';
                 else if (item.status == 1) html += ' <td>Đang bán</td>';
-                else html += '<td>Đã bán<button title="Đổi thành đang bán">Cập nhật</button>';
+                else html += '<td>Đã bán<button title="Đổi thành đang bán" onclick="changeStatusGameAccountTo_1('+item.username+')">Cập nhật</button>';
                 html += '</tr>';
             });
             $('#accountTbody').html(html);
+        });
+    }
+
+    function changeStatusGameAccountTo_1(id) {
+        $.getJSON('changeStatusGameAccountTo_1/' + id, function (rs) {
+            if (rs.toString() == "success") {
+                getAllAccount(-1);
+            }
         });
     }
 </script>
@@ -65,7 +73,6 @@
                         <option value="0">Đang chờ duyệt</option>
                         <option value="1">Đang bán</option>
                         <option value="2">Đã bán</option>
-                        <option value="3">Đang được trả giá</option>
                     </select>
 
                 </div>
@@ -101,7 +108,7 @@
                                         {
                                             <td>
                                                 Đã bán
-                                                <button title="Đổi thành đang bán">Cập nhật</button>
+                                                <button title="Đổi thành đang bán" onclick="changeStatusGameAccountTo_1('@x.USERNAME')">Cập nhật</button>
                                             </td>
                                         }
                                         else

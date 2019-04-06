@@ -75,7 +75,6 @@ namespace BeCareWithYourFuckingCode.Models
         {
             return View(entities.TB_GAME_ACCOUNT);
         }
-        [HttpPost]
         public ActionResult getTBGameAccountAcc(int id)
         {
             if (id == -1)
@@ -101,6 +100,22 @@ namespace BeCareWithYourFuckingCode.Models
             }),JsonRequestBehavior.AllowGet);
         }
 
+
+        public ActionResult changeStatusGameAccountTo_1(string id)
+        {
+            TB_GAME_ACCOUNT acc = entities.TB_GAME_ACCOUNT.Find(id);
+            var message = "fail";
+            if (acc != null)
+            {
+                acc.CURRENT_STATUS = 1;
+                if (entities.SaveChanges() > 0)
+                {
+                    message = "success";
+                    return Json(message, JsonRequestBehavior.AllowGet);
+                }
+            }
+            return Json(message, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult getTBUSER()
         {
             return View(entities.TB_USER);
