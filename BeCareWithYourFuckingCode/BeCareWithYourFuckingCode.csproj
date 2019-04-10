@@ -407,6 +407,11 @@
     <Content Include="Views\User\_UserProfile.cshtml" />
     <Content Include="Views\User\_UserDealHistory.cshtml" />
     <Content Include="Views\User\_getChangePassword.cshtml" />
+    <Content Include="Views\User\_UserUpload.cshtml" />
+    <Content Include="Views\User\_getHistoryCard.cshtml" />
+    <Content Include="Views\User\_UserOffer.cshtml" />
+    <Content Include="Views\User\_UserAddMoney.cshtml" />
+    <Content Include="Views\Home\_infoContact.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

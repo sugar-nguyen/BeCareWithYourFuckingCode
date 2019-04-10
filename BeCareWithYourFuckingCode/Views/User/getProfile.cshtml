@@ -32,37 +32,85 @@
         });
 
     })
+
+    $().ready(function () {
+        $('#addmoney').click(function () {
+            var url = '/User/addMoney';
+            $('#content').load(url);
+        });
+
+    })
+
+    $().ready(function () {
+        $('#upload').click(function () {
+            $.get('/User/userUpload', function (res) {
+                if (res == null)
+                    alert("Không có dữ liệu");
+                $('#content').html(res);
+                
+            });
+        });
+
+    })
+
+    $().ready(function () {
+        $('#lsnapthe').click(function () {
+            $.get('/User/cardHistory', function (res) {
+                $('#content').html(res);
+            });
+        });
+
+    })
+
+    $().ready(function () {
+        $('#offer').click(function () {
+            $.get('/User/userOffer', function (res) {
+                $('#content').html(res);
+            });
+        });
+
+    })
+
+    //show/hide password //
+   
+    
+   
+
+      
 </script>
 
 
 <link rel="stylesheet" href="Content/Images/Site.css" />
-<div class="row">
-    <div class="sidebar col-md-4 col-lg-4">
+<div class="row" style="display:table; width:100%;">
+    <div class="sidebar col-md-4 col-lg-4 col-sm-4" style="padding:20px; width:30%; display:table-cell;">
        <center>HỒ SƠ </center>
         <hr/>
         <ul>
             <li>
 
-                <button id="userprofile">Thông tin tài khoản</button>
-                <button id="lsgiaodich">Lịch sử giao dịch</button>
-                <button>Lịch sử nạp thẻ</button>
-                <button>Các account đang trả giá</button>
-                <button>Các account đã đăng lên</button>
-                <button>Nạp thẻ vào game</button>
-                <button>Rút tiền </button>
-                <button id="changepass">Đổi mật khẩu</button>
+                <button id="userprofile" class="btn btn-secondary text-white mb-2">Thông tin tài khoản</button>
+                <button id="lsgiaodich" class="btn btn-secondary text-white mb-2">Lịch sử giao dịch</button>
+                <button id="lsnapthe" class="btn btn-secondary text-white mb-2">Lịch sử nạp thẻ</button>
+                <button id="offer" class="btn btn-secondary text-white mb-2" style="padding:2px; height:60px;">Các account đang trả giá</button>
+                <button id="upload" class="btn btn-secondary text-white mb-2" style="padding:2px; height:60px;">Các account đã đăng lên</button>
+                <button id="addmoney" class="btn btn-secondary text-white mb-2">Nạp thẻ vào game</button>
+                <button class="btn btn-secondary text-white mb-2">Rút tiền </button>
+                <button id="changepass" class="btn btn-secondary text-white mb-2">Đổi mật khẩu</button>
             </li>
         </ul>
 
     </div>
 
     <!-- Page content -->
-    <div class="content col-md-8 col-lg-8">
-        <div id="content" class="text-light bg-white">
-            @*@Html.Partial("_UserDealHistory", Model);*@         
-        </div>
+    <div class="content col-md-8 col-lg-8 col-sm-8 p-0" id="content" style="overflow:auto; background-color:whitesmoke; color:white; width:70%; display:table-cell; ">
+        
+            @Html.Partial("_UserProfile", Model);
+        
 
     </div>
 </div>
-
+//height của cột phải được thiết lập bằng cột trái 
+<script>
+    $('.content col-md-8 col-lg-8 col-sm-8 p-0').css('height',$('sidebar col-md-4 col-lg-4 col-sm-4').css('height'));
+</script>
 

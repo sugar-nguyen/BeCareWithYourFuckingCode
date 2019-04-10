@@ -17,6 +17,12 @@ namespace BeCareWithYourFuckingCode.Controllers
         }
 
 
+
+        public ActionResult infoContact()
+        {
+            return PartialView();
+        }
+
         public ActionResult getHeader() // kiểm tra trạng thái đăng nhập để lựa chọn header nào
         {
             if (Session["UserID"] != null)

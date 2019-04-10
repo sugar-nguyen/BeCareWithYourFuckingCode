@@ -123,6 +123,10 @@
   
 }
 
+.sidebar .col-md-4 .col-lg-4{
+    padding:0;
+}
+
 /* Sidebar links */
 .sidebar button {
   color: black;
@@ -135,10 +139,26 @@
 .nav-fill h4{
     color:black;
     font-weight:bold;
-    padding:20px;
+    padding:5px;
+    
     
 
 }
+ 
+@media screen and (max-width: 767px) {
+.sidebar col-md-4 col-lg-4 col-sm-4, .content col-md-8 col-lg-8 col-sm-8 p-0 {
+display: block;
+width: 100%;
+}
+
+
+
+
+
+
+
+
+
 
 center{
     font-size:20px;
@@ -171,12 +191,9 @@ center{
 
 .row ul li button{
     color: black;
-  border: 2px solid #e7e7e7;
+  border: none;
     width:200px;
     display:block;
-    
-
- 
 }
 .row ul li button:hover{
     background-color: #e7e7e7;

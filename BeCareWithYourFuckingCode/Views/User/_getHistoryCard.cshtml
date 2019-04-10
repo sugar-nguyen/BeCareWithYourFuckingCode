@@ -1,0 +1,40 @@
+﻿@model IEnumerable<BeCareWithYourFuckingCode.Models.TB_CARD_DEAL_HISTORY>
+
+<div class="nav-fill">
+    <h4 class="text-center black-text" style="padding:6px;">LỊCH SỬ NẠP THẺ</h4>
+    <hr />
+    <table class="table m-auto p-0">
+        <thead class="white black-text">
+            <tr>
+
+                <th scope="col">Ngày nạp</th>
+                <th scope="col">Nhà mạng</th>
+                <th scope="col">Mã thẻ</th>
+                <th scope="col">Số seri</th>
+                <th scope="col">Mệnh giá</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var i in Model){
+            <tr>
+                <td>
+                    @i.HIS_TIME
+                </td>
+                <td>
+                    @i.COMPANY
+                </td>
+                <td>
+                    @i.CARD_NUMBER
+                </td>
+                <td>
+                    @i.SERIAL_NUMBER
+                </td>
+                <td>
+                    @i.DENOMINATIONS
+                </td>
+            </tr>
+            }
+            
+        </tbody>
+    </table>
+</div>
