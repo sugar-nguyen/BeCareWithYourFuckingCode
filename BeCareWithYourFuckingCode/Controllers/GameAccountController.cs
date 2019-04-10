@@ -32,6 +32,7 @@ namespace BeCareWithYourFuckingCode.Controllers
             return Json(message, JsonRequestBehavior.AllowGet);
         }
 
+
         public ActionResult getDetailAction(string id)
         {
             var message = "";

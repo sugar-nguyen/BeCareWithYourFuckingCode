@@ -88,6 +88,7 @@ namespace BeCareWithYourFuckingCode.Controllers
             try
             {
                 bill.BILL_DATE = DateTime.Now;
+                bill.STATUS = 0;
                 entities.TB_BILL.Add(bill);
                 if (entities.SaveChanges() > 0)
                 {
@@ -104,7 +105,7 @@ namespace BeCareWithYourFuckingCode.Controllers
             }
             catch (Exception ex)
             {
-                message = ex.Message;
+                message = ex.GetBaseException().ToString();
             }
             return Json(message, JsonRequestBehavior.AllowGet);
         }

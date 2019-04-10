@@ -407,11 +407,16 @@
     <Content Include="Views\User\_UserProfile.cshtml" />
     <Content Include="Views\User\_UserDealHistory.cshtml" />
     <Content Include="Views\User\_getChangePassword.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\User\_UserUpload.cshtml" />
     <Content Include="Views\User\_getHistoryCard.cshtml" />
     <Content Include="Views\User\_UserOffer.cshtml" />
     <Content Include="Views\User\_UserAddMoney.cshtml" />
     <Content Include="Views\Home\_infoContact.cshtml" />
+=======
+    <Content Include="Views\Admin\getDealUnCompelete.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+>>>>>>> f86c39c47ff054d0ca80d36a621dfc6d9c9263a9
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

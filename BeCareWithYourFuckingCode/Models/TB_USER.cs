@@ -16,11 +16,11 @@ namespace BeCareWithYourFuckingCode.Models
     {
         public TB_USER()
         {
-            this.TB_BILL = new HashSet<TB_BILL>();
             this.TB_CARD_DEAL_HISTORY = new HashSet<TB_CARD_DEAL_HISTORY>();
             this.TB_GAME_ACCOUNT = new HashSet<TB_GAME_ACCOUNT>();
             this.TB_GAME_PRICE_OFFER = new HashSet<TB_GAME_PRICE_OFFER>();
             this.TB_SELL_DEAL_HISTORY = new HashSet<TB_SELL_DEAL_HISTORY>();
+            this.TB_BILL = new HashSet<TB_BILL>();
         }
     
         public string ID { get; set; }
@@ -31,11 +31,11 @@ namespace BeCareWithYourFuckingCode.Models
         public string PHONE { get; set; }
         public string CURRENT_ADDRESS { get; set; }
     
-        public virtual ICollection<TB_BILL> TB_BILL { get; set; }
         public virtual ICollection<TB_CARD_DEAL_HISTORY> TB_CARD_DEAL_HISTORY { get; set; }
         public virtual ICollection<TB_GAME_ACCOUNT> TB_GAME_ACCOUNT { get; set; }
         public virtual ICollection<TB_GAME_PRICE_OFFER> TB_GAME_PRICE_OFFER { get; set; }
         public virtual ICollection<TB_SELL_DEAL_HISTORY> TB_SELL_DEAL_HISTORY { get; set; }
         public virtual TB_MONEY TB_MONEY { get; set; }
+        public virtual ICollection<TB_BILL> TB_BILL { get; set; }
     }
 }

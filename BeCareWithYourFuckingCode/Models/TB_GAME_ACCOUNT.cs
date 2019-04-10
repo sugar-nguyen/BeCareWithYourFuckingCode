@@ -16,9 +16,9 @@ namespace BeCareWithYourFuckingCode.Models
     {
         public TB_GAME_ACCOUNT()
         {
-            this.TB_BILL = new HashSet<TB_BILL>();
             this.TB_GAME_PRICE_OFFER = new HashSet<TB_GAME_PRICE_OFFER>();
             this.TB_SELL_DEAL_HISTORY = new HashSet<TB_SELL_DEAL_HISTORY>();
+            this.TB_BILL = new HashSet<TB_BILL>();
         }
     
         public string USERNAME { get; set; }
@@ -32,11 +32,11 @@ namespace BeCareWithYourFuckingCode.Models
         public Nullable<int> ID { get; set; }
         public string USER_ACCOUNT_ID { get; set; }
     
-        public virtual ICollection<TB_BILL> TB_BILL { get; set; }
         public virtual TB_GAME_IMAGE TB_GAME_IMAGE { get; set; }
         public virtual TB_USER TB_USER { get; set; }
         public virtual ICollection<TB_GAME_PRICE_OFFER> TB_GAME_PRICE_OFFER { get; set; }
         public virtual ICollection<TB_SELL_DEAL_HISTORY> TB_SELL_DEAL_HISTORY { get; set; }
         public virtual TB_GAME_ACCOUNT_DETAIL TB_GAME_ACCOUNT_DETAIL { get; set; }
+        public virtual ICollection<TB_BILL> TB_BILL { get; set; }
     }
 }
