@@ -42,20 +42,129 @@ namespace BeCareWithYourFuckingCode.Controllers
                 var model = Entities.TB_BILL.Where(x => x.USER_ACCOUNT_ID == id).ToList();
                 return View("_UserDealHistory", model);
             }
-            return Json(null, JsonRequestBehavior.AllowGet); 
+            return Json(null, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult changePassword()
         {
-            if (Session["UserID"] != null) {
+            if (Session["UserID"] != null)
+            {
                 string id = Session["UserID"].ToString();
                 var model = Entities.TB_USER.Find(id);
                 return View("_getChangePassword", model);
             }
             return Json(null, JsonRequestBehavior.AllowGet);
-           
+
         }
-      
+
+        [HttpPost]
+        public ActionResult UpdatePassword(string id)
+        {
+            var message = "";
+            try
+            {
+                if (Session["UserID"] != null)
+                {
+                    string _id = Session["UserID"].ToString();
+                    TB_USER model = Entities.TB_USER.Find(_id);
+                    model.PASSWORD_KEY = id;
+                    if (Entities.SaveChanges() > 0)
+                    {
+                        message = "success";
+                    }
+                    else
+                    {
+                        message = "fail";
+                    }
+                }
+                else
+                {
+                    message = "fail";
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                message = ex.GetBaseException().ToString();
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+            return Json(message, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult addMoney()
+        {
+            if (Session["UserID"] != null)
+            {
+                string id = Session["UserID"].ToString();
+                var model = Entities.TB_CARD_DEAL_HISTORY.Find(id);
+                return View("_UserAddMoney", model);
+            }
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        public ActionResult napThe(TB_CARD_DEAL_HISTORY model)
+        {
+            var message = "";
+            try
+            {
+                model.HIS_TIME = DateTime.Now;
+                Entities.TB_CARD_DEAL_HISTORY.Add(model);
+                if (Entities.SaveChanges() > 0)
+                {
+                    message = "success";
+                }
+                else
+                {
+                    message = "fail";
+                }
+            }
+            catch (Exception ex)
+            {
+                message = ex.GetBaseException().ToString();
+            }
+            return Json(message, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult userUpload()
+        {
+            if (Session["UserID"] != null)
+            {
+                string id = Session["UserID"].ToString();
+                var model = Entities.TB_GAME_ACCOUNT.Where(x => x.USER_ACCOUNT_ID == id).ToList();
+                return View("_UserUpload", model);
+            }
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult cardHistory()
+        {
+            if (Session["UserID"] != null)
+            {
+                string id = Session["UserID"].ToString();
+                var model = Entities.TB_CARD_DEAL_HISTORY.Where(x => x.ID == id).ToList();
+                return View("_getHistoryCard", model);
+            }
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult userOffer()
+        {
+            if (Session["UserID"] != null)
+            {
+                string id = Session["UserID"].ToString();
+                var model = Entities.TB_GAME_PRICE_OFFER.Where(x => x.USER_ACCOUNT_ID == id).ToList();
+                return View("_UserOffer", model);
+            }
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+
+
+
 
 
 
@@ -67,7 +176,7 @@ namespace BeCareWithYourFuckingCode.Controllers
         public ActionResult getLogin(TB_USER user) // đăng nhập
         {
             string message = "";
-            TB_USER users = Entities.TB_USER.Where(x => x.USERNAME ==user.USERNAME.Trim() && x.PASSWORD_KEY.Trim() == user.PASSWORD_KEY).Select(x=>x).SingleOrDefault();
+            TB_USER users = Entities.TB_USER.Where(x => x.USERNAME == user.USERNAME.Trim() && x.PASSWORD_KEY.Trim() == user.PASSWORD_KEY).Select(x => x).SingleOrDefault();
 
             if (users != null)
             {
@@ -111,7 +220,8 @@ namespace BeCareWithYourFuckingCode.Controllers
             var model = Entities.TB_USER.Find(id);
             if (model != null)
             {
-                var obj = new { name = model.NAME, sodu = model.TB_MONEY.TOTAL_MONEY };
+                var obj = new { name = model.NAME, sodu = model.TB_MONEY.TOTAL_MONEY, password = model.PASSWORD_KEY };
+
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
             return Json(null, JsonRequestBehavior.AllowGet);

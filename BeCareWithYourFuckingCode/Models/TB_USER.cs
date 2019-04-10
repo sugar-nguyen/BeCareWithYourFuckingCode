@@ -30,7 +30,7 @@ namespace BeCareWithYourFuckingCode.Models
         public string EMAIL { get; set; }
         public string PHONE { get; set; }
         public string CURRENT_ADDRESS { get; set; }
-    
+        
         public virtual ICollection<TB_CARD_DEAL_HISTORY> TB_CARD_DEAL_HISTORY { get; set; }
         public virtual ICollection<TB_GAME_ACCOUNT> TB_GAME_ACCOUNT { get; set; }
         public virtual ICollection<TB_GAME_PRICE_OFFER> TB_GAME_PRICE_OFFER { get; set; }

@@ -16,52 +16,52 @@
                 
             </div>
             <div class="form-group row">
-                <label class="col-md-4 col-sm-4 col-lg-4 col-form-label">@Html.DisplayNameFor(x=>x.USERNAME) *</label>
+                <label class="col-md-4 col-sm-4 col-lg-4 col-form-label">Tên đăng nhập*</label>
                 <div class="col-md-8 col-lg-8 col-sm-8">
                     @Html.TextBoxFor(x => x.USERNAME, new {@class = "form-control", @placeholder = "Tên đăng nhập", @autofocus = "" })
-                    <small class="text-danger">@Html.ValidationMessageFor(x => x.USERNAME)</small>
+                    <small class="text-danger" id="messageUSERNAME">@Html.ValidationMessageFor(x => x.USERNAME)</small>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-md-4 col-sm-4 col-lg-4 col-form-label">@Html.DisplayNameFor(x=>x.PASSWORD_KEY) *</label>
+                <label for="inputPassword3" class="col-md-4 col-sm-4 col-lg-4 col-form-label">Mật khẩu *</label>
                 <div class="col-md-8 col-lg-8 col-sm-8">
                     @Html.PasswordFor(x => x.PASSWORD_KEY, new { @class = "form-control", @placeholder = "Mật khẩu" })
-                    <small class="text-danger">@Html.ValidationMessageFor(x=>x.PASSWORD_KEY)</small>
+                    <small class="text-danger" id="messagePASSWORD_KEY">@Html.ValidationMessageFor(x=>x.PASSWORD_KEY)</small>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="inputPassword3" class="col-md-4 col-sm-4 col-lg-4 col-form-label">Nhắc lại mật khẩu *</label>
                 <div class="col-md-8 col-lg-8 col-sm-8">
-                    @Html.PasswordFor(x => x.ConfirmPassWord, new {@class = "form-control", @placeholder = "Nhắc lại mật khẩu" })
-                    <small class="text-danger">@Html.ValidationMessageFor(x => x.ConfirmPassWord)</small>
+                    <input type="password" name="name" id="Confirm" value="" placeholder="Nhắc lại mật khẩu" class="form-control"/>
+                    <small class="text-danger" id="messageConfirm"></small>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-md-4 col-sm-4 col-lg-4 col-form-label">@Html.DisplayNameFor(x=>x.NAME) *</label>
+                <label for="inputPassword3" class="col-md-4 col-sm-4 col-lg-4 col-form-label">Họ Tên *</label>
                 <div class="col-md-8 col-lg-8 col-sm-8">
                     @Html.TextBoxFor(x => x.NAME, new {@class = "form-control", @placeholder = "Họ tên" })
-                    <small class="text-danger">@Html.ValidationMessageFor(x => x.NAME)</small>
+                    <small class="text-danger" id="messageNAME">@Html.ValidationMessageFor(x => x.NAME)</small>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-md-4 col-sm-4 col-lg-4 col-form-label">@Html.DisplayNameFor(x => x.EMAIL) *</label>
+                <label for="inputPassword3" class="col-md-4 col-sm-4 col-lg-4 col-form-label">Email *</label>
                 <div class="col-md-8 col-lg-8 col-sm-8">
                     @Html.TextBoxFor(x => x.EMAIL, new { @class = "form-control", @placeholder = "Email" })
-                    <small class="text-danger">@Html.ValidationMessageFor(x => x.EMAIL)</small>
+                    <small class="text-danger" id="messageEMAIL">@Html.ValidationMessageFor(x => x.EMAIL)</small>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-md-4 col-sm-4 col-lg-4 col-form-label">@Html.DisplayNameFor(x=>x.CURRENT_ADDRESS) *</label>
+                <label for="inputPassword3" class="col-md-4 col-sm-4 col-lg-4 col-form-label">Địa chỉ *</label>
                 <div class="col-md-8 col-lg-8 col-sm-8">
                     @Html.TextBoxFor(x => x.CURRENT_ADDRESS, new {@class = "form-control", @placeholder = "Địa chỉ"})
-                    <small class="text-danger">@Html.ValidationMessageFor(x => x.CURRENT_ADDRESS)</small>
+                    <small class="text-danger" id="messageCURRENT_ADDRESS">@Html.ValidationMessageFor(x => x.CURRENT_ADDRESS)</small>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-md-4 col-sm-4 col-lg-4 col-form-label">@Html.DisplayNameFor(x=>x.PHONE) *</label>
+                <label for="inputPassword3" class="col-md-4 col-sm-4 col-lg-4 col-form-label">SĐT *</label>
                 <div class="col-md-8 col-lg-8 col-sm-8">
-                    @Html.TextBoxFor(x => x.PHONE, new {@class = "form-control", @placeholder = "Số điện thoại"})
-                    <small class="text-danger">@Html.ValidationMessageFor(x => x.PHONE)</small>
+                    @Html.TextBoxFor(x => x.PHONE, new {@class = "form-control", @placeholder = "Số điện thoại", @type = "number", @min = 0})
+                    <small class="text-danger" id="messagePHONE">@Html.ValidationMessageFor(x => x.PHONE)</small>
                 </div>
             </div>
             <div class="form-group row">
@@ -80,3 +80,35 @@
 
 
 
+<script type="text/javascript">
+    $().ready(function () {
+        $('#USERNAME').keyup(function () {
+            var val = $(this).val();
+            if (val == "") {
+                $('#messageUSERNAME').html("Bắt buộc");
+            } else $('#messageUSERNAME').html("");
+        });
+
+        $('#PASSWORD_KEY').keyup(function () {
+            var val = $(this).val();
+            if (val == "") {
+                $('#messagePASSWORD_KEY').html("Bắt buộc");
+            } else $('#messagePASSWORD_KEY').html("");
+        });
+
+        $('#Confirm').change(function () {
+            var val = $(this).val();
+            var val2 = $('#PASSWORD_KEY').val();
+            if (val != val2) {
+                $('#messageConfirm').html("Không trùng khớp");
+            } else $('#messageConfirm').html("");
+        });
+
+        $('#NAME').keyup(function () {
+            var val = $(this).val();
+            if (val == "") {
+                $('#messageNAME').html("Bắt buộc");
+            } else $('#messageNAME').html("");
+        });
+    })
+</script>

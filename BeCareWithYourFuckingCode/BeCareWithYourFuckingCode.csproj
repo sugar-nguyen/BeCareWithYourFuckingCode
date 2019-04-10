@@ -409,6 +409,8 @@
     <Content Include="Views\User\_getChangePassword.cshtml" />
     <Content Include="Views\Admin\getDealUnCompelete.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\User\_getHistoryCard.cshtml" />
+    <Content Include="Views\User\_UserAddMoney.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
