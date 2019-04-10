@@ -24,13 +24,21 @@
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <link href="~/Content/adminStyle/jquery.dataTables.min.css" rel="stylesheet" />
     <script src="~/Scripts/MyJS/admin/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <style>
         .dropdown-toggle::after {
             display: none;
         }
     </style>
 
-    <script>
+    <script language="javascript" type="text/javascript">
+        setInterval(function () {
+            $.getJSON('/Admin/checkAdminLogin', function (rs) {
+                if (rs.toString() == "") {
+                    window.location = '/Admin/Login';
+                }
+            })
+        }, 10000);
         $().ready(function () {
             $.getJSON('/Admin/getAdmin', "", function (rs) {
                 if (rs.toString() != "") {
@@ -78,9 +86,7 @@
                             <li>
                                 <a href="/Admin/getTBUSER">User</a>
                             </li>
-                            <li>
-                                <a href="#">Page 3</a>
-                            </li>
+                           
                         </ul>
                     </li>
                     <li>
@@ -96,13 +102,27 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <i class="nc-icon nc-caps-small"></i>
                             <p>Quản lý giao dịch</p>
                         </a>
+                        <ul class="collapse list-unstyled ml-5" id="pageSubmenu2">
+                            <li>
+                                <a href="#">Giao dịch đã xong</a>
+                            </li>
+                            <li>
+                                <a href="#">Giao dịch đang chờ xử lý</a>
+                            </li>
+
+                        </ul>
                     </li>
                     
-                   
+                    <li>
+                        <a href="#">
+                            <i class="nc-icon nc-single-02"></i>
+                            <p>Tin nhắn</p>
+                        </a>
+                    </li>
 
                 </ul>
             </div>
