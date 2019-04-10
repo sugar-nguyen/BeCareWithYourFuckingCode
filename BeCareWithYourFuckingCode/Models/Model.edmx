@@ -17,14 +17,16 @@
         <EntityType Name="TB_BILL">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="USER_ACCOUNT_ID" />
             <PropertyRef Name="GAME_ACCOUNT_ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="USER_ACCOUNT_ID" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="GAME_ACCOUNT_ID" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="OFFER_PRICE" Type="int" />
           <Property Name="SUCCESS_PRICE" Type="int" />
           <Property Name="BILL_DATE" Type="date" />
+          <Property Name="STATUS" Type="int" />
         </EntityType>
         <EntityType Name="TB_CARD_DEAL_HISTORY">
           <Key>
@@ -680,14 +682,16 @@
         <EntityType Name="TB_BILL">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="USER_ACCOUNT_ID" />
             <PropertyRef Name="GAME_ACCOUNT_ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="USER_ACCOUNT_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="GAME_ACCOUNT_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="OFFER_PRICE" Type="Int32" />
           <Property Name="SUCCESS_PRICE" Type="Int32" />
           <Property Name="BILL_DATE" Type="DateTime" Precision="0" />
+          <Property Name="STATUS" Type="Int32" />
           <NavigationProperty Name="TB_GAME_ACCOUNT" Relationship="WEBACCOUNTModel.FK_TB_BILL_TB_GAME_ACCOUNT" FromRole="TB_BILL" ToRole="TB_GAME_ACCOUNT" />
           <NavigationProperty Name="TB_USER" Relationship="WEBACCOUNTModel.FK_TB_BILL_TB_USER" FromRole="TB_BILL" ToRole="TB_USER" />
         </EntityType>
@@ -840,6 +844,7 @@
           <EntitySetMapping Name="TB_BILL">
             <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_BILL">
               <MappingFragment StoreEntitySet="TB_BILL">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="BILL_DATE" ColumnName="BILL_DATE" />
                 <ScalarProperty Name="SUCCESS_PRICE" ColumnName="SUCCESS_PRICE" />
                 <ScalarProperty Name="OFFER_PRICE" ColumnName="OFFER_PRICE" />
