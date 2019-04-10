@@ -82,20 +82,20 @@
 
 <link rel="stylesheet" href="Content/Images/Site.css" />
 <div class="row" style="display:table; width:100%;">
-    <div class="sidebar col-md-4 col-lg-4 col-sm-4" style="padding:20px; width:30%; display:table-cell;">
+    <div class="sidebar col-md-4 col-lg-4 col-sm-4" style="padding:20px; width:30%; display:table-cell; ">
        <center>HỒ SƠ </center>
         <hr/>
-        <ul>
+        <ul style="list-style-type:none;">
             <li>
 
-                <button id="userprofile" class="btn btn-secondary text-white mb-2">Thông tin tài khoản</button>
-                <button id="lsgiaodich" class="btn btn-secondary text-white mb-2">Lịch sử giao dịch</button>
-                <button id="lsnapthe" class="btn btn-secondary text-white mb-2">Lịch sử nạp thẻ</button>
-                <button id="offer" class="btn btn-secondary text-white mb-2" style="padding:2px; height:60px;">Các account đang trả giá</button>
-                <button id="upload" class="btn btn-secondary text-white mb-2" style="padding:2px; height:60px;">Các account đã đăng lên</button>
-                <button id="addmoney" class="btn btn-secondary text-white mb-2">Nạp thẻ vào game</button>
-                <button class="btn btn-secondary text-white mb-2">Rút tiền </button>
-                <button id="changepass" class="btn btn-secondary text-white mb-2">Đổi mật khẩu</button>
+                <button id="userprofile" class="btn btn-secondary text-white mb-2 d-block w-75">Thông tin tài khoản</button>
+                <button id="lsgiaodich" class="btn btn-secondary text-white mb-2 d-block w-75">Lịch sử giao dịch</button>
+                <button id="lsnapthe" class="btn btn-secondary text-white mb-2 w-75">Lịch sử nạp thẻ</button>
+                <button id="offer" class="btn btn-secondary text-white mb-2 w-75" style="padding:2px; height:60px;">Các account đang trả giá</button>
+                <button id="upload" class="btn btn-secondary text-white mb-2 w-75" style="padding:2px; height:60px;">Các account đã đăng lên</button>
+                <button id="addmoney" class="btn btn-secondary text-white mb-2 w-75">Nạp thẻ vào game</button>
+                <button class="btn btn-secondary text-white mb-2 w-75">Rút tiền </button>
+                <button id="changepass" class="btn btn-secondary text-white mb-2 w-75">Đổi mật khẩu</button>
             </li>
         </ul>
 
@@ -109,7 +109,7 @@
 
     </div>
 </div>
-//height của cột phải được thiết lập bằng cột trái 
+
 <script>
     $('.content col-md-8 col-lg-8 col-sm-8 p-0').css('height',$('sidebar col-md-4 col-lg-4 col-sm-4').css('height'));
 </script>
