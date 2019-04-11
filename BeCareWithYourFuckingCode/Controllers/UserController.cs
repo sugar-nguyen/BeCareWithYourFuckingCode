@@ -304,36 +304,37 @@ namespace BeCareWithYourFuckingCode.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult getSignUp(TB_USER user)  // đăng ký
         {
+            var message = "";
             try
             {
                 if (ModelState.IsValid)
                 {
                     if (CheckUserName(user.USERNAME) != null)
                     {
-                        ModelState.AddModelError("", "Tên đăng nhập đã được sử dụng");
+                        message = "Tên đăng nhập đã được sử dụng !";
                     }
                     else if (CheckEmail(user.EMAIL) != null)
                     {
-                        ModelState.AddModelError("", "Email đã được sử dụng");
+                        message = "Email đã được sử dụng !";
                     }
                     else
                     {
                         user.ID = CreateID();
                         Entities.TB_USER.Add(user);
                         Entities.SaveChanges();
-                        ViewBag.Success = "Đăng nhập thành công";
+                        message = "Đăng ký thành công !";
                     }
 
 
                 }
-                return View();
+                
             }
             catch (Exception ex)
             {
-                return Content(ex.Message);
+                message = ex.GetBaseException().ToString();
             }
 
-
+            return Json(message, JsonRequestBehavior.AllowGet);
         }
     }
 }

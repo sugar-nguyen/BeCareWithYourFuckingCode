@@ -58,6 +58,8 @@
         $.getJSON('changeStatusGameAccountTo_1/' + id, function (rs) {
             if (rs.toString() == "success") {
                 getAllAccount(-1);
+            } else {
+                alert("Không thể câp nhật");
             }
         });
     }
