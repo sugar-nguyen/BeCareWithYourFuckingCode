@@ -338,6 +338,9 @@ namespace BeCareWithYourFuckingCode.Controllers
                         Entities.TB_USER.Add(user);
                         TB_MONEY money = new TB_MONEY();
                         money.USER_ACCOUNT_ID = user.ID;
+                        money.TOTAL_MONEY = 0;
+                        money.NEWBIE = 1;
+                        money.TIME_FOR_FREE = 3;
                         Entities.TB_MONEY.Add(money);
                         Entities.SaveChanges();
                         message = "Đăng ký thành công !";

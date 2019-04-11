@@ -7,15 +7,10 @@
     <div class="container pt-3 w-75">
         <h2>Đăng ký</h2>
         <small class="text-muted"> Hoàn tất các thông tin để tạo tài khoản !</small>
-        <form action="/User/getSignUp" method="post" id="form-data" class="mt-2">
+        <form action="/" method="post" id="form-signup" class="mt-2">
 
             @Html.AntiForgeryToken()
-            <div class="form-group">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @if (ViewBag.Success != null)
-                {<div class="alert alert-success">@ViewBag.Success</div>}
-
-            </div>
+           
             <div class="form-group row">
                 <label class="col-md-4 col-sm-4 col-lg-4 col-form-label">Tên đăng nhập*</label>
                 <div class="col-md-8 col-lg-8 col-sm-8">
@@ -24,21 +19,21 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-md-4 col-sm-4 col-lg-4 col-form-label">Mật khẩu *</label>
+                <label  class="col-md-4 col-sm-4 col-lg-4 col-form-label">Mật khẩu *</label>
                 <div class="col-md-8 col-lg-8 col-sm-8">
                     @Html.PasswordFor(x => x.PASSWORD_KEY, new { @class = "form-control", @placeholder = "Mật khẩu" })
                     <small class="text-danger" id="messagePASSWORD_KEY">@Html.ValidationMessageFor(x => x.PASSWORD_KEY)</small>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-md-4 col-sm-4 col-lg-4 col-form-label">Nhắc lại mật khẩu *</label>
+                <label  class="col-md-4 col-sm-4 col-lg-4 col-form-label">Nhắc lại mật khẩu *</label>
                 <div class="col-md-8 col-lg-8 col-sm-8">
-                    <input type="password" name="name" id="Confirm" value="" placeholder="Nhắc lại mật khẩu" class="form-control" />
+                    <input type="password"  id="Confirm" value="" placeholder="Nhắc lại mật khẩu" class="form-control" />
                     <small class="text-danger" id="messageConfirm"></small>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-md-4 col-sm-4 col-lg-4 col-form-label">Họ Tên *</label>
+                <label class="col-md-4 col-sm-4 col-lg-4 col-form-label">Họ Tên *</label>
                 <div class="col-md-8 col-lg-8 col-sm-8">
                     @Html.TextBoxFor(x => x.NAME, new { @class = "form-control", @placeholder = "Họ tên" })
                     <small class="text-danger" id="messageNAME">@Html.ValidationMessageFor(x => x.NAME)</small>
@@ -138,7 +133,7 @@
     })
 
     function submit() {
-        var data = $('#form-data').serialize();
+        var data = $('#form-signup').serialize();
         $.ajax({
             url: '/User/getSignUp',
             type: 'POST',

@@ -22,7 +22,7 @@ namespace BeCareWithYourFuckingCode.Models
             this.TB_BILL = new HashSet<TB_BILL>();
             this.TB_CARD_DEAL_HISTORY = new HashSet<TB_CARD_DEAL_HISTORY>();
         }
-    
+     
         public string ID { get; set; }
         public string USERNAME { get; set; }
         public string PASSWORD_KEY { get; set; }
