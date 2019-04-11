@@ -11,20 +11,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TB_CARD_DEAL_HISTORY">
-      <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_CARD_DEAL_HISTORY">
-        <MappingFragment StoreEntitySet="TB_CARD_DEAL_HISTORY">
-          <ScalarProperty Name="HIS_ID" ColumnName="HIS_ID" />
-          <ScalarProperty Name="HIS_TIME" ColumnName="HIS_TIME" />
-          <ScalarProperty Name="COMPANY" ColumnName="COMPANY" />
-          <ScalarProperty Name="CARD_NUMBER" ColumnName="CARD_NUMBER" />
-          <ScalarProperty Name="SERIAL_NUMBER" ColumnName="SERIAL_NUMBER" />
-          <ScalarProperty Name="DENOMINATIONS" ColumnName="DENOMINATIONS" />
-          <ScalarProperty Name="RESULT" ColumnName="RESULT" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="TB_GAME_ACCOUNT">
       <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_GAME_ACCOUNT">
         <MappingFragment StoreEntitySet="TB_GAME_ACCOUNT">
@@ -127,6 +113,20 @@
           <ScalarProperty Name="GAME_ACCOUNT_ID" ColumnName="GAME_ACCOUNT_ID" />
           <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_CARD_DEAL_HISTORY">
+      <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_CARD_DEAL_HISTORY">
+        <MappingFragment StoreEntitySet="TB_CARD_DEAL_HISTORY">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="RESULT" ColumnName="RESULT" />
+          <ScalarProperty Name="DENOMINATIONS" ColumnName="DENOMINATIONS" />
+          <ScalarProperty Name="SERIAL_NUMBER" ColumnName="SERIAL_NUMBER" />
+          <ScalarProperty Name="CARD_NUMBER" ColumnName="CARD_NUMBER" />
+          <ScalarProperty Name="COMPANY" ColumnName="COMPANY" />
+          <ScalarProperty Name="HIS_TIME" ColumnName="HIS_TIME" />
+          <ScalarProperty Name="HIS_ID" ColumnName="HIS_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

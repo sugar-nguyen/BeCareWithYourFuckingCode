@@ -37,7 +37,7 @@
           <Property Name="COMPANY" Type="varchar" MaxLength="10" />
           <Property Name="CARD_NUMBER" Type="varchar" MaxLength="20" />
           <Property Name="SERIAL_NUMBER" Type="varchar" MaxLength="20" />
-          <Property Name="DENOMINATIONS" Type="money" />
+          <Property Name="DENOMINATIONS" Type="int" />
           <Property Name="RESULT" Type="varchar" MaxLength="20" />
           <Property Name="ID" Type="varchar" MaxLength="10" />
         </EntityType>
@@ -360,20 +360,6 @@
           <Property Name="PASSWORD_KEY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="TB_CARD_DEAL_HISTORY">
-          <Key>
-            <PropertyRef Name="HIS_ID" />
-          </Key>
-          <Property Name="HIS_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="HIS_TIME" Type="DateTime" Precision="3" />
-          <Property Name="COMPANY" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="CARD_NUMBER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="SERIAL_NUMBER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="DENOMINATIONS" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="RESULT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TB_USER" Relationship="Self.FK_TB_CARD_DEAL_HISTORY_TB_USER" FromRole="TB_CARD_DEAL_HISTORY" ToRole="TB_USER" />
-        </EntityType>
         <EntityType Name="TB_GAME_ACCOUNT">
           <Key>
             <PropertyRef Name="USERNAME" />
@@ -449,25 +435,13 @@
           <Property Name="EMAIL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="PHONE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="CURRENT_ADDRESS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TB_CARD_DEAL_HISTORY" Relationship="Self.FK_TB_CARD_DEAL_HISTORY_TB_USER" FromRole="TB_USER" ToRole="TB_CARD_DEAL_HISTORY" />
           <NavigationProperty Name="TB_GAME_ACCOUNT" Relationship="Self.FK_TB_GAME_ACCOUNT_TB_USER" FromRole="TB_USER" ToRole="TB_GAME_ACCOUNT" />
           <NavigationProperty Name="TB_GAME_PRICE_OFFER" Relationship="Self.FK_TB_GAME_PRICE_OFFER_TB_USER" FromRole="TB_USER" ToRole="TB_GAME_PRICE_OFFER" />
           <NavigationProperty Name="TB_SELL_DEAL_HISTORY" Relationship="Self.FK_TB_SELL_DELL_HISTORY_TB_USER1" FromRole="TB_USER" ToRole="TB_SELL_DEAL_HISTORY" />
           <NavigationProperty Name="TB_MONEY" Relationship="WEBACCOUNTModel.FK_TB_MONEY_TB_USER" FromRole="TB_USER" ToRole="TB_MONEY" />
           <NavigationProperty Name="TB_BILL" Relationship="WEBACCOUNTModel.FK_TB_BILL_TB_USER" FromRole="TB_USER" ToRole="TB_BILL" />
+          <NavigationProperty Name="TB_CARD_DEAL_HISTORY" Relationship="WEBACCOUNTModel.FK_TB_CARD_DEAL_HISTORY_TB_USER" FromRole="TB_USER" ToRole="TB_CARD_DEAL_HISTORY" />
         </EntityType>
-        <Association Name="FK_TB_CARD_DEAL_HISTORY_TB_USER">
-          <End Role="TB_USER" Type="Self.TB_USER" Multiplicity="0..1" />
-          <End Role="TB_CARD_DEAL_HISTORY" Type="Self.TB_CARD_DEAL_HISTORY" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_USER">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TB_CARD_DEAL_HISTORY">
-              <PropertyRef Name="ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TB_GAME_ACCOUNT_TB_GAME_IMAGE">
           <End Role="TB_GAME_IMAGE" Type="Self.TB_GAME_IMAGE" Multiplicity="0..1" />
           <End Role="TB_GAME_ACCOUNT" Type="Self.TB_GAME_ACCOUNT" Multiplicity="*" />
@@ -542,17 +516,12 @@
         </Association>
         <EntityContainer Name="WEBACCOUNTEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="TB_ADMIN" EntityType="Self.TB_ADMIN" />
-          <EntitySet Name="TB_CARD_DEAL_HISTORY" EntityType="Self.TB_CARD_DEAL_HISTORY" />
           <EntitySet Name="TB_GAME_ACCOUNT" EntityType="Self.TB_GAME_ACCOUNT" />
           <EntitySet Name="TB_GAME_IMAGE" EntityType="Self.TB_GAME_IMAGE" />
           <EntitySet Name="TB_GAME_PRICE_OFFER" EntityType="Self.TB_GAME_PRICE_OFFER" />
           <EntitySet Name="TB_RANK_NAME" EntityType="Self.TB_RANK_NAME" />
           <EntitySet Name="TB_SELL_DEAL_HISTORY" EntityType="Self.TB_SELL_DEAL_HISTORY" />
           <EntitySet Name="TB_USER" EntityType="Self.TB_USER" />
-          <AssociationSet Name="FK_TB_CARD_DEAL_HISTORY_TB_USER" Association="Self.FK_TB_CARD_DEAL_HISTORY_TB_USER">
-            <End Role="TB_USER" EntitySet="TB_USER" />
-            <End Role="TB_CARD_DEAL_HISTORY" EntitySet="TB_CARD_DEAL_HISTORY" />
-          </AssociationSet>
           <AssociationSet Name="FK_TB_GAME_ACCOUNT_TB_GAME_IMAGE" Association="Self.FK_TB_GAME_ACCOUNT_TB_GAME_IMAGE">
             <End Role="TB_GAME_IMAGE" EntitySet="TB_GAME_IMAGE" />
             <End Role="TB_GAME_ACCOUNT" EntitySet="TB_GAME_ACCOUNT" />
@@ -603,6 +572,11 @@
           <AssociationSet Name="FK_TB_BILL_TB_USER" Association="WEBACCOUNTModel.FK_TB_BILL_TB_USER">
             <End Role="TB_USER" EntitySet="TB_USER" />
             <End Role="TB_BILL" EntitySet="TB_BILL" />
+          </AssociationSet>
+          <EntitySet Name="TB_CARD_DEAL_HISTORY" EntityType="WEBACCOUNTModel.TB_CARD_DEAL_HISTORY" />
+          <AssociationSet Name="FK_TB_CARD_DEAL_HISTORY_TB_USER" Association="WEBACCOUNTModel.FK_TB_CARD_DEAL_HISTORY_TB_USER">
+            <End Role="TB_USER" EntitySet="TB_USER" />
+            <End Role="TB_CARD_DEAL_HISTORY" EntitySet="TB_CARD_DEAL_HISTORY" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="TB_MONEY">
@@ -719,6 +693,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TB_CARD_DEAL_HISTORY">
+          <Key>
+            <PropertyRef Name="HIS_ID" />
+          </Key>
+          <Property Name="HIS_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="HIS_TIME" Type="DateTime" Precision="3" />
+          <Property Name="COMPANY" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CARD_NUMBER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SERIAL_NUMBER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DENOMINATIONS" Type="Int32" />
+          <Property Name="RESULT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TB_USER" Relationship="WEBACCOUNTModel.FK_TB_CARD_DEAL_HISTORY_TB_USER" FromRole="TB_CARD_DEAL_HISTORY" ToRole="TB_USER" />
+        </EntityType>
+        <Association Name="FK_TB_CARD_DEAL_HISTORY_TB_USER">
+          <End Type="WEBACCOUNTModel.TB_USER" Role="TB_USER" Multiplicity="0..1" />
+          <End Type="WEBACCOUNTModel.TB_CARD_DEAL_HISTORY" Role="TB_CARD_DEAL_HISTORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TB_CARD_DEAL_HISTORY">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -732,20 +732,6 @@
                 <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
                 <ScalarProperty Name="PASSWORD_KEY" ColumnName="PASSWORD_KEY" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_CARD_DEAL_HISTORY">
-            <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_CARD_DEAL_HISTORY">
-              <MappingFragment StoreEntitySet="TB_CARD_DEAL_HISTORY">
-                <ScalarProperty Name="HIS_ID" ColumnName="HIS_ID" />
-                <ScalarProperty Name="HIS_TIME" ColumnName="HIS_TIME" />
-                <ScalarProperty Name="COMPANY" ColumnName="COMPANY" />
-                <ScalarProperty Name="CARD_NUMBER" ColumnName="CARD_NUMBER" />
-                <ScalarProperty Name="SERIAL_NUMBER" ColumnName="SERIAL_NUMBER" />
-                <ScalarProperty Name="DENOMINATIONS" ColumnName="DENOMINATIONS" />
-                <ScalarProperty Name="RESULT" ColumnName="RESULT" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -851,6 +837,20 @@
                 <ScalarProperty Name="GAME_ACCOUNT_ID" ColumnName="GAME_ACCOUNT_ID" />
                 <ScalarProperty Name="USER_ACCOUNT_ID" ColumnName="USER_ACCOUNT_ID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_CARD_DEAL_HISTORY">
+            <EntityTypeMapping TypeName="WEBACCOUNTModel.TB_CARD_DEAL_HISTORY">
+              <MappingFragment StoreEntitySet="TB_CARD_DEAL_HISTORY">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RESULT" ColumnName="RESULT" />
+                <ScalarProperty Name="DENOMINATIONS" ColumnName="DENOMINATIONS" />
+                <ScalarProperty Name="SERIAL_NUMBER" ColumnName="SERIAL_NUMBER" />
+                <ScalarProperty Name="CARD_NUMBER" ColumnName="CARD_NUMBER" />
+                <ScalarProperty Name="COMPANY" ColumnName="COMPANY" />
+                <ScalarProperty Name="HIS_TIME" ColumnName="HIS_TIME" />
+                <ScalarProperty Name="HIS_ID" ColumnName="HIS_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

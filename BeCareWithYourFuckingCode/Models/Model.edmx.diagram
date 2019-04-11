@@ -6,14 +6,12 @@
     <edmx:Diagrams>
       <Diagram DiagramId="7a4bd57a0df147b4965c43acb2bc829d" Name="Diagram1">
         <EntityTypeShape EntityType="WEBACCOUNTModel.TB_ADMIN" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WEBACCOUNTModel.TB_CARD_DEAL_HISTORY" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="WEBACCOUNTModel.TB_GAME_ACCOUNT" Width="1.5" PointX="6" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="WEBACCOUNTModel.TB_GAME_IMAGE" Width="1.5" PointX="3.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="WEBACCOUNTModel.TB_GAME_PRICE_OFFER" Width="1.5" PointX="11.25" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="WEBACCOUNTModel.TB_RANK_NAME" Width="1.5" PointX="6" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="WEBACCOUNTModel.TB_SELL_DEAL_HISTORY" Width="1.5" PointX="11.25" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="WEBACCOUNTModel.TB_USER" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
-        <AssociationConnector Association="WEBACCOUNTModel.FK_TB_CARD_DEAL_HISTORY_TB_USER" ManuallyRouted="false" />
         <AssociationConnector Association="WEBACCOUNTModel.FK_TB_GAME_ACCOUNT_TB_GAME_IMAGE" ManuallyRouted="false" />
         <AssociationConnector Association="WEBACCOUNTModel.FK_TB_GAME_ACCOUNT_TB_USER" ManuallyRouted="false" />
         <AssociationConnector Association="WEBACCOUNTModel.FK_TB_GAME_PRICE_OFFER_TB_GAME_ACCOUNT" ManuallyRouted="false" />
@@ -29,6 +27,8 @@
         <EntityTypeShape EntityType="WEBACCOUNTModel.TB_BILL" Width="1.5" PointX="8.25" PointY="12.625" />
         <AssociationConnector Association="WEBACCOUNTModel.FK_TB_BILL_TB_GAME_ACCOUNT" />
         <AssociationConnector Association="WEBACCOUNTModel.FK_TB_BILL_TB_USER" />
+        <EntityTypeShape EntityType="WEBACCOUNTModel.TB_CARD_DEAL_HISTORY" Width="1.5" PointX="3" PointY="9.625" />
+        <AssociationConnector Association="WEBACCOUNTModel.FK_TB_CARD_DEAL_HISTORY_TB_USER" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

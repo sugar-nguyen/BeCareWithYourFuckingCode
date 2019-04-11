@@ -411,6 +411,9 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\User\_getHistoryCard.cshtml" />
     <Content Include="Views\User\_UserAddMoney.cshtml" />
+    <Content Include="Views\User\_UserUpload.cshtml" />
+    <Content Include="Views\User\_UserOffer.cshtml" />
+    <Content Include="Views\User\_CardSuccess.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

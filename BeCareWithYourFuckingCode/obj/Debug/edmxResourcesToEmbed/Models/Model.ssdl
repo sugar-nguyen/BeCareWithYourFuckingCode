@@ -32,7 +32,7 @@
     <Property Name="COMPANY" Type="varchar" MaxLength="10" />
     <Property Name="CARD_NUMBER" Type="varchar" MaxLength="20" />
     <Property Name="SERIAL_NUMBER" Type="varchar" MaxLength="20" />
-    <Property Name="DENOMINATIONS" Type="money" />
+    <Property Name="DENOMINATIONS" Type="int" />
     <Property Name="RESULT" Type="varchar" MaxLength="20" />
     <Property Name="ID" Type="varchar" MaxLength="10" />
   </EntityType>

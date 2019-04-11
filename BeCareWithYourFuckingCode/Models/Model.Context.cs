@@ -26,7 +26,6 @@ namespace BeCareWithYourFuckingCode.Models
         }
     
         public virtual DbSet<TB_ADMIN> TB_ADMIN { get; set; }
-        public virtual DbSet<TB_CARD_DEAL_HISTORY> TB_CARD_DEAL_HISTORY { get; set; }
         public virtual DbSet<TB_GAME_ACCOUNT> TB_GAME_ACCOUNT { get; set; }
         public virtual DbSet<TB_GAME_IMAGE> TB_GAME_IMAGE { get; set; }
         public virtual DbSet<TB_GAME_PRICE_OFFER> TB_GAME_PRICE_OFFER { get; set; }
@@ -36,5 +35,6 @@ namespace BeCareWithYourFuckingCode.Models
         public virtual DbSet<TB_MONEY> TB_MONEY { get; set; }
         public virtual DbSet<TB_GAME_ACCOUNT_DETAIL> TB_GAME_ACCOUNT_DETAIL { get; set; }
         public virtual DbSet<TB_BILL> TB_BILL { get; set; }
+        public virtual DbSet<TB_CARD_DEAL_HISTORY> TB_CARD_DEAL_HISTORY { get; set; }
     }
 }

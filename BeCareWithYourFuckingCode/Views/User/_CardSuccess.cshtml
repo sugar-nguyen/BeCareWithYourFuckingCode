@@ -1,0 +1,30 @@
+﻿@model BeCareWithYourFuckingCode.Models.TB_CARD_DEAL_HISTORY
+
+@{
+    Layout = null;
+}
+<p class="text-center text-danger">Thông tin giao dịch</p>
+<table class="table table-dark" >
+   <thead>
+       <tr>
+           <th>User</th>
+           <th>Nhà mạng</th>
+           <th>Số seri</th>
+           <th>Mã thẻ</th>
+           <th>Mệnh giá</th>
+           <th>Ngày nạp</th>
+           <th>Trạng thái</th>
+       </tr>
+   </thead>
+    <tbody>
+        <tr>
+            <td>@Model.ID</td>
+            <td>@Model.COMPANY</td>
+            <td>@Model.SERIAL_NUMBER</td>
+            <td>@Model.CARD_NUMBER</td>
+            <td>@Model.DENOMINATIONS</td>
+            <td>@Model.HIS_TIME</td>
+            <td>Thành công</td>
+        </tr>
+    </tbody>
+</table>

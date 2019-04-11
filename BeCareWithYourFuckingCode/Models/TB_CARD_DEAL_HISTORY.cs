@@ -19,7 +19,7 @@ namespace BeCareWithYourFuckingCode.Models
         public string COMPANY { get; set; }
         public string CARD_NUMBER { get; set; }
         public string SERIAL_NUMBER { get; set; }
-        public Nullable<decimal> DENOMINATIONS { get; set; }
+        public Nullable<int> DENOMINATIONS { get; set; }
         public string RESULT { get; set; }
         public string ID { get; set; }
     

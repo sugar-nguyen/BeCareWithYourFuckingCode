@@ -106,15 +106,21 @@ namespace BeCareWithYourFuckingCode.Controllers
             try
             {
                 model.HIS_TIME = DateTime.Now;
+                model.ID = Session["UserID"].ToString();
+                // model.RESULT = "Thành công";
+                model.HIS_ID = CreateIDforCard();
                 Entities.TB_CARD_DEAL_HISTORY.Add(model);
+                TB_MONEY money = Entities.TB_MONEY.FirstOrDefault(x => x.USER_ACCOUNT_ID == model.ID);
+                money.TOTAL_MONEY += model.DENOMINATIONS;
                 if (Entities.SaveChanges() > 0)
                 {
-                    message = "success";
+                    return PartialView("_CardSuccess", model);
                 }
                 else
                 {
                     message = "fail";
                 }
+
             }
             catch (Exception ex)
             {
@@ -241,6 +247,21 @@ namespace BeCareWithYourFuckingCode.Controllers
             return id;
         }
 
+        public string CreateIDforCard() // Cơ chế sinh mã
+        {
+            string id = "";
+            Random rand = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                int a = rand.Next() % 10;
+                a = a < 0 ? -1 * a : a;
+                id += a.ToString();
+            }
+            TB_CARD_DEAL_HISTORY card = Entities.TB_CARD_DEAL_HISTORY.Find(id);
+            if (card != null) return CreateIDforCard();
+            return id;
+        }
+
         public TB_USER CheckUserName(string username)
         {
             TB_USER user = Entities.TB_USER.Where(x => x.USERNAME == username).SingleOrDefault();
@@ -324,7 +345,7 @@ namespace BeCareWithYourFuckingCode.Controllers
 
 
                 }
-                
+
             }
             catch (Exception ex)
             {
