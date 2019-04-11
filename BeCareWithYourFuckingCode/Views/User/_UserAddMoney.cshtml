@@ -9,20 +9,12 @@
    
     @using (Html.BeginForm())
     {
-        
+       
         <div class="row">
             <div class="col-25">
                 <label>Nhà mạng</label>
             </div>
-            <div class="col-75">
-                <select style="cursor:pointer;" name="COMPANY">
-                    <option selected>Chọn nhà mạng</option>
-                    <option value="viettel">Viettel</option>
-                    <option value="vinaphone">Vinaphone</option>
-                    <option value="mobifone">Mobifone</option>
-                    <option value="vietnammobile">Vietnammobile</option>
-                </select>
-            </div>
+            
         </div>
         <div class="row">
             <div class="col-25">
@@ -44,7 +36,7 @@
                 <label>Số seri</label>
             </div>
             <div class="col-75">
-                <input type="text" placeholder="Nhập số seri..." name="SERIAL_NUMBER">
+                @Html.TextBoxFor(x => x.SERIAL_NUMBER, new { @class = "form-control form-control-sm", @type = "number"})
             </div>
         </div>
         <div class="row">
@@ -52,7 +44,7 @@
                 <label>Mã thẻ</label>
             </div>
             <div class="col-75">
-                <input type="text" placeholder="Nhập mã thẻ.." name="CARD_NUMBER">
+                @Html.TextBoxFor(x => x.CARD_NUMBER, new { @class = "form-control form-control-sm", @type = "number" })
             </div>
         </div>
         <div class="row">

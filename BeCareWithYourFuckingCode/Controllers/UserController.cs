@@ -95,13 +95,7 @@ namespace BeCareWithYourFuckingCode.Controllers
 
         public ActionResult addMoney()
         {
-            if (Session["UserID"] != null)
-            {
-                string id = Session["UserID"].ToString();
-                var model = Entities.TB_CARD_DEAL_HISTORY.Find(id);
-                return View("_UserAddMoney", model);
-            }
-            return Json(null, JsonRequestBehavior.AllowGet);
+            return PartialView("_UserAddMoney");
         }
 
 
@@ -321,6 +315,9 @@ namespace BeCareWithYourFuckingCode.Controllers
                     {
                         user.ID = CreateID();
                         Entities.TB_USER.Add(user);
+                        TB_MONEY money = new TB_MONEY();
+                        money.USER_ACCOUNT_ID = user.ID;
+                        Entities.TB_MONEY.Add(money);
                         Entities.SaveChanges();
                         message = "Đăng ký thành công !";
                     }

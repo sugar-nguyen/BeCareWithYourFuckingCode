@@ -1,0 +1,78 @@
+﻿@model IEnumerable<BeCareWithYourFuckingCode.Models.TB_GAME_ACCOUNT>
+@{
+    Layout = null;
+}
+<div class="nav-fill">
+    <h4 class="text-center black-text" style="padding:6px;">CÁC TÀI KHOẢN ĐÃ ĐƯỢC ĐĂNG LÊN</h4>
+    <hr />
+    <table class="table m-auto p-0">
+        <thead class="white black-text">
+            <tr>
+                <th scope="col">Mã tài khoản</th>
+                <th scope="col">Tên đăng nhập</th>
+                <th scope="col">Giá gốc</th>
+                <th scope="col">Giá được chấp thuận</th>
+                <th scope="col">Thời gian đăng</th>
+                <th scope="col">Trạng thái hiện tại</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                if (Model == null)
+                {
+                    <tr>
+                        <td colspan="6">Không có dữ liệu</td>
+                    </tr>
+                    
+                }
+                else
+                {
+                    foreach (var i in Model)
+                    {
+                        <tr>
+                            <td>
+                                @i.USER_ACCOUNT_ID
+                            </td>
+                            <td>
+                                @i.USERNAME
+                            </td>
+                            <td>
+                                @i.ORIGINAL_PRICE
+                            </td>
+
+                            @if (i.ACCEPT_PRICE == null)
+                            {
+                                <td>
+                                    Không tồn tại
+                                </td>
+                            }
+
+                            <td>
+                                @i.DATE_UPLOAD
+                            </td>
+                            @if (i.CURRENT_STATUS == 0)
+                            {
+                                <td>
+                                    Đang chờ duyệt
+                                </td>
+                            }
+                            else if (i.CURRENT_STATUS == 1)
+                            {
+                                <td>
+                                    Đang bán
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    Đã bán
+                                </td>
+                            }
+                        </tr>
+                    }
+                }
+            }
+
+        </tbody>
+    </table>
+</div>
